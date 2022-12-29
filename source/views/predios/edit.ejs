@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/predios/edit/<%= predio.id %>?m=PUT" >
+            <h3>Editar Predio</h3>
+            <label for="name">Nombre del Predio</label>
+            <input type="text" name="name" id="name"
+            value="<%= predio.name%>">
+
+            <label for="adress">Dirección</label>
+            <input type="text" name="adress" id="adress"
+            value="<%=predio.adress%>">
+
+            <label for="map">HTML de Google maps</label>
+            <input type="text" name="map" id="map"
+            value="<%=predio.map%>">
+            
+            
+            <iframe src="<%= predio.map %>" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+
+    </main>
+</body>
+</html>

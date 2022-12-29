@@ -1,10 +1,9 @@
 const {Router} = require("express")
 const router = Router()
-const {create, created, list, edit, edited, destroid}= require("../controllers/predios.controller")
+const {create, created, edit, edited, destroid}= require("../controllers/predios.controller")
 
 
-router.get("/", list)
-router.get('/create', create)
+router.get("/", create)
 router.post("/created",created)
 router.get("/edit/:id", edit)
 router.put("/edit/:id", edited)
