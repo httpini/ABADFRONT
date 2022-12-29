@@ -14,11 +14,11 @@ module.exports={
         })
     },
     edit: async(req, res)=>{
-        let categorias= categoria.findByPk({include:{all:true}})
+        let categorias= categoria.findByPk(req.params.id,{include:{all:true}})
         if (!categorias){
             res.redirect("/categorias/")
         }
-        return res.render("/categorias/edit",{
+        return res.render("categorias/edit",{
             title:"Editar Categoria",
             categoria: categorias
         })
@@ -33,11 +33,15 @@ module.exports={
         return res.redirect("categorias/")
     },
     destroid: async (req,res)=>{
-        let categorias= categoria.findByPk({include:{all:true}})
+        let categorias= categoria.findByPk(req.params.id,{include:{all:true}})
         if (!categorias){
             res.redirect("/categorias/")
         }
-        await categoria.destroy()
+        await categoria.destroy({
+            include:{all:true},
+            where:{id:req.params.id}
+        })
+       
         res.redirect("/categorias/")
     }
 
