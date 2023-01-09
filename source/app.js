@@ -22,3 +22,5 @@ app.use(require("./routes/home.routes")) // RUTAS DEL HOME
 app.use("/predios",require("./routes/predios.routes")) //rutas de predios
 
 app.use("/categorias",require("./routes/categorias.routes")) //rutas de categorias
+
+app.use("/subcategorias",require("./routes/subcategorias.routes")) 

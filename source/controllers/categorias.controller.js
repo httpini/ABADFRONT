@@ -1,4 +1,4 @@
-const {categoria}= require("../database/models/index")
+const {categoria, subcategoria}= require("../database/models/index")
 
 module.exports={
     create: async(req,res)=>{
@@ -8,13 +8,22 @@ module.exports={
                 ["name", "ASC"]
             ]
         })
+        let listaSub = await subcategoria.findAll({
+            include:{all:true},
+            order:[
+                ["categoria_id", "ASC"],
+                ["name", "ASC"]
+            ]
+        })
+        
         return res.render("categorias/create",{
             title: "Categorias",
             categorias: listaCategorias,
+            subcategorias:  listaSub
         })
     },
     edit: async(req, res)=>{
-        let categorias= categoria.findByPk(req.params.id,{include:{all:true}})
+        let categorias= await categoria.findByPk(req.params.id,{include:{all:true}})
         if (!categorias){
             res.redirect("/categorias/")
         }

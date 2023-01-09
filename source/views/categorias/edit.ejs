@@ -5,7 +5,7 @@
 <body>
     <%- include("../includes/header.ejs") %>
     <main>
-        <form method="post" action="/categorias/created">
+        <form method="post" action="/categorias/edit/<%= categoria.id %>?m=PUT">
             <h3> Editar Categoria <%= categoria.name %> </h3>
             <label for="name">Nombre de la categoria</label>
             <input type="text" name="name" id="name"
@@ -15,7 +15,11 @@
             <textarea name="description" id="description" ><%= categoria.description %> </textarea>
 
             <button type="submit">Actualizar datos</button>
-
+        </form>
+        <form action="/categorias/delete/<%=categoria.id%>?m=DELETE" method="post">
+            <button type="submit">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </form>
     </main>
 </body>
