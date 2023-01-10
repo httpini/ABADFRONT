@@ -6,7 +6,7 @@
     <%- include("../includes/header.ejs") %>
     <main>
         <form method="post" action="/predios/edit/<%= predio.id %>?m=PUT" >
-            <h3>Editar Predio</h3>
+            <h3>Editar Predio <%= predio.name %> </h3>
             <label for="name">Nombre del Predio</label>
             <input type="text" name="name" id="name"
             value="<%= predio.name%>">
