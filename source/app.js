@@ -24,3 +24,5 @@ app.use("/predios",require("./routes/predios.routes")) //rutas de predios
 app.use("/categorias",require("./routes/categorias.routes")) //rutas de categorias
 
 app.use("/subcategorias",require("./routes/subcategorias.routes")) 
+
+app.use("/equipos", require("./routes/equipos.routes"))

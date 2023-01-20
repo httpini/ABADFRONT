@@ -19,7 +19,8 @@ module.exports = {
         return res.render("predios/create",{
             title: "Predios Habilitados",
             listaPredios: listaPredios,
-            recentsPredios: recentsPredios, 
+            recentsPredios: recentsPredios,
+            count:listaPredios.length
         })
     },
 

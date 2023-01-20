@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/equipos/created" >
+            <h3>Nuevo Equipo <i class="fa-solid fa-plus"></i></h3>
+            <label for="name">Nombre del Equipo</label>
+            <input type="text" name="name" id="name">
+
+            <label for="categoria_id">Categoria a la que pertenece</label>
+            <select name="categoria_id" id="categoria_id">
+                <option selected disabled>Elegí una Categoria</option>
+                <% categorias.forEach(c =>{ %>
+                    <option value="<%=c.id%>"><%= c.name %> </option> 
+                <% }) %> 
+            </select>
+
+            <button type="submit">Crear Equipo</button>
+        </form>
+        <section>
+            <h3>Creados Recientemente</h3>
+            <nav>
+                <% recentsEquipos.forEach(equipo => { %>
+                    <div>
+                        <p><%= equipo.name %> - <%= equipo.categoria.name  %></p>
+                        <a href="/equipos/edit/<%=equipo.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/equipos/delete/<%=equipo.id%>?m=DELETE" method="post">
+                            <button type="submit">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </form>
+                    </div>
+                 
+                <% }) %>
+            </nav>
+        </section>
+        <section>
+            <h3>Lista de Equipos - (<%= count %> )</h3>
+            <form action="/equipos/" method="get">
+                <input type="text" name="name" id="name" placeholder="Buscar por Nombre">
+
+                <select name="cat" id="cat">
+                    <option value="null" selected disabled>Filtrar por Categoria</option>
+                    <% categorias.forEach(c =>{ %>
+                        <option value="<%=c.id%>"><%= c.name %> </option> 
+                    <% }) %> 
+
+                </select>
+                <button class="boton-buscar" type="submit">Buscar</button>
+            </form>
+            <nav>
+                <% listaEquipos.forEach(equipo => { %>
+                    <div>
+                        <p><%= equipo.name %> - <%= equipo.categoria.name  %></p>
+                        <a href="/equipos/edit/<%=equipo.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/equipos/delete/<%=equipo.id%>?m=DELETE" method="post">
+                            <button type="submit">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </form>
+                    </div>
+                 
+                <% }) %>
+            </nav>
+        </section>
+        
+    </main>
+    
+</body>
+</html>
