@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/equipos/edit/<%= equipo.id %>?m=PUT" >
+            <h3>Editar Equipo <%= equipo.name %> </h3>
+            <label for="name">Nombre del Equipo</label>
+            <input type="text" name="name" id="name"
+            value="<%= equipo.name%>">
+
+            <label for="categoria_id">Categoria</label>
+            <select name="categoria_id" id="categoria_id">
+                <% categorias.forEach(c => { %>
+                    <option value="<%=c.id%>" <%= c.id === equipo.categoria_id ? "selected": null %> ><%= c.name %></option>
+                 
+                <% }) %>
+            </select>
+            
+             <button type="submit">Guardar Cambios</button>
+        </form>
+
+    </main>
+</body>
+</html>

@@ -46,15 +46,19 @@ module.exports = {
 
     },
     edit:async(req,res)=> {
+        let categorias = await categoria.findAll({include: {all:true}})
         let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
         if (!equipos){
             res.redirect("/equipos/")
         }
-        return res.render("/equipos/edit",{
-            title: "Editar Equipo",
-            euqipo:equipos
+        return res.render("equipos/edit",{
+            title: "Editar equipo",
+            equipo: equipos,
+            categorias: categorias
         })
+    
     },
+    
     edited: async (req,res)=>{
         let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
         await equipos.update(req.body)
