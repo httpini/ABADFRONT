@@ -23,11 +23,11 @@
         <section>
             <h3>Creados Recientemente</h3>
             <nav>
-                <% recentsEquipos.forEach(equipo => { %>
+                <% recentsEquipos.forEach(e => { %>
                     <div>
-                        <p><%= equipo.name %> - <%= equipo.categoria.name  %></p>
-                        <a href="/equipos/edit/<%=equipo.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form action="/equipos/delete/<%=equipo.id%>?m=DELETE" method="post">
+                        <p><%= e.name %> - <%= e.categoria.name  %></p>
+                        <a href="/equipos/edit/<%=e.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/equipos/delete/<%=e.id%>?m=DELETE" method="post">
                             <button type="submit">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
