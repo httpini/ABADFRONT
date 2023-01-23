@@ -30,6 +30,7 @@ module.exports = {
                 ["name", "ASC"]
             ]
         })
+        
 
         return res.render ("equipos/create",{
             title: "Equipos Asociados",
@@ -70,7 +71,7 @@ module.exports = {
             res.redirect("/equipos/")
         }
         await equipos.destroy()
-        return res.redirect("/equipos")
+        return res.redirect("/equipos/")
     }
 
 }

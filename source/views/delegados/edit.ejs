@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/delegados/edit/<%= delegado.id %>?m=PUT" >
+            <h3>Editar Delegado <%= delegado.last_name %> <%= delegado.name %> </h3>
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name"
+            value="<%= delegado.name%>">
+
+            <label for="last_name">Apellido</label>
+            <input type="text" name="last_name" id="last_name"
+            value="<%= delegado.last_name%>">
+
+            <label for="email">Correo Electronico</label>
+            <input type="email" name="email" id="email"
+            value="<%= delegado.email%>">
+
+            <label for="tel">Telefono</label>
+            <input type="number" name="tel" id="tel"
+            value="<%= delegado.tel%>">
+
+            <label for="equipo_id">Categoria</label>
+            <select name="equipo_id" id="equipo_id">
+                <% equipos.forEach(e => { %>
+                    <option value="<%=e.id%>" <%= e.id === delegado.equipo_id ? "selected": null %> ><%= e.name %> - <%= e.categoria.name %> </option>
+                 
+                <% }) %>
+            </select>
+            
+             <button type="submit">Guardar Cambios</button>
+        </form>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/delegados/created" >
+            <h3>Nuevo Delegado <i class="fa-solid fa-plus"></i></h3>
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name">
+
+            <label for="last_name">Apellido</label>
+            <input type="text" name="last_name" id="last_name">
+
+            <label for="email">Correo Electronico</label>
+            <input type="text" name="email" id="email">
+
+            <label for="tel">Telefono</label>
+            <input type="number" id="tel" name="tel">
+
+            <label for="equipo_id">Equipo al que pertenece</label>
+            <select name="equipo_id" id="equipo_id">
+                <option selected disabled>Elegí un Equipo</option>
+                <% equipos.forEach(e =>{ %>
+                    <option value="<%=e.id%>"><%= e.name %> - <%= e.categoria.name %>  </option> 
+                <% }) %> 
+            </select>
+
+            <button type="submit">Agregar Delegado</button>
+        </form>
+        <section>
+            <h3>Creados Recientemente</h3>
+            <nav>
+                <% recentsDelegados.forEach(d => { %>
+                    <div>
+                        <p><%= d.equipo.name %> / <%= d.categoria.name %> - <%= d.last_name %> <%= d.name %>  </p>
+                        <a href="/delegados/edit/<%=d.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/delegados/delete/<%=d.id%>?m=DELETE" method="post">
+                            <button type="submit">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </form>
+                    </div>
+                 
+                <% }) %>
+            </nav>
+        </section>
+        <section>
+            <h3>Lista de Delegados - (<%= count %> )</h3>
+            <form action="/delegados/" method="get">
+                <input type="text" name="name" id="name" placeholder="Buscar por Nombre">
+
+                <select name="cat" id="cat">
+                    <option value="null" selected disabled>Filtrar por Categoria</option>
+                    <% categorias.forEach(c =>{ %>
+                        <option value="<%=c.id%>"><%= c.name %></option> 
+                    <% }) %> 
+                </select>
+
+                <select name="tim" id="tim">
+                    <option value="null" selected disabled>Filtrar por Equipo</option>
+                    <% equipos.forEach(e =>{ %>
+                        <option value="<%=e.id%>"><%= e.name %> - <%= e.categoria.name %>  </option> 
+                    <% }) %> 
+                </select>
+                <button class="boton-buscar" type="submit">Buscar</button>
+                <button type="reset">Eliminar Filtros</button>
+            </form>
+            <nav>
+                <% delegados.forEach(d => { %>
+                    <div>
+                        <p><%= d.equipo.name %> - <%= d.categoria.name  %></p>
+                        <p><%= d.last_name%> <%= d.name %></p>
+                        <p>tel:<%= d.tel %> - email: <%= d.email %>  </p>
+                        <a href="/delegados/edit/<%=d.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/delegados/delete/<%=d.id%>?m=DELETE" method="post">
+                            <button type="submit">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </form>
+                    </div>
+                 
+                <% }) %>
+            </nav>
+        </section>
+        
+    </main>
+    
+</body>
+</html>
