@@ -28,6 +28,10 @@ module.exports=(sequelize,DataTypes)=>{
             as:"categoria",
             foreignKey:"categoria_id"
         })
+        Equipo.hasOne(model.delegado,{
+            as:"delegado",
+            foreignKey:"equipo_id"
+        })
     } 
 
 
