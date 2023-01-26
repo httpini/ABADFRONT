@@ -61,12 +61,14 @@ module.exports=(sequelize,DataTypes)=>{
             as: 'torneo',
             foreignKey: 'torneo_id',
           });
-          Equipo_Torneo.belongsTo(model.equipo, {
+        Equipo_Torneo.belongsTo(model.equipo, {
             as: 'equipo',
             foreignKey: 'equipo_id',
-          });
-       
-       
+        });
+        Equipo_Torneo.belongsTo(model.predio, {
+            as: 'predio',
+            foreignKey: 'predio_id',
+        }); 
     }
    
 

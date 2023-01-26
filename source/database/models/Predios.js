@@ -27,6 +27,14 @@ module.exports=(sequelize,DataTypes)=>{
     }
     const Predio = sequelize.define(alias, cols, config)
 
+    Predio.associate = function(model){
+        Predio.hasMany(model.equipo_torneo, {
+            as: 'equipos',
+            foreignKey: 'predio_id',
+          });
+       
+    }
+
 
 
     return Predio
