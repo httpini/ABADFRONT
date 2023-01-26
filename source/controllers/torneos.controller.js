@@ -24,6 +24,14 @@ module.exports={
             ]
         })
 
+        return res.render("torneos/create",{
+            title:"Torneos",
+            torneos:torneos,
+            equipos:equipos,
+            categorias:categorias,
+            subcategorias:subcategorias
+        })
+
 
     }
 }

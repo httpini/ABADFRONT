@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/torneos/created" name="torneoForm" >
+            <h3>Nuevo Torneo <i class="fa-solid fa-plus"></i></h3>
+            <label for="name">Nombre del Torneo</label>
+            <input type="text" name="name" id="name">
+
+            <label for="temporada">Temporada</label>
+            <input type="number" name="temporada" id="temporada">
+
+            <label for="categoria_id">Categoria del Torneo</label>
+            <select name="categoria_id" id="categoria_id" onchange="cambia_categoria()">
+                <option value="0" selected disabled>Elegí una Categoria</option>
+                <% categorias.forEach(c =>{ %>
+                    <option value="<%=c.id%>"><%= c.name %> </option> 
+                <% }) %> 
+            </select>
+
+            <label for="subcategoria_id">Subcategoria</label>
+            <select name="subcategoria_id" id="subcategoria_id">
+                <option selected disabled>Elegí una Subcategoria</option>
+            </select>
+
+            <fieldset class="equipos" id="equiposTorneo">
+
+            </fieldset>
+
+            <button type="submit">Crear Torneo</button>
+        </form>
+     
+        
+    </main>
+   <script src="scripts/formDinamicoTorneos.js"></script>
+</html>

@@ -72,6 +72,15 @@ module.exports = {
         }
         await equipos.destroy()
         return res.redirect("/equipos/")
+    },
+    allEquipos: async (req,res)=>{
+        let listaEquipos = await equipo.findAll({
+            include:{all:true},
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        return res.send(listaEquipos)
     }
 
 }

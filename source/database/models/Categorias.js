@@ -32,6 +32,10 @@ module.exports=(sequelize,DataTypes)=>{
             as:"subcategorias",
             foreignKey:"categoria_id",
         })
+        Categoria.hasMany(model.torneo,{
+            as:"torneos",
+            foreignKey:"categoria_id",
+        })
     }
 
 

@@ -7,5 +7,5 @@ router.get("/", create)
 router.get("/edit/:id",edit)
 router.put("/edit/:id",edited)
 router.delete("/delete/:id",destroid)
-
-module.exports = router*/
+*/
+module.exports = router

@@ -29,4 +29,4 @@ app.use("/equipos", require("./routes/equipos.routes"))
 
 app.use("/delegados", require("./routes/delegados.routes"))
 
-//app.use("/torneos", require("./routes/torneos.routes"))
+app.use("/torneos", require("./routes/torneos.routes"))

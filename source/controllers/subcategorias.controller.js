@@ -35,5 +35,15 @@ module.exports = {
             where:{id:req.params.id}
         })
         res.redirect("/categorias/")
+    },
+    allSubCategorias: async (req,res)=>{
+        let listaSubCategorias = await subcategoria.findAll({
+            include:{all:true},
+            order:[
+                ["categoria_id", "ASC"],
+                ["name", "ASC"]
+            ]
+        })
+        return res.send(listaSubCategorias)
     }
 }
