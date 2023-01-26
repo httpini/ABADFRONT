@@ -31,7 +31,9 @@ module.exports={
             categorias:categorias,
             subcategorias:subcategorias
         })
-
-
+    },
+    created: async(req,res)=>{
+        console.log(req.body)
+        return res.redirect("/torneos")
     }
 }

@@ -32,6 +32,12 @@ module.exports=(sequelize,DataTypes)=>{
             as:"delegado",
             foreignKey:"equipo_id"
         })
+        Equipo.belongsToMany(model.torneo, {
+            through: model.equipo_torneo,
+            as: 'torneos',
+            foreignKey: 'equipo_id',
+            otherKey: 'torneo_id',
+          })
     } 
 
 

@@ -31,10 +31,6 @@ module.exports=(sequelize, DataTypes)=>{
         subcategoria_id:{
             allowNull: false,
             type:DataTypes.INTEGER
-        },
-        equipos_id:{
-            allowNull: true,
-            type:DataTypes.INTEGER
         }
 
     }
@@ -49,6 +45,12 @@ module.exports=(sequelize, DataTypes)=>{
             as:"subcategoria",
             foreignKey:"subcategoria_id",
         })
+        Torneo.belongsToMany(model.equipo, {
+            through: model.equipo_torneo,
+            as: 'equipos',
+            foreignKey: 'torneo_id',
+            otherKey: 'equipo_id',
+          })
        
     }
 
