@@ -14,7 +14,7 @@ module.exports=(sequelize, DataTypes)=>{
         },
         name:{
             allowNull:false,
-            type:DataTypes.STRING
+            type:DataTypes.INTEGER
         },
         temporada:{
             allowNull:false,
@@ -29,7 +29,7 @@ module.exports=(sequelize, DataTypes)=>{
             type:DataTypes.INTEGER
         },
         subcategoria_id:{
-            allowNull: false,
+            allowNull: true,
             type:DataTypes.INTEGER
         }
 

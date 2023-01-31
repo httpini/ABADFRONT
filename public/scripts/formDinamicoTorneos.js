@@ -76,6 +76,7 @@ let todosEquipos
             input.id= equipo.id;
             var label = document.createElement("label");
             label.innerHTML = equipo.name;
+            
 
             div.appendChild(input);
             div.appendChild(label);
