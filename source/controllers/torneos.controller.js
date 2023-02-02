@@ -193,7 +193,15 @@ module.exports={
 
     },
     edited:async(req, res)=>{
-        
+        let torneos = await torneo.findByPk(req.params.id,{
+            include:{all:true}
+        })
+        if(!torneos){
+            return res.redirect("/torneos")
+        }//FALTA LA PARTE DEL REGLAMENTO CON MULTER.
+        await torneos.update(req.body)
+        return res.redirect("/torneos")
+
     }
 
 }

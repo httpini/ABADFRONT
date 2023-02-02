@@ -5,7 +5,7 @@
 <body>
     <%- include("../includes/header.ejs") %>
     <main>
-        <form method="post" action="/torneos/<%=torneo.id%>edited" name="torneoForm" >
+        <form method="post" action="/torneos/edit/<%=torneo.id%>?m=PUT" name="torneoForm" >
             <h3>Editar Torneo</h3>
             <p>Aqui vamos a poder actualizar el nombre, la temporada, el reglamento o la subcategoria del torneo, en caso de querer modificar la categoria, directamente vamos a eliminar este torneo y crear uno nuevo. En caso de querer editar los equipos que participan, lo vamos a hacer en agregar o quitar equipos</p>
             <label for="name">Nombre del Torneo</label>
