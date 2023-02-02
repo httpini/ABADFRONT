@@ -1,4 +1,4 @@
-const {categoria, equipo}= require("../database/models/index")
+const {categoria, equipo, equipo_torneo}= require("../database/models/index")
 
 
 module.exports = {
@@ -70,8 +70,26 @@ module.exports = {
         if(!equipos){
             res.redirect("/equipos/")
         }
+
+        await equipo_torneo.destroy({
+            where:{
+                equipo_id:req.params.id
+            }
+        })
         await equipos.destroy()
+
+         
+
         return res.redirect("/equipos/")
+    },
+    allEquipos: async (req,res)=>{
+        let listaEquipos = await equipo.findAll({
+            include:{all:true},
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        return res.send(listaEquipos)
     }
 
 }

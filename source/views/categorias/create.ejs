@@ -21,7 +21,7 @@
             <nav>
                 <% categorias.forEach(categoria => { %>
                     <div>
-                        <p><%= categoria.name %></p>
+                        <p><%= categoria.name %> - (<%= categoria.equipos.length %>) Equipos </p>
                         <a href="/categorias/edit/<%=categoria.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
                         <form action="/categorias/delete/<%=categoria.id%>?m=DELETE" method="post">
                             <button type="submit">
@@ -42,7 +42,7 @@
 
             <label for="categoria_id">Categoria a la que pertenece</label>
             <select name="categoria_id" id="categoria_id">
-                <option selected disabled>Elegí una Categoria</option>
+                <option value="selected" disabled>Elegí una Categoria</option>
                 <% categorias.forEach(c =>{ %>
                     <option value="<%=c.id%>"><%= c.name %> </option> 
                 <% }) %> 

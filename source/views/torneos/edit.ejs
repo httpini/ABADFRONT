@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/torneos/edit/<%=torneo.id%>?m=PUT" name="torneoForm" >
+            <h3>Editar Torneo</h3>
+            <p>Aqui vamos a poder actualizar el nombre, la temporada, el reglamento o la subcategoria del torneo, en caso de querer modificar la categoria, directamente vamos a eliminar este torneo y crear uno nuevo. En caso de querer editar los equipos que participan, lo vamos a hacer en agregar o quitar equipos</p>
+            <label for="name">Nombre del Torneo</label>
+            <input type="text" name="name" id="name" value="<%=torneo.name%>">
+
+            <label for="temporada">Temporada</label>
+            <input type="number" name="temporada" id="temporada" value="<%=torneo.temporada%>">
+
+            <% if (subcategorias.length > 0) { %>
+                <label for="subcategoria_id">Subcategoria</label>
+                <select name="subcategoria_id" id="subcategoria_id">
+                <% subcategorias.forEach(s => { %>
+                    <option value="<%=s.id%>" <%= s.id === torneo.subcategoria_id ? "selected": null %>><%= s.name %></option>
+                 
+                <% }) %>
+            </select>
+             
+            <% } %>
+
+            <button type="submit">Actualizar datos</button>
+        </form>     
+        
+    </main>
+   
+</html>
