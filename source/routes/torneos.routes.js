@@ -4,9 +4,9 @@ const {create,created,edit,edited,destroid, oneTorneo, quitarEquipos, agregarEqu
 
 router.get("/", create)
 router.post("/created", created)
-/*router.get("/edit/:id",edit)
-router.put("/edit/:id",edited)
-router.delete("/delete/:id",destroid)*/
+router.get("/edit/:id",edit)
+/*router.put("/edit/:id",edited)*/
+router.delete("/delete/:id",destroid)
 router.get("/:id",oneTorneo)
 router.put("/:id/quitarEquipos",quitarEquipos)
 router.put("/:id/agregarEquipo", agregarEquipos)

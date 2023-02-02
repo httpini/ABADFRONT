@@ -62,17 +62,22 @@ module.exports={
 
         let idsEquipos = req.body.equiposTorneo
 
-        if (!Array.isArray(idsEquipos)) {
-            idsEquipos = [idsEquipos];
-          }
-
-
-        idsEquipos.forEach( async e=>{
-            await equipo_torneo.create({
-                torneo_id: nuevoTorneo.id,
-                equipo_id: e
+        if(idsEquipos){// ESTE IF ES EN EL CASO QUE QUERAMOS CREAR EL TORNEO SIN NINGUN EQUIPO
+            if (!Array.isArray(idsEquipos)) {
+                idsEquipos = [idsEquipos];
+              }
+    
+    
+            idsEquipos.forEach( async e=>{
+                await equipo_torneo.create({
+                    torneo_id: nuevoTorneo.id,
+                    equipo_id: e
+                })
             })
-        })
+
+        }
+
+        
         return res.redirect("/torneos")
     },
     oneTorneo: async(req,res)=>{
@@ -109,34 +114,86 @@ module.exports={
     },
     quitarEquipos: async(req, res) => {
         let equipos = req.body.equipos;
-      
-        if (!Array.isArray(equipos)) {
-          equipos = [equipos];
+
+        if(equipos){
+            if (!Array.isArray(equipos)) {
+                equipos = [equipos];
+              }
+            
+              for (const equipoId of equipos) {
+                await equipo_torneo.destroy({
+                  where: {
+                    equipo_id: equipoId,
+                    torneo_id: req.params.id
+                  }
+                });
+              }
+
         }
       
-        for (const equipoId of equipos) {
-          await equipo_torneo.destroy({
-            where: {
-              equipo_id: equipoId,
-              torneo_id: req.params.id
-            }
-          });
-        }
+        
       
         return res.redirect(`/torneos/${req.params.id}`);
-      },
-      agregarEquipos: async(req,res)=>{
+    },
+    agregarEquipos: async(req,res)=>{
         let equipos = req.body.equipos
 
-        if (!Array.isArray(equipos)) {
-            equipos = [equipos];
-        }
-        equipos.forEach( async e=>{
-            await equipo_torneo.create({
-                torneo_id: req.params.id,
-                equipo_id: e
+        if (equipos){
+            if (!Array.isArray(equipos)) {
+                equipos = [equipos];
+            }
+            equipos.forEach( async e=>{
+                await equipo_torneo.create({
+                    torneo_id: req.params.id,
+                    equipo_id: e
+                })
             })
-        })
+
+        }
+
+        
         return res.redirect(`/torneos/${req.params.id}`)
-      }
+    },
+    destroid: async(req, res)=>{
+        let torneos = await torneo.findByPk(req.params.id,{
+            include:{all:true}
+        })
+        if(!torneos){
+            return res.redirect("/torneos")
+        }
+        await equipo_torneo.destroy({
+            where: {torneo_id: req.params.id}
+        })
+        await torneos.destroy()
+
+        return res.redirect("/torneos")
+    },
+    edit:async(req, res)=>{
+        let torneos = await torneo.findByPk(req.params.id,{
+            include:{all:true}
+        })
+        if(!torneos){
+            res.redirect("/torneos")
+        }
+        let subcategorias = await subcategoria.findAll({
+            include:{all:true},
+            where:{
+                categoria_id: torneos.categoria_id
+            },
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        
+        return res.render("torneos/edit",{
+            title: `Editar ${torneos.name}`,
+            torneo:torneos,
+            subcategorias:subcategorias
+        })
+
+    },
+    edited:async(req, res)=>{
+        
+    }
+
 }
