@@ -69,6 +69,10 @@ module.exports=(sequelize,DataTypes)=>{
             as: 'predio',
             foreignKey: 'predio_id',
         }); 
+        Equipo_Torneo.hasMany(model.goleador, {
+            as: 'goleadores',
+            foreignKey: 'e_t_id',
+        }); 
     }
    
 

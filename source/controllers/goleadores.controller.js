@@ -1,0 +1,1 @@
+const {equipo_torneo, goleador}= require("../database/models/index")
