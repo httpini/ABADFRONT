@@ -69,6 +69,7 @@ module.exports=(sequelize,DataTypes)=>{
             as: 'predio',
             foreignKey: 'predio_id',
         }); 
+         
     }
    
 

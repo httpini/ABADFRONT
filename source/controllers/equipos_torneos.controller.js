@@ -46,7 +46,8 @@ module.exports={
             allEquipos: equipos_torneos,
             torneos:torneos,
             categorias:categorias,
-            predios:predios
+            predios:predios,
+            filter:req.query
         })
     },
     oneEquipo:async (req,res)=>{},
