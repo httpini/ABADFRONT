@@ -20,17 +20,29 @@ module.exports= (sequelize, DataTypes)=>{
             allowNull: false,
             type: DataTypes.STRING
         },
-        e_t_id:{
+        equipo_id:{
             allowNull:false,
             type: DataTypes.INTEGER
+        },
+        torneo_id:{
+            allowNull:false,
+            type: DataTypes.INTEGER
+        },
+        goles:{
+            allowNull:false,
+            type:DataTypes.INTEGER
         }
     }
     const Goleador = sequelize.define(alias,cols,config)
 
     Goleador.associate = function(model){
-        Goleador.belongsTo(model.equipo_torneo,{
-            as: "eqipo_torneo",
-            foreignKey: "e_t_id"
+        Goleador.belongsTo(model.torneo,{
+            as: "torneo",
+            foreignKey: "torneo_id"
+        })
+        Goleador.belongsTo(model.equipo,{
+            as: "equipo",
+            foreignKey: "equipo_id"
         })
     }
 
