@@ -1,4 +1,4 @@
-const {torneo, categoria, subcategoria, equipo, equipo_torneo}=require("../database/models/index")
+const {torneo, categoria, subcategoria, equipo, equipo_torneo, fair_play}=require("../database/models/index")
 
 module.exports={
     create: async (req,res)=>{
@@ -73,6 +73,15 @@ module.exports={
                     torneo_id: nuevoTorneo.id,
                     equipo_id: e
                 })
+                await fair_play.create({
+                    torneo_id: nuevoTorneo.id,
+                    equipo_id: e,
+                    amarillas: 0,
+                    rojas:0,
+                    amonestaciones: 0,
+                    motivos_amon:"",
+                    puntos:0
+                })
             })
 
         }
@@ -127,6 +136,12 @@ module.exports={
                     torneo_id: req.params.id
                   }
                 });
+                await fair_play.destroy({
+                    where: {
+                      equipo_id: equipoId,
+                      torneo_id: req.params.id
+                    }
+                  })
               }
 
         }
@@ -147,11 +162,13 @@ module.exports={
                     torneo_id: req.params.id,
                     equipo_id: e
                 })
+                await fair_play.create({
+                    torneo_id: req.params.id,
+                    equipo_id: e
+                })
             })
 
         }
-
-        
         return res.redirect(`/torneos/${req.params.id}`)
     },
     destroid: async(req, res)=>{
@@ -164,6 +181,11 @@ module.exports={
         await equipo_torneo.destroy({
             where: {torneo_id: req.params.id}
         })
+        await fair_play.destroy({
+            where: {torneo_id: req.params.id}
+        })
+
+
         await torneos.destroy()
 
         return res.redirect("/torneos")
