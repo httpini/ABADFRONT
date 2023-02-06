@@ -34,3 +34,6 @@ app.use("/torneos", require("./routes/torneos.routes"))
 app.use("/equipos-torneos", require("./routes/equipos_torneos.routes"))
 
 app.use("/goleadores", require("./routes/goleadores.routes"))
+
+
+app.use("/fair-play", require("./routes/fair_play.routes"))

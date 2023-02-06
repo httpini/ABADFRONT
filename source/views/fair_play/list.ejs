@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <section>
+            <h3>Fair Play <%= torneo.name %> <%=torneo.temporada %></h3>
+
+            <p>Puntuaciones: Amarillas = 1pto, Rojas= 2ptos</p>
+
+            <table>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Puntos</th>
+                    <th>Amarillas</th>
+                    <th>Rojas</th>
+                    <th>Amonestaciones</th>
+                    <th>Motivos de Amonestacion</th>
+                    <th>Agregar</th>
+                    <th>Editar</th>
+                </tr>
+                <% fair_play.forEach(fp => { %>
+                    <tr>
+                        <td><%= fp.equipo.name %></td>
+                        <td><%= fp.puntos %></td>
+                        <td><%= fp.amarillas %></td>
+                        <td><%= fp.rojas %></td>
+                        <td><%= fp.amonestaciones %></td>
+                        <td><%= fp.motivos_amon %></td>
+                        <td>
+                            <form action="/fair-play/<%=fp.id%>/agregar?m=PUT" method="post">
+                                <label for="amarillas">T. A</label>
+                                <input type="number" value="0" name="amarillas" id=amarillas placeholder="Amarillas">
+                                <label for="rojas">T. R</label>
+                                <input type="number" value="0" name="rojas" id="rojas" placeholder="Rojas">
+                                <label for="amonestaciones">Amon.</label>
+                                <input type="number" value="0" name="amonestaciones" id="amonestaciones" placeholder="Amonestaciones">
+                                <textarea type="text" name="motivos_amon" id="motivos_amon" placeholder="Motivos de la amonestacion"></textarea>
+                                
+                                <button type="submit">Actualizar Datos</button>
+                            </form>
+                        </td>
+                        <td>
+                            <nav>
+                                <a href="/fair-play/edit/<%=fp.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            </nav>
+                        </td>
+                    </tr>
+                 
+                <% }) %>
+            </table>
+
+            
+
+            
+        </section>
+        
+
+    </main>
+</body>
+</html>
