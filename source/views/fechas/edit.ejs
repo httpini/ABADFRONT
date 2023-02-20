@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/fechas/torneo/<%=fecha.torneo.id%>/edit/<%=fecha.id%>?m=PUT" >
+            <h3>Editar Datos de la fecha "<%= fecha.name %>" del <%= fecha.torneo.name %> <%= fecha.torneo.temporada %></h3>
+                       
+            <label for="nro">Fecha Numero</label>
+            <input type="number" id="nro" name="nro" value="<%= fecha.nro%>">
+
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" value="<%= fecha.name%>">
+
+            <label for="dia">Dia de juego</label>
+            <input type="date" name="dia" id="dia" value="<%= fecha.dia%>">
+            
+             <button type="submit">Guardar Cambios</button>
+        </form>
+        <section>
+            <h3>PARTIDOS DE LA FECHA</h3>
+            <table>
+                <tr>
+                    <th>Dia</th>
+                    <th>Terna</th>
+                    <th>Local</th>
+                    <th> </th>
+                    <th> </th>
+                    <th>Visitante</th>
+                    <th>Hora</th>
+                    <th>Predio</th>
+                    <th>Estado</th>
+                    <th>Motivo</th>
+                    <th>Editar/Eliminar</th>
+                </tr>
+                <% partidos.forEach(p => { %>
+                    <tr>
+                        <td><%= p.dia %></td>
+                        <td><%= p.terna_id%></td>
+                        <td><%= p.local.team_name %></td>
+                        <td><%= p.g_local == null? "-" : p.g_local %></td>
+                        <td><%= p.g_visitante == null? "-" : p.g_visitante %></td>
+                        <td><%= p.visitante.team_name %></td>
+                        <td><%= p.hora == null? "A Confirmar": p.hora %></td>
+                        <td><%= p.predio_id == null? "A Confirmar": p.predio.name %></td>
+                        <td><%= p.estado.name %></td>
+                        <td><%= p.motivo_postergado %></td>
+                        <td>
+                            <a href="/partidos/edit/<%=p.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="/partidos/delete/<%=p.id%>?m=DELETE" method="post">
+                                <button type="submit">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                 
+                <% }) %>
+            </table>
+        </section>
+
+    </main>
+</body>
+</html>

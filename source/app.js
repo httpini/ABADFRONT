@@ -38,3 +38,6 @@ app.use("/goleadores", require("./routes/goleadores.routes"))
 app.use("/fair-play", require("./routes/fair_play.routes"))
 
 app.use("/sancionados", require("./routes/sancionados.routes"))
+
+app.use("/fechas", require("./routes/fechas.routes"))
+
