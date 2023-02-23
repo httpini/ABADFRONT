@@ -41,3 +41,5 @@ app.use("/sancionados", require("./routes/sancionados.routes"))
 
 app.use("/fechas", require("./routes/fechas.routes"))
 
+app.use("/ternas", require("./routes/ternas.routes"))
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/ternas/created">
+            <h3> Nueva Terna <i class="fa-solid fa-plus"></i></h3>
+            <label for="name">Nombre de la terna (Abreviacion)</label>
+            <input type="text" name="name" id="name">
+
+            <label for="responsable">Nombre y Apellido del responsable</label>
+            <input type="text" name="responsable" id="responsable">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+
+            <label for="tel">Telefono</label>
+            <input type="number" name="tel" id="tel">
+
+            <button type="submit">Crear Terna</button>
+
+        </form>
+        <section>
+            <h3>Lista de Ternas</h3>
+            <nav>
+                <% ternas.forEach(terna => { %>
+                    <nav>
+                        <a href="/ternas/<%=terna.id%>"><%= terna.name %> - <%= terna.responsable %></a>
+                        <a href="/ternas/edit/<%=terna.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/ternas/delete/<%=terna.id%>?m=DELETE" method="post">
+                            <button type="submit">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </form>
+                    </nav>
+                 
+                <% }) %>
+            </nav>
+
+        </section>
+    </main>
+</body>
+</html>

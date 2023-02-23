@@ -39,7 +39,7 @@ module.exports={
     edited: async(req,res)=>{
         let categorias= await categoria.findByPk(req.params.id,{include:{all:true}})
         await categorias.update(req.body)
-        return res.redirect("categorias/")
+        return res.redirect("/categorias/")
     },
     destroid: async (req,res)=>{
         let categorias= categoria.findByPk(req.params.id,{include:{all:true}})

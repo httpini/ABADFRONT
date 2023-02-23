@@ -1,5 +1,5 @@
 let todosEquipos
-let todasTernas = [{id:1,name:"AFA"},{id:2,name:"ACAFA"}, {id:3,name:"SAA"}]
+let todasTernas 
 
 //FALTA AGREGAR LA FUNCION DEL SELECT DE LAS TERNAS NOMAS
 async function agregar_partido(){
@@ -21,13 +21,18 @@ async function agregar_partido(){
     })
    
     //AGARRAMOS EL TORNEO_ID PARA poder filtrar los equipos que pertenezcan a ese torneo
-    var torneo_id = document.getElementById("torneo_id").value; 
+    var torneo_id = document.getElementById("torneo_id").value;
+
+    // Nos traemos los datos de las ternas
+    let request2 = await fetch("http://localhost:8020/ternas/all")
+    let response2 = await request2.json()   
+    todasTernas = response2
 
     //llamamos a la api de nuestra aplicacion web para que nos devuelva los equipos
     let request = await fetch("http://localhost:8020/equipos-torneos/all")
     let response = await request.json()   
     todosEquipos = response
-    
+
     //los filtramos por el torneo
     todosEquipos = todosEquipos.filter( e => e.torneo.id == torneo_id)
 
