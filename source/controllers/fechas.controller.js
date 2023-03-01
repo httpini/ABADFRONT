@@ -1,4 +1,4 @@
-const {fecha, torneo, partido, equipo_torneo}= require("../database/models/index")
+const {fecha, torneo, partido, equipo_torneo, terna, predio, estado_partido}= require("../database/models/index")
 
 module.exports ={
     select: async (req,res)=>{
@@ -85,10 +85,31 @@ module.exports ={
             },
             include:{all:true}
         })
+        let ternas = await terna.findAll({
+            include:{all:true},
+            order:[
+                ["name","ASC"]
+            ]
+        })
+        let predios = await predio.findAll({
+            include:{all:true},
+            order:[
+                ["name","ASC"]
+            ]
+        })
+        let estados = await estado_partido.findAll({
+            include:{all:true},
+            order:[
+                ["name","ASC"]
+            ]
+        })
         return res.render("fechas/edit",{
             title: "Editar Campos de Fair Play",
             fecha: fec,
-            partidos:partidos
+            partidos:partidos,
+            predios:predios,
+            ternas:ternas,
+            estados:estados
         })
     },
     edited: async(req,res)=>{
