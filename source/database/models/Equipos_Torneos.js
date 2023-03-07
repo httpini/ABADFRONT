@@ -20,28 +20,40 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull: false,
             type: DataTypes.INTEGER
         },
+        team_name:{
+            allowNull: false,
+            type: DataTypes.STRING
+        },
         p_jugados:{
-            allowNull: true,
+            allowNull: false,
             type: DataTypes.INTEGER
         },
         p_ganados:{
-            allowNull: true,
+            allowNull: false,
+            type: DataTypes.INTEGER
+        },
+        p_empatados:{
+            allowNull: false,
             type: DataTypes.INTEGER
         },
         p_perdidos:{
-            allowNull: true,
+            allowNull: false,
             type: DataTypes.INTEGER
         },
         g_favor:{
-            allowNull: true,
+            allowNull: false,
             type: DataTypes.INTEGER
         },
         g_contra:{
-            allowNull: true,
+            allowNull: false,
             type: DataTypes.INTEGER
         },
         g_dif:{
-            allowNull: true,
+            allowNull: false,
+            type: DataTypes.INTEGER
+        },
+        pts:{
+            allowNull: false,
             type: DataTypes.INTEGER
         },
         predio_id:{
@@ -69,6 +81,14 @@ module.exports=(sequelize,DataTypes)=>{
             as: 'predio',
             foreignKey: 'predio_id',
         }); 
+        Equipo_Torneo.hasMany(model.partido, {
+            as: 'partidos_local',
+            foreignKey: 'local_id',
+        });
+        Equipo_Torneo.hasMany(model.partido, {
+            as: 'partidos_visitante',
+            foreignKey: 'visitante_id',
+        });
          
     }
    

@@ -69,9 +69,20 @@ module.exports={
     
     
             idsEquipos.forEach( async e=>{
+
+                let equipon = await equipo.findOne({
+                    where:{
+                        id:e
+                    },
+                    include:{all:true}
+                }); //
+                
+                console.log(equipon.name)
+
                 await equipo_torneo.create({
                     torneo_id: nuevoTorneo.id,
-                    equipo_id: e
+                    equipo_id: e,
+                    team_name:equipon.name
                 })
                 await fair_play.create({
                     torneo_id: nuevoTorneo.id,

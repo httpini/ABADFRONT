@@ -96,4 +96,12 @@ module.exports={
        
     },
     destroid:async (req,res)=>{},
+    allEquiposTorneos: async(req,res)=>{
+        let listaEquipos = await equipo_torneo.findAll({
+            include:{all:true}
+            
+        })
+        return res.send(listaEquipos)
+
+    }
 }

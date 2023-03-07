@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <form method="post" action="/ternas/edit/<%= terna.id %>?m=PUT">
+            <label for="name">Nombre de la terna (Abreviacion)</label>
+            <input type="text" name="name" id="name" value="<%=terna.name%>">
+
+            <label for="responsable">Nombre y Apellido del responsable</label>
+            <input type="text" name="responsable" id="responsable" value="<%=terna.responsable%>">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="<%=terna.email%>">
+
+            <label for="tel">Telefono</label>
+            <input type="number" name="tel" id="tel" value="<%=terna.tel%>">
+
+            <button type="submit">Actualizar datos</button>
+        </form>
+        <form action="/ternas/delete/<%=terna.id%>?m=DELETE" method="post">
+            <button type="submit">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </form>
+    </main>
+</body>
+</html>
