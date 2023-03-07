@@ -13,5 +13,20 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "name": "abad2023",
+  "description": "TORNEO ABAD",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/httpini/ABAD2023.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/httpini/ABAD2023/issues"
+  },
+  "homepage": "https://github.com/httpini/ABAD2023#readme"
 }
