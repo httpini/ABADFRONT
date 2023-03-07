@@ -29,10 +29,10 @@ export default function Header() {
                         <li className='text-xl w-full my-2'>
                             <AiOutlineClose onClick={() => setToggleMenu(false)} />
                         </li>
-                        <LinkHeader texto='Torneos' lista={list} hola={true} pagina='torneo'/>
-                        <LinkHeader texto='Copas' lista={list} hola={true} pagina='copa' />
-                        <LinkHeader texto='Predios' lista={[]} hola={true} pagina='predio' />
-                        <LinkHeader texto='Nosotros' lista={[]} hola={true} pagina='nosotros' />
+                        <LinkHeader texto='Torneos' lista={list} pagina='torneo'/>
+                        <LinkHeader texto='Copas' lista={list} pagina='copa' />
+                        <LinkHeader texto='Predios' lista={[]} pagina='predio' />
+                        <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
                     </ul>
                 )}
             </div>
