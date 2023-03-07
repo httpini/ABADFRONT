@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <section>
+            <H2>Todos los partidos del <%= torneo.name %> <%= torneo.temporada %></H2>
+            <form action="/partidos/torneo/<%=torneo.id%>" method="get">
+                <h3>Filtrar por:</h3>
+                <label for="fecha_id">Fecha:</label>
+                <select name="fecha_id" id="fecha_id">
+                    <option disabled selected>Seleccione..</option>
+                    <% fechas.forEach(f => { %>
+                        <option value="<%=f.id%>" ><%= f.name %></option>
+                    <% }) %>
+                </select>
+
+                <label for="equipo">Equipo:</label>
+                <select name="equipo" id="equipo">
+                    <option selected disabled>Seleccione...</option>
+                    <% torneo.equipos.forEach(element => { %>
+                        <option value="<%= element.id %>"><%= element.name %></option>
+                    <% }) %>
+                </select>
+
+                <label for="estado">Estado:</label>
+                <select name="estado" id="estado">
+                    <option selected disabled>Seleccione...</option>
+                    <% estados.forEach(element => { %>
+                        <option value="<%= element.id %>"><%= element.name %></option>
+                    <% }) %>
+                </select>
+
+                <label for="predio">Predio:</label>
+                <select name="predio" id="predio">
+                    <option selected disabled>Seleccione...</option>
+                    <% predios.forEach(element => { %>
+                        <option value="<%= element.id %>"><%= element.name %></option>
+                    <% }) %>
+                </select>
+
+                <label for="terna">Terna:</label>
+                <select name="terna" id="terna">
+                    <option selected disabled>Seleccione...</option>
+                    <% ternas.forEach(element => { %>
+                        <option value="<%= element.id %>"><%= element.name %></option>
+                    <% }) %>
+                </select>
+
+                <button type="submit">Aplicar Filtros</button>
+                <button type="reset">Borrar Filtros</button>
+
+                
+            
+            </form>
+        </section>
+        <br>
+        <% if (partidos.length > 0) { %>
+            <table>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Dia</th>
+                    <th>Terna</th>
+                    <th>Local</th>
+                    <th>GL</th>
+                    <th>GV</th>
+                    <th>Visitante</th>
+                    <th>Hora</th>
+                    <th>Predio</th>
+                    <th>Estado</th>
+                    <th>Motivo</th>
+                    <th>Editar/Eliminar</th>
+                </tr>
+                <% partidos.forEach(p => { %>
+                    <tr>
+                        <td><%= p.fecha.name %></td>
+                        <td><%= p.dia %></td>
+                        <td><%= p.terna == null? "A Confirmar...": p.terna.name %></td>
+                        <td><%= p.local.team_name %></td>
+                        <td><%= p.g_local == null?"-":p.g_local %></td>
+                        <td><%= p.g_visitante == null?"-":p.g_visitante %></td>
+                        <td><%= p.visitante.team_name %></td>
+                        <td><%= p.hora == null? "A Confirmar...": p.hora%></td>
+                        <td><%= p.predio == null? "A Confirmar...": p.predio.name%></td>
+                        <td><%= p.estado.name %></td>
+                        <td><%= p.motivo_postergado %></td>
+                        <td>
+                            <a href="/partidos/torneo/<%=torneo.id%>/edit/<%=p.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="/partidos/delete/<%=p.id%>?m=DELETE" method="post">
+                                <button type="submit">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                 
+                <% }) %>
+                
+            </table>
+         
+        <% } %>
+        
+
+
+    </main>
+</body>
+</html>

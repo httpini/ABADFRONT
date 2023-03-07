@@ -78,7 +78,7 @@
                                 <select name="predio_id" id="predio_id">
                                     <option disabled <%= p.predio_id != null?"": "selected"%>>A Confirmar</option>
                                     <% predios.forEach(pre => { %>
-                                        <option value="<%=pre.id%>" <%= p.predio_id == null?"": "selected"%>><%= pre.name %></option>
+                                        <option value="<%=pre.id%>" <%= p.predio_id == pre.id ? "selected":""%>><%= pre.name %></option>
                                      
                                     <% }) %>
                                 </select>

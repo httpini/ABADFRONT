@@ -1,4 +1,4 @@
-const {partido, terna, torneo, fecha, equipo_torneo}= require("../database/models/index")
+const {partido, terna, torneo, fecha, equipo_torneo, estado_partido, predio}= require("../database/models/index")
 const{actualizar,restablecer}= require("../modules/actualizarTabla")
 
 /*al momento de editar el partido, debemos restar el partido ganado/empatado/perdido de la tabla, restar los goles en contra y los goles a favor, y rehacer el calculo de partidos jugados, puntos y diferencia de gol.
@@ -17,10 +17,132 @@ module.exports= {
         torneos: torneos
         })
     },
+    porTorneo: async (req,res)=>{
+        let partidos = await partido.findAll({
+            include:{all:true},
+            order:[
+                ["dia", "DESC"]
+            ]
+        })
+
+        partidos = partidos.filter(partido=>{
+           return partido.fecha.torneo_id == req.params.torneo_id
+        })
+       
+        
+
+        if(req.query && req.query.fecha_id){
+            partidos = partidos.filter(p=> {
+                return p.fecha_id == req.query.fecha_id
+            })
+        }
+        if(req.query && req.query.equipo){
+
+            let elEquipo= await equipo_torneo.findOne({
+                include:{all:true},
+                where:{
+                    equipo_id: req.query.equipo,
+                    torneo_id:req.params.torneo_id
+                }
+            })
+            partidos = partidos.filter(p=>{
+                return p.local_id == elEquipo.id || p.visitante_id==elEquipo.id
+            })
+        }
+        if(req.query && req.query.estado){
+            partidos = partidos.filter(p=>{
+              return  p.estado_id == req.query.estado
+            })
+        }
+        if(req.query && req.query.terna){
+            partidos = partidos.filter(p=>{
+             return p.terna_id == req.query.terna
+            })
+        }
+        if(req.query && req.query.predio){
+            partidos = partidos.filter(p=>{
+              return p.predio_id == req.query.predio
+            })
+        }
+        let estados = await estado_partido.findAll({include:{all:true}})
+        let ternas = await terna.findAll({
+            include:{all:true},
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let predios = await predio.findAll({
+            include:{all:true},
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let fechas = await fecha.findAll({
+            include:{all:true},
+            where:{
+                torneo_id:req.params.torneo_id
+            },
+            order:[
+                ["nro", "ASC"]
+            ]
+        })
+
+        let torneos = await torneo.findByPk(req.params.torneo_id,{
+            include:{all:true}
+        })
+        
+        return res.render("partidos/list",{
+            title:`Partidos ${torneos.name} ${torneos.temporada}`,
+            partidos:partidos,
+            torneo:torneos,
+            fechas:fechas,
+            estados:estados,
+            ternas:ternas,
+            predios:predios,
+        })
+    },
     partido: async (req, res)=>{
         let partidos = await partido.findAll({include:{all:true}})
         return res.send(partidos)
 
+    },
+    edit: async(req,res)=>{
+        let elPartido = await partido.findByPk(req.params.id,{include:{all:true}})
+        if(!elPartido){
+            return res.redirect(`/partidos/torneo/${req.params.torneo_id}`)
+        }
+        let ternas= await terna.findAll({
+            include:{all:true},
+            order:[
+                ["name","ASC"]
+            ]
+        })
+        let fechas= await fecha.findAll({
+            include:{all:true},
+            order:[
+                ["nro","ASC"]
+            ]
+        })
+        let predios= await predio.findAll({
+            include:{all:true},
+            order:[
+                ["name","ASC"]
+            ]
+        })
+        let estados = await estado_partido.findAll({
+            include:{all:true},
+
+        })
+
+        return res.render("partidos/edit",{
+            title: "Editar Partido",
+            p:elPartido,
+            ternas:ternas,
+            fechas:fechas,
+            predios:predios,
+            estados:estados
+
+        })
     },
     edited: async(req,res)=>{
         let elPartido = await partido.findByPk(req.params.id,{
