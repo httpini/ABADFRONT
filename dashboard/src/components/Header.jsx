@@ -1,12 +1,16 @@
 import React from 'react'
+import LinkHeader from './LinkHeader'
+
+let list = [1, 2, 4, 5, 6, "ajsdofjadsfoaod"]
 
 export default function Header() {
     return (
-        <div>
-            <h2>Torneos</h2>
-            <h2>Copas</h2>
-            <h2>Partidos</h2>
-            <h2>Predios</h2>
+        <div className='flex w-full justify-around'>
+            <LinkHeader texto='Torneos' lista={list}/>
+            <LinkHeader texto='Copas' lista={list}/>
+            <h1>LOGO</h1>
+            <LinkHeader texto='Partidos' />
+            <LinkHeader texto='Predios' />
         </div>
     )
 }
