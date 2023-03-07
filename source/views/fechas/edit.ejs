@@ -43,15 +43,32 @@
                                 <select name="terna_id" id="terna_id">
                                     <option disabled <%= p.terna_id != null?"": "selected"%>>A Confirmar</option>
                                     <% ternas.forEach(t => { %>
-                                        <option value="<%=t.id%>" <%= p.terna_id == null?"": "selected"%>><%= t.name %></option>
+                                        <option value="<%=t.id%>" <%= p.terna_id == t.id? "selected":"" %>><%= t.name %></option>
                                      
                                     <% }) %>
                                 </select>
                             </td>
                             <td><%= p.local.team_name %></td>
 
-                            <td><input type="number" name="g_local" id="g_local" value="<%= p.g_local%>"></td>
-                            <td><input type="number" name="g_visitante" id="g_visitante" value="<%= p.g_visitante%>"></td>
+                            <td>
+                                <select name="g_local" id="g_local">
+                                    <option disabled <%= p.g_local != null?"": "selected"%>>-</option>
+                                    <% for( let index = 0; index < 21; index++ ) { %>
+                                        <option value="<%=index%>"  <%= p.g_local == index? "selected" : "" %>><%= index %></option>
+                                    
+                                    <% } %>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="g_visitante" id="g_visitante">
+                                    <option disabled <%= p.g_visitante != null?"": "selected"%>>-</option>
+                                    <% for( let index = 0; index < 21; index++ ) { %>
+                                        <option value="<%=index%>"  <%= p.g_visitante == index? "selected" : "" %>><%= index %></option>
+                                    
+                                    <% } %>
+                                </select>
+
+                            </td>
 
                             <td><%= p.visitante.team_name %></td>
 
@@ -79,6 +96,7 @@
                             </td>
                             <td>
                                 <button type="submit">Actualizar</button>
+                            </form>
                                 <form action="/partidos/delete/<%=p.id%>?m=DELETE" method="post">
                                     <button type="submit">
                                         <i class="fa-solid fa-xmark"></i> Eliminar Partido
@@ -87,7 +105,7 @@
                             </td>
                         </tr>
                         
-                    </form>
+                    
                     
                  
                 <% }) %>

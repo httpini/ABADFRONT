@@ -9,8 +9,8 @@ router.get("/all", partido)
 //router.get("/torneo/:torneo_id/create", create)
 //router.post("/torneo/:torneo_id/create", created)
 //router.get("/torneo/:torneo_id/edit/:id", edit)
-//router.put("/torneo/:torneo_id/edit/:id", edited)
-//router.delete("/torneo/:torneo_id/delete/:id", destroid)
+router.put("/edit/:id", edited)
+router.delete("/delete/:id", destroid)
 
 
 

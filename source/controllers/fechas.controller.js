@@ -1,5 +1,5 @@
 const {fecha, torneo, partido, equipo_torneo, terna, predio, estado_partido}= require("../database/models/index")
-
+const{actualizar,restablecer}= require("../modules/actualizarTabla")
 module.exports ={
     select: async (req,res)=>{
             let torneos = await torneo.findAll({
@@ -133,11 +133,31 @@ module.exports ={
             return res.redirect(`/fechas/torneo/${req.params.torneo_id}`)
         }
 
+        let partidos = await partido.findAll({
+            include:{all:true},
+            where:{
+                fecha_id:fec.id
+            }
+        })
+
+        partidos.forEach(async partido=>{
+            let local = await equipo_torneo.findByPk(partido.local_id)
+            let visitante = await equipo_torneo.findByPk(partido.visitante_id)
+
+            restablecer(local,visitante,partido)
+            await local.save()
+            await visitante.save()
+        })
+      
+
+        //SI ELIMINO UNA FECHA DEBERIA ELIMINAR LOS PUNTOS DE LA TABLA DE CADA PARTIDO
+
         await partido.destroy({
             where:{
                 fecha_id: fec.id
             }
         })
+
         await fec.destroy()
         return res.redirect(`/fechas/torneo/${req.params.torneo_id}`)
 
