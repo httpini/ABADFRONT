@@ -5,11 +5,11 @@ import ProximosPartidos from "@/components/ProximosPartidos";
 
 export default function Home() {
   return (
-    <div>
+    <div className="h-screen">
       <Header />
       <Banner />
       <ProximosPartidos />
-      <Footer/>
+      <Footer />
     </div>
   )
 }
