@@ -1,9 +1,9 @@
 module.exports=(sequelize,DataTypes)=>{
-    let alias = "predio";
+    let alias = "terna";
     let config={
         timestamps: false,
         deletedAt: false,
-        tableName: "predios"
+        tableName: "ternas"
     }
     let cols = {
         id:{
@@ -16,30 +16,31 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull: false,
             type: DataTypes.STRING
         },
-        adress:{
+        responsable:{
             allowNull: false,
-            type: DataTypes.TEXT
+            type: DataTypes.STRING
         },
-        map:{
+        email:{
             allowNull: false,
-            type: DataTypes.TEXT
+            type: DataTypes.STRING
+        },
+        tel:{
+            allowNull: false,
+            type: DataTypes.INTEGER
         }
     }
-    const Predio = sequelize.define(alias, cols, config)
+    const Ternas = sequelize.define(alias, cols, config)
 
-    Predio.associate = function(model){
-        Predio.hasMany(model.equipo_torneo, {
-            as: 'equipos',
-            foreignKey: 'predio_id',
-        });
-        Predio.hasMany(model.partido, {
+    Ternas.associate = function(model){
+        Ternas.hasMany(model.partido, {
             as: 'partidos',
-            foreignKey: 'predio_id',
+            foreignKey: 'terna_id',
         });
+        
     
     }
 
 
 
-    return Predio
+    return Ternas
 }
