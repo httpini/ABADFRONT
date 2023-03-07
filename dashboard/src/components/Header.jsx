@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { HiMenuAlt4 } from 'react-icons/hi'
 import { AiOutlineClose } from 'react-icons/ai'
 import LinkHeader from './LinkHeader'
+import Link from 'next/link'
+
 
 let list = [1, 2, 4, 5, 6, "ajsdofjadsfoaod"]
 
@@ -10,11 +12,13 @@ export default function Header() {
 
     return (
         <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
-            <div className='md:flex hidden justify-around flex-grow'>
+            <div className='md:flex hidden justify-around flex-grow mr-[5em]'>
                 <LinkHeader texto='Torneos' lista={list} />
                 <LinkHeader texto='Copas' lista={list} />
             </div>
-            <h1 className='flex-grow flex justify-center'>LOGO</h1>
+            <Link href='/'>
+                <h1 className='flex-grow flex justify-center'>LOGO</h1>
+            </Link>
             <div>
                 {toggleMenu ?
                     <AiOutlineClose fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(false)} />
@@ -32,7 +36,7 @@ export default function Header() {
                     </ul>
                 )}
             </div>
-            <div className='md:flex hidden justify-around flex-grow'>
+            <div className='md:flex hidden justify-around flex-grow ml-[5em]'>
                 <LinkHeader texto='Predios' lista={[]} />
                 <LinkHeader texto='Nosotros' lista={[]} />
             </div>

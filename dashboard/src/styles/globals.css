@@ -5,3 +5,7 @@
 :root {
     background-color: gray;
 }
+
+section {
+    padding-top: 75px
+}
