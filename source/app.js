@@ -45,5 +45,6 @@ app.use("/ternas", require("./routes/ternas.routes"))
 
 app.use("/partidos", require("./routes/partidos.routes"))
 
+app.use("", require("../routes/apis/apiPartidos.routes"))
 
 
