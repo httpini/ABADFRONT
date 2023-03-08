@@ -16,7 +16,7 @@ export default function LinkHeader({ texto, lista, pagina }) {
             {visible && (
                 <div onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}
                     className='relative md:absolute  bg-red-500 w-[100px] text-center py-1 text-ellipsis'>
-                    {list && list.map(l => (<Link href={`./${pagina}/${l}`} key={l} className='text-center text-ellipsis w-full block'>{l}</Link>))}
+                    {list && list.map(l => (<Link href={`/${pagina}/${l}`} key={l} className='text-center text-ellipsis w-full block'>{l}</Link>))}
                 </div>)
             }
         </div>

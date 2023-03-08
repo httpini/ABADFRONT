@@ -3,9 +3,7 @@ import { HiMenuAlt4 } from 'react-icons/hi'
 import { AiOutlineClose } from 'react-icons/ai'
 import LinkHeader from './LinkHeader'
 import Link from 'next/link'
-
-
-let list = [1, 2, 4, 5, 6, "ajsdofjadsfoaod"]
+import { torneos, copas } from '../../utils/constants'
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false)
@@ -13,8 +11,8 @@ export default function Header() {
     return (
         <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
             <div className='md:flex hidden justify-around flex-grow mr-[5em]'>
-                <LinkHeader texto='Torneos' lista={list} pagina='torneo'/>
-                <LinkHeader texto='Copas' lista={list} pagina='copa'/>
+                <LinkHeader texto='Torneos' lista={torneos} pagina='torneo'/>
+                <LinkHeader texto='Copas' lista={copas} pagina='copa'/>
             </div>
             <Link href='/'>
                 <h1 className='flex-grow flex justify-center'>LOGO</h1>
@@ -29,8 +27,8 @@ export default function Header() {
                         <li className='text-xl w-full my-2'>
                             <AiOutlineClose onClick={() => setToggleMenu(false)} />
                         </li>
-                        <LinkHeader texto='Torneos' lista={list} pagina='torneo'/>
-                        <LinkHeader texto='Copas' lista={list} pagina='copa' />
+                        <LinkHeader texto='Torneos' lista={torneos} pagina='torneo'/>
+                        <LinkHeader texto='Copas' lista={copas} pagina='copa' />
                         <LinkHeader texto='Predios' lista={[]} pagina='predio' />
                         <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
                     </ul>
