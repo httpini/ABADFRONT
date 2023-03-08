@@ -19,6 +19,18 @@ module.exports=(sequelize,DataTypes)=>{
         categoria_id:{
             allowNull: true,
             type: DataTypes.INTEGER
+        },
+        color_1:{
+            allowNull: true,
+            type: DataTypes.STRING
+        },
+        color_2:{
+            allowNull: true,
+            type: DataTypes.STRING
+        },
+        color_3:{
+            allowNull: true,
+            type: DataTypes.STRING
         }
     }
     const Equipo = sequelize.define(alias, cols, config)

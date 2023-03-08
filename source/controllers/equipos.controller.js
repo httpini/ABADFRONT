@@ -62,8 +62,33 @@ module.exports = {
     
     edited: async (req,res)=>{
         let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
-        await equipos.update(req.body)
-        return res.redirect("/equipos/")
+        await equipos.update({
+            name: req.body.name,
+            categoria_id: req.body.categoria_id,
+            color_1: req.body.color_1 != ""? req.body.color_1:null,
+            color_2: req.body.color_2 != ""? req.body.color_2:null,
+            color_3: req.body.color_3 != ""? req.body.color_3:null,
+        })
+
+        let equiposTorneos= await equipo_torneo.findAll({
+            include:{all:true},
+            where:{
+                equipo_id:equipos.id
+            }
+        })
+        if(equiposTorneos.length > 0){
+            equiposTorneos.forEach(async et=>{
+                await et.update({
+                    team_name:equipos.name,
+                    color_1:equipos.color_1,
+                    color_2:equipos.color_2,
+                    color_3:equipos.color_3
+                })
+            })
+
+        }
+        
+        return res.redirect(`/equipos/edit/${equipos.id}`)
     },
     destroid: async(req,res)=>{
         let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
