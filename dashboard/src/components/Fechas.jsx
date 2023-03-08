@@ -19,20 +19,32 @@ export default function Fechas() {
                     <div key={i + 1} onClick={cambioFecha} className={`${i == fecha - 1 ? activeTopicStyle : ''}`}>{i + 1}</div>
                 )}
             </div>
-            <div className=''>
-                {
-                    equipos && equipos.map((e, i) => (
-                        <div key={i} className={`flex w-full gap-4`}>
-                            <p>{i}</p>
-                            <p>{e.nombre}</p>
-                            <p>{e.puntaje}</p>
-                            <p>ganados: {e.partidos.ganado}</p>
-                            <p>empatados: {e.partidos.empatado}</p>
-                            <p>perdidos: {e.partidos.perdido}</p>
-                        </div>
-                    ))
-                }
-            </div>
+            <table className='w-full'>
+                <thead className='bg-white'>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Puntaje</th>
+                        <th>Ganados</th>
+                        <th>Empatados</th>
+                        <th>Perdidos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        equipos && equipos.map((e, i) => (
+                            <tr key={i}>
+                                <th>{i}</th>
+                                <th>{e.nombre}</th>
+                                <th>{e.puntaje}</th>
+                                <th>{e.partidos.ganado}</th>
+                                <th>{e.partidos.empate}</th>
+                                <th>{e.partidos.perdido}</th>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
         </div >
     )
 }
