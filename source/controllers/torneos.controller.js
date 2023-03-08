@@ -56,7 +56,7 @@ module.exports={
         })
     },
     created: async(req,res)=>{
-        console.log(req.body)
+        
 
         let nuevoTorneo = await torneo.create(req.body)
 
@@ -77,12 +77,22 @@ module.exports={
                     include:{all:true}
                 }); //
                 
-                console.log(equipon.name)
 
                 await equipo_torneo.create({
                     torneo_id: nuevoTorneo.id,
                     equipo_id: e,
-                    team_name:equipon.name
+                    team_name:equipon.name,
+                    color_1:equipon.color_1,
+                    color_2:equipon.color_2,
+                    color_3:equipon.color_3,
+                    p_jugados:0,
+                    p_ganados:0,
+                    p_empatados:0,
+                    p_perdidos:0,
+                    g_favor:0,
+                    g_contra:0,
+                    g_dif:0,
+                    pts:0
                 })
                 await fair_play.create({
                     torneo_id: nuevoTorneo.id,
@@ -169,9 +179,22 @@ module.exports={
                 equipos = [equipos];
             }
             equipos.forEach( async e=>{
+                let tim = await equipo.findByPk(e)
                 await equipo_torneo.create({
                     torneo_id: req.params.id,
-                    equipo_id: e
+                    equipo_id: e,
+                    team_name:tim.name,
+                    color_1:tim.color_1,
+                    color_2:tim.color_2,
+                    color_3:tim.color_3,
+                    p_jugados:0,
+                    p_ganados:0,
+                    p_empatados:0,
+                    p_perdidos:0,
+                    g_favor:0,
+                    g_contra:0,
+                    g_dif:0,
+                    pts:0
                 })
                 await fair_play.create({
                     torneo_id: req.params.id,

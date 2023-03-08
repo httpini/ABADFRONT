@@ -21,7 +21,7 @@
 
             <p>Para quitar un equipo del torneo debes seleccionar los que desees quitar de entre los que estan aca abajo y tocar el boton de "Eliminar equipo/s". En el caso para agregar equipos es de la misma forma pero con el boton "Agregar equipo/s"</p>
 
-            <% if (!torneo.equipos.length == 0) { %>
+            <% if (torneo.equipos.length > 0) { %>
                 <form action="/torneos/<%=torneo.id%>/quitarEquipos?m=PUT" method="POST">           
                     <h4>Quitar equipos del torneo</h4>
                     <% torneo.equipos.forEach(e => { %>

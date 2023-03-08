@@ -24,6 +24,18 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull: false,
             type: DataTypes.STRING
         },
+        color_1:{
+            allowNull: true,
+            type: DataTypes.STRING
+        },
+        color_2:{
+            allowNull: true,
+            type: DataTypes.STRING
+        },
+        color_3:{
+            allowNull: true,
+            type: DataTypes.STRING
+        },
         p_jugados:{
             allowNull: false,
             type: DataTypes.INTEGER
