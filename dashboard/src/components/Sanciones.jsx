@@ -4,6 +4,7 @@ import { equipos } from '../../utils/constants'
 export default function Sanciones() {
   return (
     <div className='md:col-span-2 flex flex-wrap justify-center w-full'>
+      <h1>Sanciones</h1>
       <div className='bg-yellow-300 w-full md:w-auto'>
         {
           equipos && equipos.map((e, i) => (

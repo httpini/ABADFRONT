@@ -4,6 +4,8 @@ import { equipos } from '../../utils/constants'
 export default function FairPlay() {
   return (
     <div className='bg-orange-300'>
+            <h1>Fair Play</h1>
+
             {
                 equipos && equipos.map((e, i) => (
                     <div key={i} className='flex w-full gap-4'>

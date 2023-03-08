@@ -13,6 +13,7 @@ export default function Fechas() {
 
     return (
         <div className='bg-blue-500'>
+            <h1>Fechas</h1>
             <div className={`cursor-pointer flex flex-wrap gap-2 `}>
                 {Array(partidos).fill(0).map((x, i) =>
                     <div key={i + 1} onClick={cambioFecha} className={`${i == fecha - 1 ? activeTopicStyle : ''}`}>{i + 1}</div>

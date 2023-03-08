@@ -4,6 +4,7 @@ import { equipos } from '../../utils/constants'
 export default function TablaPuntajes({ partidos }) {
     return (
         <div className='bg-red-300'>
+            <h1>Puntajes</h1>
             {
                 equipos && equipos.map((e, i) => (
                     <div key={i} className='flex w-full gap-4'>

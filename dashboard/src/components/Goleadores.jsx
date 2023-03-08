@@ -5,6 +5,7 @@ import { equipos } from '../../utils/constants'
 export default function Goleadores() {
     return (
         <div className='bg-green-300 '>
+            <h1>Goleadores</h1>
             {
                 equipos && equipos.map((e, i) => (
                     <div key={i} className='flex w-full gap-4'>

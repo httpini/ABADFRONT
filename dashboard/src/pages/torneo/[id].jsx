@@ -35,7 +35,7 @@ export default function Torneo({ id, torneos }) {
 }
 
 export const getServerSideProps = async ({ params: { id } }) => {
-  let torneos = await axios.get('http://localhost:3500/api/a')
+  let torneos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
   return {
     props: {
       id,
