@@ -5,16 +5,17 @@ import InformacionEquipo from '@/components/InformacionEquipo'
 import LinksTorneos from '@/components/LinksTorneos'
 import axios from 'axios'
 import React from 'react'
+import FechasEquipo from '@/components/FechasEquipo'
 
 export default function Equipo({ id, torneos }) {
   return (
     <div>
       <Header />
-      <section>
+      <section className='w-full'>
         {/* <LinksTorneos torneos={torneos} id={id} /> */}
         <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
           <InformacionEquipo />
-          <Fechas />
+          <FechasEquipo />
         </div>
       </section>
       <Footer />

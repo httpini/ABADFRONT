@@ -6,7 +6,7 @@ let partidos = 24
 
 export default function InformacionEquipo({ equipo }) {
     return (
-        <div className='bg-blue-500 p-5'>
+        <div className='bg-blue-500 p-5 w-[100%]'>
             <h1 className='underline'>Nombre de equipo</h1>
             <div>
                 <h2>Torneo Amateur</h2>
