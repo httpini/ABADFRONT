@@ -1,7 +1,9 @@
 import React from 'react'
 import Puntaje from './Puntaje'
 
-export default function TarjetaPartido({ data }) {
+export default function TarjetaPartido({ data, jugado = false }) {
+  console.log(jugado);
+
   return (
     <div className='w-[250px] bg-blue-300 p-3 rounded-md'>
       <div className='flex justify-between'>
@@ -13,7 +15,13 @@ export default function TarjetaPartido({ data }) {
         <div className='h-[75%] w-[1px] bg-white'></div>
         <Puntaje equipo='equipo 2' goles={0} colores={['blue', 'black']} />
       </div>
-      <h3 className='text-center cursor-pointer bg-slate-200'>Información de partido</h3>
+      <div className='text-center cursor-pointer flex justify-around bg-slate-200'>
+        <p>Predio</p>
+        <p>-</p>
+        <p>Torneo</p>
+        <p>-</p>
+        <p>Fecha</p>
+      </div>
     </div>
   )
 }
