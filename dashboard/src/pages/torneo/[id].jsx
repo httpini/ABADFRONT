@@ -8,6 +8,7 @@ import TablaPuntajes from '@/components/TablaPuntajes';
 import Goleadores from '@/components/Goleadores';
 import FairPlay from '@/components/FairPlay';
 import Sanciones from '@/components/Sanciones';
+import LinksTorneos from '@/components/LinksTorneos';
 
 export default function Torneo({ id, torneos }) {
   const activeTopicStyle = 'underline font-bold'
@@ -16,11 +17,12 @@ export default function Torneo({ id, torneos }) {
     <div>
       <Header />
       <section>
-        <div className='flex w-[50%] justify-around m-auto mt-3'>
+        <LinksTorneos torneos={torneos} id={id} />
+        {/* <div className='flex w-[50%] justify-around m-auto mt-3'>
           {torneos && torneos.map(t => (
             <Link key={t} href={`/torneo/${t}`} className={id == t ? activeTopicStyle : topicStyle}>{t}</Link>
           ))}
-        </div>
+        </div> */}
         <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
           <TablaPuntajes />
           <Fechas />
@@ -42,4 +44,5 @@ export const getServerSideProps = async ({ params: { id } }) => {
       torneos: torneos.data.torneos
     }
   }
+
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { equipos } from '../../utils/constants'
+import Link from 'next/link'
 
 export default function TablaPuntajes({ partidos }) {
     return (
@@ -21,7 +22,7 @@ export default function TablaPuntajes({ partidos }) {
                         equipos && equipos.map((e, i) => (
                             <tr key={i}>
                                 <th>{i}</th>
-                                <th>{e.nombre}</th>
+                                <th><Link href={`/equipo/${e.nombre}`}>{e.nombre}</Link></th>
                                 <th>{e.puntaje}</th>
                                 <th>{e.partidos.ganado}</th>
                                 <th>{e.partidos.empate}</th>
