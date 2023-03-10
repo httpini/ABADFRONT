@@ -1,5 +1,6 @@
-const {partido}=require("../../database/models/index")
+const {partido, torneo, fecha}=require("../../database/models/index")
 const { Op } = require('sequelize');
+
 
 module.exports={
     confirmados: async(req, res)=>{
@@ -18,22 +19,24 @@ module.exports={
                 ]
             });
 
+            let count = partidos.length           
             
-            let count = partidos.length
-            
-            
-            partidos = partidos.map(p=>{
+            partidos = partidos.map( p =>{
+                
                 let data = {
                     id:p.id,
                     hora:p.hora,
                     dia:p.dia,
+                    fecha:p.fecha.name, 
+                    torneo_id:p.fecha.torneo_id,
+                    torneo_name:"",               
                     local_name:p.local.team_name,
                     local_colores:[],
                     visitante_id:p.visitante_id,
                     visitante_name: p.visitante.team_name,
                     visitante_colores:[],
                     //ACA CON EL PREDIO HAY UN TEMA, PREFERIS QUE TE PASE A CONFIRMAR O QUE DEJE NULL Y VOS LE ARMAS LA LOGICA PARA QUE DIGA A CONFIRMAR?
-                    predio_name:p.predio_id ==null? "A Confirmar": p.predio.name,
+                    predio_name:p.predio_id ==null? null: p.predio.name,
                     predio_url:p.predio_id ==null? null : p.predio.map,
                     estado:p.estado.name                
                 }
@@ -62,6 +65,11 @@ module.exports={
 
                 return data
             })
+
+            for (const p of partidos) {
+                const torneo_datos = await torneo.findOne({ where: { id: p.torneo_id } })
+                p.torneo_name = `${torneo_datos.name} ${torneo_datos.temporada}`
+              }
             
 
             return res.send({count: count, partidos: partidos}).status(200)
@@ -80,7 +88,8 @@ module.exports={
                 order:[
                     ["dia","DESC"],
                     ["hora","DESC"]
-                ]
+                ],
+                limit: 48
             })
 
             
@@ -92,6 +101,9 @@ module.exports={
                     id:p.id,
                     hora:p.hora,
                     dia:p.dia,
+                    fecha:p.fecha.name,
+                    torneo_id:p.fecha.torneo_id,
+                    torneo_name:"",  
                     local_name:p.local.team_name,
                     local_colores:[],
                     local_goles:p.g_local,
@@ -100,7 +112,7 @@ module.exports={
                     visitante_colores:[],
                     visitante_goles:p.g_visitante,
                     //ACA CON EL PREDIO HAY UN TEMA, PREFERIS QUE TE PASE A CONFIRMAR O QUE DEJE NULL Y VOS LE ARMAS LA LOGICA PARA QUE DIGA A CONFIRMAR?
-                    predio_name:p.predio_id ==null? "A Confirmar": p.predio.name,
+                    predio_name:p.predio_id ==null? null: p.predio.name,
                     predio_url:p.predio_id ==null? null : p.predio.map,
                     estado:p.estado.name                
                 }
@@ -113,8 +125,8 @@ module.exports={
                 if(p.local.color_2 != null){
                     data.local_colores.push(p.local.color_2)
                 }
-                if(p.visitante.color_3 != null){
-                    data.local_colores.push(p.visitante.color_3)
+                if(p.local.color_3 != null){
+                    data.local_colores.push(p.local.color_3)
                 }
                 if(p.visitante.color_1 != null){
                     data.visitante_colores.push(p.visitante.color_1)
@@ -129,7 +141,10 @@ module.exports={
 
                 return data
             })
-            
+            for (const p of partidos) {
+                const torneo_datos = await torneo.findOne({ where: { id: p.torneo_id } })
+                p.torneo_name = `${torneo_datos.name} ${torneo_datos.temporada}`
+              }
 
             return res.send({count: count, partidos: partidos}).status(200)
 

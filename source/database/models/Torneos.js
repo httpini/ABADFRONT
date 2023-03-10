@@ -14,7 +14,11 @@ module.exports=(sequelize, DataTypes)=>{
         },
         name:{
             allowNull:false,
-            type:DataTypes.INTEGER
+            type:DataTypes.STRING
+        },
+        name_url:{
+            allowNull:false,
+            type:DataTypes.STRING
         },
         temporada:{
             allowNull:false,

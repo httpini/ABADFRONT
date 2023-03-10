@@ -1,5 +1,15 @@
 const {torneo, categoria, subcategoria, equipo, equipo_torneo, fair_play}=require("../database/models/index")
 
+function nameURL(nombre, temporada) {
+    // Convertir el nombre a minúsculas y reemplazar espacios por guiones bajos
+    const nombreFormateado = nombre.toLowerCase().replace(/\s+/g, '_');
+    
+    // Concatenar el nombre formateado con la temporada
+    const nombreTemporada = nombreFormateado + '_' + temporada;
+    
+    // Retornar el resultado
+    return nombreTemporada;
+  }
 module.exports={
     create: async (req,res)=>{
         let torneos = await torneo.findAll({
@@ -58,7 +68,13 @@ module.exports={
     created: async(req,res)=>{
         
 
-        let nuevoTorneo = await torneo.create(req.body)
+        let nuevoTorneo = await torneo.create({
+            name:req.body.name,
+            temporada:req.body.temporada,
+            categoria_id:req.body.categoria_id,
+            subcategoria_id:req.body.subcategoria_id?req.body.subcategoria_id:null,
+            name_url:nameURL(req.body.name,req.body.temporada)
+        })
 
         let idsEquipos = req.body.equiposTorneo
 
@@ -255,7 +271,13 @@ module.exports={
         if(!torneos){
             return res.redirect("/torneos")
         }//FALTA LA PARTE DEL REGLAMENTO CON MULTER.
-        await torneos.update(req.body)
+        await torneos.update({
+            name:req.body.name,
+            temporada:req.body.temporada,
+            categoria_id:req.body.categoria_id,
+            subcategoria_id:req.body.subcategoria_id?req.body.subcategoria_id:null,
+            name_url:nameURL(req.body.name,req.body.temporada)
+        })
         return res.redirect("/torneos")
 
     }
