@@ -14,7 +14,12 @@
             <% if (torneo.subcategoria) { %>
                 <p>Subcategoria: <%= torneo.subcategoria.name %> </p>
             <% } %>
+
+            <% if (torneo.reglamento_path) { %>
+                <a href="/assets/reglamentos-torneos/<%= torneo.reglamento_path %>" download="Reglamento <%= torneo.name %> <%= torneo.temporada %>">Descargar Reglamento</a>
+            <% } %>
             <p>Equipos participantes: <%= torneo.equipos.length %></p>
+
         </section>
         <section>
             <h3>Agregar o quitar equipos</h3>

@@ -24,7 +24,7 @@ module.exports=(sequelize, DataTypes)=>{
             allowNull:false,
             type: DataTypes.INTEGER
         },
-        reglamento:{
+        reglamento_path:{
             allowNull: true,
             type: DataTypes.STRING
         },

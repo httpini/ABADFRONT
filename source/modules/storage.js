@@ -16,3 +16,4 @@ const storage = function(folder){
 };
 
 module.exports = storage;
+
