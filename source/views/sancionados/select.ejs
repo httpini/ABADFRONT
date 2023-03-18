@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <section>
+            <h3>Selecciona un torneo para ver sus Sancionados</h3>
+
+            <nav>
+                <% torneos.forEach(t => { %>
+                    <a href="/sancionados/torneo/<%=t.id%>">Sanciones del <%= t.name %> <%= t.temporada %></a>
+                    <% }) %>
+
+            </nav>
+
+            
+        </section>
+        
+
+    </main>
+</body>
+</html>

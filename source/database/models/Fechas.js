@@ -40,6 +40,10 @@ module.exports=(sequelize,DataTypes)=>{
             as: 'partidos',
             foreignKey: 'fecha_id',
         })
+        Fecha.hasMany(model.sancionado, {
+            as: 'sancionados',
+            foreignKey: 'f_sancion',
+        })
        
     }
 

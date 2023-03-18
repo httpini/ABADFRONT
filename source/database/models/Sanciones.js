@@ -29,11 +29,11 @@ module.exports= (sequelize, DataTypes)=>{
             type: DataTypes.INTEGER
         },
         f_sancion:{
-            allowNull:true,
-            type:DataTypes.STRING
+            allowNull:false,
+            type:DataTypes.INTEGER
         },
         sancion:{
-            allowNull:false,
+            allowNull:true,
             type: DataTypes.STRING
         },
         f_vuelta:{
@@ -55,6 +55,10 @@ module.exports= (sequelize, DataTypes)=>{
         Sancionado.belongsTo(model.equipo,{
             as: "equipo",
             foreignKey: "equipo_id"
+        })
+        Sancionado.belongsTo(model.fecha,{
+            as: "fecha",
+            foreignKey: "f_sancion"
         })
     }
 

@@ -2,14 +2,6 @@ const {fair_play, torneo, equipo}= require("../database/models/index")
 
 module.exports ={
     select: async (req,res)=>{
-        let fair_plays = await fair_play.findAll({
-            include:{all:true},
-            order:[
-                ["torneo_id", "DESC"],
-                ["puntos", "ASC"]
-            ]
-        })
-
         let torneos = await torneo.findAll({
             include:{all:true}
         })

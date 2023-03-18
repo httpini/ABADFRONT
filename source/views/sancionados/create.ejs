@@ -5,32 +5,107 @@
 <body>
     <%- include("../includes/header.ejs") %>
     <main>
-        <form action="/sancionados/created" method="post">
+        <form action="/sancionados/torneo/<%=torneo.id%>/created" method="post">
+            <h2><%= torneo.name %> <%= torneo.temporada %></h2>
             <h3>Nuevo/a Sancionado/a <i class="fa-solid fa-plus"></i></h3>
 
-            <label for="torneo_id">Torneo</label>
-            <select name="torneo_id" id="torneo_id">
-                <option selected disabled>Selecciona el torneo al que pertenece</option>
-                <% torneos.forEach(t => { %>
-                    <option value="<%=t.id%>"><%= t.name %> - <%= t.temporada %></option> 
+            <label   for="torneo_id">Torneo ID</label>
+            <input type="text" id="torneo_id" name="torneo_id" value="<%=torneo.id%>" readonly> 
+
+            <label for="f_sancion">Fecha de Sancion</label>
+            <select name="f_sancion" id="f_sancion">
+                <option selected disabled>Seleccione...</option>
+                <% fechas.forEach(f => { %>
+                    <option value="<%=f.id%>"><%= f.name %></option> 
                 <% }) %>
             </select>
 
             <label for="equipo_id">Equipo</label>
             <select name="equipo_id" id="equipo_id">
-                <option selected disabled>Selecciona el Equipo al que pertenece</option>
+                <option selected disabled>Seleccione...</option>
                 <% equipos.forEach(e => { %>
-                    <option value="<%=e.id%>"><%= e.name %> - <%= e.categoria.name %></option> 
+                    <option value="<%=e.id%>"><%= e.team_name %></option> 
                 <% }) %>
             </select>
-
-            <label for="name">Nombre</label>
-            <input type="text" name="name" id="name">
 
             <label for="last_name">Apellido</label>
             <input type="text" id="last_name" name="last_name">
 
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name">           
+
+            <label for="sancion">Sancion</label>
+            <input type="text" name="sancion" id="sancion">
+
+            <label for="f_vuelta">Vuelve a Jugar</label>
+            <input type="text" name="f_vuelta" id="f_vuelta">
+
+            <label for="aclaraciones">Aclaraciones</label>
+            <input type="text" name="aclaraciones" id="aclaraciones">
+
+            <button type="submit">Crear Sancionado/a</button>
         </form>
+        <section>
+            <h3>Sanciones <%= torneo.name %> <%= torneo.temporada %></h3>
+            <table>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Sancion</th>
+                    <th>Sancion</th>
+                    <th>Vuelve</th> 
+                    <th>Aclaraciones</th>
+                    <th>Editar / Eliminar</th>             
+                </tr>
+                <% sancionados.forEach(sanc => { %>
+                    <form action="/sancionados/torneo/<%=torneo.id%>/edit/<%=sanc.id%>?m=PUT" method="post">
+                        <tr>
+                            <td>
+                                <select name="equipo_id" id="equipo_id">
+                                    <% equipos.forEach(e => { %>
+                                        <option value="<%=e.id%>" <%= sanc.equipo_id == e.id? "selected":"" %>><%= e.team_name %></option>
+                                    <% }) %>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" name="last_name" id="last_name" value="<%=sanc.last_name%>">
+                            </td>
+                            <td>
+                                <input type="text" name="name" id="name" value="<%=sanc.name%>">
+                            </td>
+                            <td>
+                                <select name="f_sancion" id="f_sancion">
+                                    <% fechas.forEach(f => { %>
+                                        <option value="<%=f.id%>" <%= sanc.f_sancion == f.id? "selected":"" %>><%= f.name%></option>
+                                    <% }) %>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" name="sancion" id="sancion" value="<%=sanc.sancion%>">
+                            </td>
+                            <td>
+                                <input type="text" name="f_vuelta" id="f_vuelta" value="<%=sanc.f_vuelta%>">
+                            </td>
+                            <td>
+                                <input type="text" name="aclaraciones" id="aclaraciones" value="<%=sanc.aclaraciones%>">
+                            </td>
+                            <td>
+                                <button type="submit">Actualizar</button>
+                            </form>
+                                <form action="/sancionados/delete/<%=sanc.id%>?m=DELETE" method="post">
+                                    <button type="submit">
+                                        <i class="fa-solid fa-xmark"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    
+                    
+                 
+                <% }) %>
+                
+            </table>
+        </section>
         
     </main>
 </body>
