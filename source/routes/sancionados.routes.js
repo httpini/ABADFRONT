@@ -1,14 +1,14 @@
-const {Router} = require("express")
+const {Router}= require("express")
 const router = Router()
-const {create, created, edit, edited, destroid}= require("../controllers/sancionados.controller")
+const {select, create,created, edited, destroid} = require("../controllers/sancionados.controller")
 
 
-
-router.get("/", create)
-//router.post("/created",created)
-//router.get("/edit/:id", edit)
-//router.put("/edit/:id", edited)
-//router.delete("/delete/:id", destroid)
+router.get("/", select)
+router.get("/torneo/:torneo_id", create)
+router.post("/torneo/:torneo_id/created",created )
+router.put("/torneo/:torneo_id/edit/:id", edited)
+router.delete("/delete/:id", destroid)
+//router.put("/:id/agregar", agregarTarjetas)
 
 
 

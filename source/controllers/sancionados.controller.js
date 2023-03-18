@@ -1,38 +1,83 @@
-const {equipo, torneo, sancionado}= require("../database/models/index")
+const {equipo, torneo, sancionado, equipo_torneo, fecha}= require("../database/models/index")
 
 module.exports ={
-    create: async(req,res)=>{
-        let allSancionados= await sancionado.findAll({
-            include:{all:true}
-        })
-        //FALTAN LOS QUERYS DE LOS FILTROS Y EL ORDER
+    select: async (req,res)=>{
         let torneos = await torneo.findAll({
             include:{all:true},
             order:[
-                ["id", "DESC"]
+                ["temporada","DESC"]
             ]
         })
 
-        let equipos = await equipo.findAll({
+        res.render("sancionados/select",{
+            title: "Selecciona un torneo",
+            torneos: torneos
+        })
+    },
+    create: async(req,res)=>{
+        let sancionados= await sancionado.findAll({
             include:{all:true},
             order:[
-                ["name", "ASC"]
+                ["f_sancion", "ASC"]
             ]
         })
-        let lastSancionados=await sancionado.findAll({
+        //FALTAN LOS QUERYS DE LOS FILTROS Y EL ORDER
+        let elTorneo = await torneo.findByPk(req.params.torneo_id,{
             include:{all:true},
+    
+        })
+        let fechas = await fecha.findAll({
+            include:{all:true},
+            where:{
+                torneo_id:req.params.torneo_id
+            },
             order:[
-                ["id","DESC"]
-            ],
-            limit:5
+                ["nro", "ASC"]
+            ]
         })
+
+        let equipos = await equipo_torneo.findAll({
+            include:{all:true},
+            where:{
+                torneo_id: req.params.torneo_id
+            },
+            order:[
+                ["team_name", "ASC"]
+            ]
+        })
+        
         return res.render("sancionados/create",{
-            title: "Sancionados",
-            sancionados: allSancionados,
-            lastSancionados: lastSancionados,
+            title: `Sancionados ${elTorneo.name} ${elTorneo.temporada}`,
+            sancionados: sancionados,
             equipos:equipos,
-            torneos:torneos
+            torneo:elTorneo,
+            fechas:fechas
         })
+    },
+    created: async(req,res)=>{
+        await sancionado.create(req.body)
+        return res.redirect(`/sancionados/torneo/${req.body.torneo_id}`)
+    },
+    edited: async(req,res)=>{
+        let oneSancionado = await sancionado.findByPk(req.params.id,{
+            include:{all:true}
+        })
+        if(!oneSancionado){
+            return res.redirect(`/sancionados/torneo/${req.params.torneo_id}`)
+        }
+        await oneSancionado.update(req.body)
+        return res.redirect(`/sancionados/torneo/${oneSancionado.torneo_id}`)
+    },
+    destroid: async(req,res)=>{
+        let oneSancionado = await sancionado.findByPk(req.params.id,{
+            include:{all:true}
+        })
+        if(!oneSancionado){
+            return res.redirect(`/sancionados/`)
+        }
+        let torneoID= oneSancionado.torneo_id
+        await oneSancionado.destroy()
+        return res.redirect(`/sancionados/torneo/${torneoID}`)
     }
     
 
