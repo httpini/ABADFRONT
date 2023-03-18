@@ -5,7 +5,7 @@
 <body>
     <%- include("../includes/header.ejs") %>
     <main>
-        <form action="/goleadores/edit/<%=goleador.id%>?m=PUT" method="post">
+        <form action="/goleadores/torneo/<%=goleador.torneo_id%>/edit/<%=goleador.id%>?m=PUT" method="post">
             <h3>Editar datos de <%= goleador.last_name %> <%= goleador.name %>  </h3>
 
             <label for="name">Nombre</label>
@@ -14,16 +14,10 @@
             <label for="last_name">Apellido</label>
             <input type="text" id="last_name" name="last_name" value="<%=goleador.last_name%>">
 
-            <label for="torneo_id">Torneo</label>
-            <select name="torneo_id" id="torneo_id">
-                <% torneos.forEach(t => { %>
-                    <option value="<%=t.id%>" <%= t.id == goleador.torneo_id? "selected": null %> ><%= t.name %> - <%= t.temporada %></option> 
-                <% }) %>
-            </select>
             <label for="equipo_id">Equipo</label>
             <select name="equipo_id" id="equipo_id">
                 <% equipos.forEach(e => { %>
-                    <option value="<%=e.id%>" <%= e.id == goleador.equipo_id? "selected": null %>><%= e.name %> - <%= e.categoria.name %></option> 
+                    <option value="<%=e.id%>" <%= e.id == goleador.equipo_id? "selected": null %>><%= e.team_name %>
                 <% }) %>
             </select>
 

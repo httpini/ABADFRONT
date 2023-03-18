@@ -1,4 +1,4 @@
-const {equipo, torneo, sancionado, equipo_torneo, fecha}= require("../database/models/index")
+const {torneo, sancionado, equipo_torneo, fecha}= require("../database/models/index")
 
 module.exports ={
     select: async (req,res)=>{

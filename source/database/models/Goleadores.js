@@ -40,7 +40,7 @@ module.exports= (sequelize, DataTypes)=>{
             as: "torneo",
             foreignKey: "torneo_id"
         })
-        Goleador.belongsTo(model.equipo,{
+        Goleador.belongsTo(model.equipo_torneo,{
             as: "equipo",
             foreignKey: "equipo_id"
         })
