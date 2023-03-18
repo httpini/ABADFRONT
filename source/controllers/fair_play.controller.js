@@ -1,4 +1,4 @@
-const {fair_play, torneo, equipo}= require("../database/models/index")
+const {fair_play, torneo}= require("../database/models/index")
 
 module.exports ={
     select: async (req,res)=>{

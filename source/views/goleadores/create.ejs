@@ -5,29 +5,26 @@
 <body>
     <%- include("../includes/header.ejs") %>
     <main>
-        <form action="/goleadores/created" method="post">
+        <h2>Goleadores/as <%= torneo.name %> <%= torneo.temporada %></h2>
+        <form action="/goleadores/torneo/<%=torneo.id%>/created" method="post">
             <h3>Nuevo/a Goleador/a <i class="fa-solid fa-plus"></i></h3>
+
+            <label for="torneo_id">Torneo ID</label>
+            <input type="number" id="torneo_id" name="torneo_id" value="<%=torneo.id%>" readonly>
+
+            <label for="equipo_id">Equipo</label>
+            <select name="equipo_id" id="equipo_id">
+                <option selected disabled>Seleccione...</option>
+                <% equipos.forEach(e => { %>
+                    <option value="<%=e.id%>"><%= e.team_name %></option> 
+                <% }) %>
+            </select>
 
             <label for="name">Nombre</label>
             <input id="name" name="name" type="text">
 
             <label for="last_name">Apellido</label>
-            <input type="text" id="last_name" name="last_name">
-
-            <label for="torneo_id">Torneo</label>
-            <select name="torneo_id" id="torneo_id">
-                <option selected disabled>Selecciona el torneo al que pertenece</option>
-                <% torneos.forEach(t => { %>
-                    <option value="<%=t.id%>"><%= t.name %> - <%= t.temporada %></option> 
-                <% }) %>
-            </select>
-            <label for="equipo_id">Equipo</label>
-            <select name="equipo_id" id="equipo_id">
-                <option selected disabled>Selecciona el Equipo al que pertenece</option>
-                <% equipos.forEach(e => { %>
-                    <option value="<%=e.id%>"><%= e.name %> - <%= e.categoria.name %></option> 
-                <% }) %>
-            </select>
+            <input type="text" id="last_name" name="last_name">       
 
             <label for="goles">Cantidad de Goles realizados</label>
             <input type="number" id="goles" name="goles">
@@ -42,30 +39,23 @@
                     <th>Equipo</th>
                     <th>Jugador/a</th>
                     <th>Goles</th>
-                    <th>Agregar</th>
-                    <th>Quitar</th>
+                    <th>Agregar/ Quitar</th>
                     <th>Editar/Eliminar</th>
                 </tr>
                 <% lastGoleadores.forEach(g => { %>
                     <tr>
                         <td><%= g.torneo.name %> - <%= g.torneo.temporada %></td>
-                        <td><%= g.equipo.name %></td>
+                        <td><%= g.equipo.team_name %></td>
                         <td><%= g.last_name %> <%= g.name %></td>
                         <td><%= g.goles %></td>
                         <td>
-                            <form action="/goleadores/<%=g.id%>/agregar" method="post">
+                            <form action="/goleadores/torneo/<%=g.torneo_id%>/<%=g.id%>/agregar" method="post">
                                 <input type="number" name="add" id="add">
                                 <button type="submit">Agregar</button>
                             </form>
                         </td>
                         <td>
-                            <form action="/goleadores/<%=g.id%>/quitar" method="post">
-                                <input type="number" name="less" id="less">
-                                <button type="submit">Quitar</button>
-                            </form>
-                        </td>
-                        <td>
-                            <a href="/goleadores/edit/<%=g.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/goleadores/torneo/<%=g.torneo_id%>/edit/<%=g.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
                             <form action="/goleadores/delete/<%=g.id%>?m=DELETE" method="post">
                                 <button type="submit">
                                     <i class="fa-solid fa-xmark"></i>
@@ -85,23 +75,13 @@
 
         <section>
             <h3>Lista de Goleadores/as (<%=goleadores.length  %>)</h3>
-            <form method="get" action="/goleadores/">
-                <h4>Filtrar por:</h4>
-                <label for="torneo_id">Torneo:</label>
-                <select name="torneo_id" id="torneo_id">
-                    <option selected disabled>Selecciona un torneo</option>
-                    
-                    <% torneos.forEach(t => { %>
-                        <option value="<%=t.id%>"><%= t.name %> - <%= t.temporada %></option> 
-                    <% }) %>
-                    
-                </select>
-                
+            <form method="get" action="/goleadores/torneo/<%=torneo.id%>/">
+                <h4>Filtrar por:</h4>            
                 <label for="equipo_id">Equipo:</label>
                 <select name="equipo_id" id="equipo_id">
                     <option selected disabled>Selecciona un equipo</option>
                     <% equipos.forEach(e => { %>
-                        <option value="<%=e.id%>"><%= e.name %> - <%= e.categoria.name %></option> 
+                        <option value="<%=e.id%>"><%= e.team_name %></option> 
                     <% }) %>
                 </select>
                 
@@ -121,30 +101,23 @@
                     <th>Equipo</th>
                     <th>Jugador/a</th>
                     <th>Goles</th>
-                    <th>Agregar</th>
-                    <th>Quitar</th>
+                    <th>Agregar/ Quitar</th>
                     <th>Editar/Eliminar</th>
                 </tr>
                 <% goleadores.forEach(g => { %>
                     <tr>
                         <td><%= g.torneo.name %> - <%= g.torneo.temporada %></td>
-                        <td><%= g.equipo.name %></td>
+                        <td><%= g.equipo.team_name %></td>
                         <td><%= g.last_name %> <%= g.name %></td>
                         <td><%= g.goles %></td>
                         <td>
-                            <form action="/goleadores/<%=g.id%>/agregar" method="post">
+                            <form action="/goleadores/torneo/<%=g.torneo_id%>/<%=g.id%>/agregar" method="post">
                                 <input type="number" name="add" id="add">
                                 <button type="submit">Agregar</button>
                             </form>
                         </td>
                         <td>
-                            <form action="/goleadores/<%=g.id%>/quitar" method="post">
-                                <input type="number" name="less" id="less">
-                                <button type="submit">Quitar</button>
-                            </form>
-                        </td>
-                        <td>
-                            <a href="/goleadores/edit/<%=g.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/goleadores/torneo/<%=g.torneo_id%>/edit/<%=g.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
                             <form action="/goleadores/delete/<%=g.id%>?m=DELETE" method="post">
                                 <button type="submit">
                                     <i class="fa-solid fa-xmark"></i>

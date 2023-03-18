@@ -52,7 +52,7 @@ module.exports= (sequelize, DataTypes)=>{
             as: "torneo",
             foreignKey: "torneo_id"
         })
-        Sancionado.belongsTo(model.equipo,{
+        Sancionado.belongsTo(model.equipo_torneo,{
             as: "equipo",
             foreignKey: "equipo_id"
         })

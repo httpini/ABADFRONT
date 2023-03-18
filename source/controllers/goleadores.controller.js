@@ -1,40 +1,54 @@
-const {equipo, torneo, goleador}= require("../database/models/index")
+const {equipo_torneo, torneo, goleador}= require("../database/models/index")
 
 module.exports = {
+    select: async (req,res)=>{
+        let torneos = await torneo.findAll({
+            include:{all:true},
+            order:[
+                ["temporada","DESC"]
+            ]
+        })
 
+        res.render("goleadores/select",{
+            title: "Selecciona un torneo",
+            torneos: torneos
+        })
+    },
     create: async(req,res)=>{
         let allGoleadores =await goleador.findAll({
             include: {all:true},
+            where:{
+                torneo_id:req.params.torneo_id
+            },
             order:[
-                ["torneo_id", "DESC"],
                 ["goles","DESC"]
             ]
         })
         if(req.query && req.query.last_name){
             allGoleadores = allGoleadores.filter(goleador=> goleador.last_name.toLowerCase().indexOf(req.query.last_name.toLowerCase())> -1)
         }
-        if(req.query && req.query.torneo_id){
-            allGoleadores= allGoleadores.filter(goleador => goleador.torneo_id == req.query.torneo_id)
-        }
         if(req.query && req.query.equipo_id){
             allGoleadores= allGoleadores.filter(goleador => goleador.equipo_id == req.query.equipo_id)
         }
 
-        let torneos = await torneo.findAll({
+        let torneos = await torneo.findByPk(req.params.torneo_id,{
             include:{all:true},
-            order:[
-                ["id", "DESC"]
-            ]
         })
 
-        let equipos = await equipo.findAll({
+        let equipos = await equipo_torneo.findAll({
             include:{all:true},
+            where:{
+                torneo_id:req.params.torneo_id
+            },
             order:[
-                ["name", "ASC"]
-            ]
+                ["team_name", "ASC"]
+            ]            
         })
         let lastGoleadores=await goleador.findAll({
             include:{all:true},
+            where:{
+                torneo_id:req.params.torneo_id
+            },
             order:[
                 ["id","DESC"]
             ],
@@ -42,17 +56,17 @@ module.exports = {
         })
 
 
-        return res.render("goleadores/create",{
+        return res.render(`goleadores/create`,{
             title: "Goleadores",
             goleadores: allGoleadores,
             lastGoleadores: lastGoleadores,
             equipos:equipos,
-            torneos:torneos
+            torneo:torneos
         })
     },
     created: async(req,res)=>{
         await goleador.create(req.body)
-    return res.redirect("/goleadores")
+    return res.redirect(`/goleadores/torneo/${req.params.torneo_id}`)
     },
     agregarGoles: async(req,res)=>{
         let goleadores = await goleador.findByPk(req.params.id,{
@@ -69,51 +83,29 @@ module.exports = {
             goles:resultado
         }
         )
-        return res.redirect("/goleadores")
-    },
-    quitarGoles: async(req,res)=>{
-        let goleadores = await goleador.findByPk(req.params.id,{
-            include:{all:true}
-        })
-        if(!goleadores){
-            return res.redirect("/goleadores")
-        }
-        let golesActuales = parseInt(goleadores.goles)
-        let quitar = parseInt(req.body.less)
-        let resultado = golesActuales - quitar
-
-        await goleadores.update({
-            goles:resultado
-        }
-        )
-        return res.redirect("/goleadores")
+        return res.redirect(`/goleadores/torneo/${req.params.torneo_id}`)
     },
     edit:async(req, res) => {
         let goleadores = await goleador.findByPk(req.params.id,{
             include:{all:true}
         })
         if(!goleadores){
-            return res.redirect("/goleadores")
+            return res.redirect(`/goleadores/torneo/${req.params.torneo_id}`)
         }
-        
-        let torneos = await torneo.findAll({
-            include:{all:true},
-            order:[
-                ["id", "DESC"]
-            ]
-        })
 
-        let equipos = await equipo.findAll({
+        let equipos = await equipo_torneo.findAll({
             include:{all:true},
+            where:{
+                torneo_id:req.params.torneo_id
+            },
             order:[
-                ["name", "ASC"]
+                ["team_name", "ASC"]
             ]
         })
        
         return res.render("goleadores/edit",{
             title: "Editar Goleador/a",
             goleador: goleadores,
-            torneos: torneos,
             equipos: equipos
         })
     },
@@ -122,10 +114,10 @@ module.exports = {
             include:{all:true}
         })
         if(!goleadores){
-            return res.redirect("/goleadores")
+            return res.redirect(`/goleadores/torneo/${req.params.torneo_id}`)
         }
         await goleadores.update(req.body)
-        return res.redirect(`/goleadores/?torneo_id=${goleadores.torneo_id}&equipo_id=${goleadores.equipo_id}&last_name=${goleadores.last_name}`)
+        return res.redirect(`/goleadores/torneo/${req.params.torneo_id}`)
         //cuando se edita un goleador, redirige a /goleadores, pero con los filtros puestos para ese jugador
     },
     destroid:async(req,res)=>{
@@ -135,8 +127,9 @@ module.exports = {
         if(!goleadores){
             return res.redirect("/goleadores")
         }
+        let torneoID= goleadores.torneo_id
         await goleadores.destroy()
-        return res.redirect("/goleadores")
+        return res.redirect(`/goleadores/torneo/${torneoID}`)
     }
 
         
