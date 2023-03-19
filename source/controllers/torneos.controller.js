@@ -1,4 +1,6 @@
 const {torneo, categoria, subcategoria, equipo, equipo_torneo, fair_play}=require("../database/models/index")
+const {unlinkSync} = require('fs')
+const {join} = require('path')
 
 function nameURL(nombre, temporada) {
     // Convertir el nombre a minúsculas y reemplazar espacios por guiones bajos
@@ -73,8 +75,15 @@ module.exports={
             temporada:req.body.temporada,
             categoria_id:req.body.categoria_id,
             subcategoria_id:req.body.subcategoria_id?req.body.subcategoria_id:null,
-            name_url:nameURL(req.body.name,req.body.temporada)
+            name_url:nameURL(req.body.name,req.body.temporada),
         })
+
+        if(req.files || req.files.length>0){
+           await nuevoTorneo.update({
+            reglamento_path: req.files[0].filename
+
+           })
+        }
 
         let idsEquipos = req.body.equiposTorneo
 
@@ -228,13 +237,18 @@ module.exports={
         if(!torneos){
             return res.redirect("/torneos")
         }
-        await equipo_torneo.destroy({
-            where: {torneo_id: req.params.id}
-        })
+        
         await fair_play.destroy({
             where: {torneo_id: req.params.id}
         })
-
+        if(torneos.reglamento_path){
+            unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",torneos.reglamento_path))
+        }
+        
+        
+        await equipo_torneo.destroy({
+            where: {torneo_id: req.params.id}
+        })
 
         await torneos.destroy()
 
@@ -278,6 +292,13 @@ module.exports={
             subcategoria_id:req.body.subcategoria_id?req.body.subcategoria_id:null,
             name_url:nameURL(req.body.name,req.body.temporada)
         })
+        if(req.files || req.files.length > 0){
+            unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",torneos.reglamento_path))
+            await torneos.update({
+             reglamento_path: req.files[0].filename
+ 
+            })
+         }
         return res.redirect("/torneos")
 
     }
