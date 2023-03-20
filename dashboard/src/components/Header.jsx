@@ -8,7 +8,7 @@ import { torneos, copas } from '../../utils/constants'
 
 export default function Header({allTorneos}) {
     const [toggleMenu, setToggleMenu] = useState(false)
-
+    
     return (
         <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
             <div className='md:flex hidden justify-around flex-grow mr-[5em]'>

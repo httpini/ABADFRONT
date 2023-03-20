@@ -11,13 +11,14 @@ import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
 
 export default function Torneo({ allTorneos, id, torneos }) {
+  // console.log(allTorneos);
   const activeTopicStyle = 'underline font-bold'
   const topicStyle = ''
   return (
     <div>
       <Header allTorneos = {allTorneos} />
       <section>
-        <LinksTorneos torneos={torneos} id={id} />
+        <LinksTorneos torneos={allTorneos} id={id} />
         {/* <div className='flex w-[50%] justify-around m-auto mt-3'>
           {torneos && torneos.map(t => (
             <Link key={t} href={`/torneo/${t}`} className={id == t ? activeTopicStyle : topicStyle}>{t}</Link>
@@ -39,12 +40,12 @@ export default function Torneo({ allTorneos, id, torneos }) {
 export const getServerSideProps = async ({ params: { id } }) => {
   let torneos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
   let allTorneos = await axios.get('http://localhost:3500/api/torneos')
-
+  // let torneosJson = JSON.stringify(torneos)
   return {
     props: {
-      allTorneos,
+      allTorneos: allTorneos.data.torneos,
       id,
-      torneos: torneos.data.torneos
+      torneos: torneos.data
     }
   }
 }
