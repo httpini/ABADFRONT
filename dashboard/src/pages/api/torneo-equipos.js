@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import axios from "axios";
-import { torneos } from '../../../utils/constants'
+
 
 
 export default async function handler(req, res) {
