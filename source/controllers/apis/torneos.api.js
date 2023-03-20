@@ -89,6 +89,7 @@ module.exports={
                 return data
             })
             
+            
 
             let fp = await fair_play.findAll({
                 include:{all:true},
@@ -114,8 +115,9 @@ module.exports={
                 return data;
 
             })
+            
 
-            let goleadores = await goleadores.findAll({
+            let goleadores = await goleador.findAll({
                 include:{all:true},
                 where:{
                     torneo_id: elTorneo.id
@@ -124,21 +126,21 @@ module.exports={
                     ["goles","DESC"]
                 ]
             })
+            console.log(goleadores);
             goleadores = goleadores.map((g, index)=>{
                 //TE PASO LOS COLORES DE LOS EQUIPOS PARA PONER COMO SI FUERA EL ESCUDO
                 let data ={
                     pos: index+1,
                     equipo:g.equipo.team_name,
                     colores_equipo:[],
-                    apellido: g.last_name,
-                    nombre: g.name,
+                    nombre: `${g.last_name} ${g.name}`,
                     goles:g.goles
 
                 }
                 if(g.equipo.color_1 != null){
                     data.colores_equipo.push(g.equipo.color_1)
                 }
-                if(e.color_2 != null){
+                if(g.equipo.color_2 != null){
                     data.colores_equipo.push(g.equipo.color_2)
                 }
                 if(g.equipo.color_3 != null){
@@ -146,7 +148,8 @@ module.exports={
                 }
                 return data
             })
-
+            
+            console.log(goleadores);
             let sancionados = await sancionado.findAll({
                 include:{all:true},
                 where:{
@@ -167,8 +170,16 @@ module.exports={
                 }
                 return data
             })
+            console.log(sancionados);
 // DE ACA SOLO FALTARIAN LAS FECHAS Y LOS PARTIDOS.
-            return res.send({torneo: elTorneo, tabla:tabla,goleadores:goleadores, sanciones:sancionados, fair_play:fp}).status(200)
+            return res.send({
+                torneo: elTorneo,
+                tabla:tabla,
+                fair_play:fp,
+                goleadores:goleadores,
+                sanciones:sancionados,
+                }
+                ).status(200)
         }
         catch(error){
             return res.status(505).json(error)
