@@ -154,6 +154,8 @@ module.exports={
     },
     porTorneo: async(req,res)=>{
         try{
+
+            let elTorneo = await torneo.findOne
             let fechas = await fecha.findAll({
                 include:{all:true},
                 where:{
@@ -190,6 +192,7 @@ module.exports={
             partidos = partidos.map(p=>{
                 let data = {
                     fecha_id: p.fecha_id,
+                    torneo_id:p.fecha.torneo_id,
                     estado:p.estado.name,
                     motivo_postergado:p.motivo_postergado,
                     dia:p.dia,
