@@ -10,12 +10,12 @@ import FairPlay from '@/components/FairPlay';
 import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
 
-export default function Torneo({ id, torneos, datosTorneo }) {
+export default function Torneo({ allTorneos, id, torneos }) {
   const activeTopicStyle = 'underline font-bold'
   const topicStyle = ''
   return (
     <div>
-      <Header torneos=''/>
+      <Header allTorneos = {allTorneos} />
       <section>
         <LinksTorneos torneos={torneos} id={id} />
         {/* <div className='flex w-[50%] justify-around m-auto mt-3'>
@@ -38,8 +38,11 @@ export default function Torneo({ id, torneos, datosTorneo }) {
 
 export const getServerSideProps = async ({ params: { id } }) => {
   let torneos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
+  let allTorneos = await axios.get('http://localhost:3500/api/torneos')
+
   return {
     props: {
+      allTorneos,
       id,
       torneos: torneos.data.torneos
     }
