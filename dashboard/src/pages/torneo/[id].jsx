@@ -10,7 +10,7 @@ import FairPlay from '@/components/FairPlay';
 import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
 
-export default function Torneo({ id, torneos }) {
+export default function Torneo({ id, torneos, datosTorneo }) {
   const activeTopicStyle = 'underline font-bold'
   const topicStyle = ''
   return (
