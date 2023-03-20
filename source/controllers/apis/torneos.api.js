@@ -4,7 +4,6 @@ module.exports={
     
     allTorneos:async(req,res)=>{
         try{
-            console.log("hello world")
             let torneos = await torneo.findAll({
                 include:{all:true},
                 order:[
