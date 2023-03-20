@@ -54,7 +54,7 @@ module.exports ={
             datos_local = await equipo_torneo.findByPk(req.body.local_id[i],{
                 include:{all:true}
             })
-            console.log(datos_local)
+            // console.log(datos_local)
 
 
             await partido.create({
@@ -65,7 +65,8 @@ module.exports ={
                 predio_id: datos_local.predio_id,
                 local_id: req.body.local_id[i],
                 visitante_id:req.body.visitante_id[i],
-                terna_id:req.body.terna_id[i] == "0"? null : req.body.terna_id[i]
+                terna_id:req.body.terna_id[i] == "0"? null : req.body.terna_id[i],
+                torneo_id:fechaCreada.torneo_id
                 
             })
         }

@@ -168,6 +168,7 @@ module.exports= {
         await elPartido.update({
             
             fecha_id: !req.body.fecha_id? elPartido.fecha_id: req.body.fecha_id,
+            torneo_id: laFecha.torneo_id,
             hora: req.body.hora,
             dia:req.body.dia,
             predio_id:req.body.predio_id,

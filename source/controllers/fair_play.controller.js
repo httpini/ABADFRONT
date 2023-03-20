@@ -41,8 +41,8 @@ module.exports ={
         if(!fp){
             return res.redirect("/fair-play")
         }
-        console.log(fp.amarillas)
-        console.log(req.body.amarillas)
+        // console.log(fp.amarillas)
+        // console.log(req.body.amarillas)
         
         let totalAmarillas = parseInt(fp.amarillas) + parseInt(req.body.amarillas)
         let totalRojas = parseInt(fp.rojas) + parseInt(req.body.rojas)
@@ -68,7 +68,7 @@ module.exports ={
         if(!fp){
             return res.redirect("/fair-play")
         }
-        console.log(fp)
+        // console.log(fp)
         return res.render("fair_play/edit",{
             title: "Editar Campos de Fair Play",
             fair_play: fp
