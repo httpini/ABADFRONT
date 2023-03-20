@@ -15,7 +15,7 @@ export default function LinkHeader({ texto, lista, pagina }) {
             <Link href={`/${pagina}${lista?.length ? '/' + lista[0].name_url : ''}`} className='cursor-pointer pr-3 py-5' onMouseEnter={() => { if (list.length) setVisible(true) }} onMouseLeave={() => setVisible(false)}>{texto}</Link>
             {visible && (
                 <div onMouseEnter={() => {setVisible(true)}} onMouseLeave={() => setVisible(false)}
-                    className='relative md:absolute  bg-red-500 w-[100px] text-center py-1 text-ellipsis'>
+                    className='relative md:absolute  bg-red-500 w-[200px] text-center py-1 text-ellipsis'>
                     {list && list.map(l => (<Link href={`/${pagina}/${l.name_url}`} key={l.name_url} className='text-center text-ellipsis w-full block'>{`${l.name}`}</Link>))}
                 </div>)
             }

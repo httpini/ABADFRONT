@@ -4,7 +4,6 @@ import { torneos } from '../../../utils/constants'
 
 
 export default async function handler(req, res) {
-  console.log(req.body.torneo);
   let equipos = await axios.get('http://localhost:8020/equipos/all')
   let fechas = await axios.get('http://localhost:8020/equipos/all')
   // let equiposTorneo = equipos.data.filter(e => e.)
