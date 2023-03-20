@@ -189,6 +189,7 @@ module.exports={
                     visitante_name:p.visitante.team_name,
                     predio_name:p.predio?p.predio.name:null,
                     predio_url:p.predio?p.predio.map:null,
+                    nro: p.fecha.nro
                 }
                 if(p.local.color_1 != null){
                     data.local_colores.push(p.local.color_1)
@@ -210,7 +211,7 @@ module.exports={
                 }
                 return data
             })
-            // console.log(partidos);
+            console.log(partidos);
             // console.log(fechas.length, partidos.length);
             return res.send({partidos}).status(200)
         }catch(error){
