@@ -6,14 +6,14 @@ export default function LinkHeader({ texto, lista, pagina }) {
     const [list, setList] = useState([])
     const [visible, setVisible] = useState(false)
     
+    console.log('lista', lista);
     useEffect(() => {
-        console.log(lista);
         setList(lista)
     }, [lista])
 
     return (
         <div className='relative'>
-            <Link href={`/${pagina}${lista?.length ? '/' + lista[0] : ''}`} className='cursor-pointer pr-3 py-5' onMouseEnter={() => { if (list.length) setVisible(true) }} onMouseLeave={() => setVisible(false)}>{texto}</Link>
+            <Link href={`/${pagina}${lista?.length ? '/' + lista[0].name_url : ''}`} className='cursor-pointer pr-3 py-5' onMouseEnter={() => { if (list.length) setVisible(true) }} onMouseLeave={() => setVisible(false)}>{texto}</Link>
             {visible && (
                 <div onMouseEnter={() => {setVisible(true)}} onMouseLeave={() => setVisible(false)}
                     className='relative md:absolute  bg-red-500 w-[100px] text-center py-1 text-ellipsis'>

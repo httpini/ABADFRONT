@@ -1,19 +1,30 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { HiMenuAlt4 } from 'react-icons/hi'
 import { AiOutlineClose } from 'react-icons/ai'
 import LinkHeader from './LinkHeader'
 import Link from 'next/link'
 import { torneos, copas } from '../../utils/constants'
+import axios from 'axios'
 
 
-export default function Header({allTorneos}) {
+export default function Header({ allTorneos }) {
     const [toggleMenu, setToggleMenu] = useState(false)
+    const [torn, setTorn] = useState([])
     
+    useEffect(() => {
+        let fetch = async () => {
+            let data = await axios.get('http://localhost:3500/api/torneos')
+            setTorn(data.data.torneos)
+        }
+        fetch()
+    }, [])
+
+
     return (
         <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
             <div className='md:flex hidden justify-around flex-grow mr-[5em]'>
-                <LinkHeader texto='Torneos' lista={allTorneos} pagina='torneo'/>
-                <LinkHeader texto='Copas' lista={copas} pagina='copa'/>
+                <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
+                <LinkHeader texto='Copas' lista={copas} pagina='copa' />
             </div>
             <Link href='/'>
                 <h1 className='flex-grow flex justify-center'>LOGO</h1>
@@ -29,7 +40,7 @@ export default function Header({allTorneos}) {
                         <li className='text-xl w-full my-2'>
                             <AiOutlineClose onClick={() => setToggleMenu(false)} />
                         </li>
-                        <LinkHeader texto='Torneos' lista={allTorneos} pagina='torneo'/>
+                        <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
                         <LinkHeader texto='Copas' lista={copas} pagina='copa' />
                         <LinkHeader texto='Predios' lista={[]} pagina='predios' />
                         <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
@@ -38,8 +49,8 @@ export default function Header({allTorneos}) {
             </div>
 
             <div className='md:flex hidden justify-around flex-grow ml-[5em]'>
-                <LinkHeader texto='Predios' lista={[]} pagina='predios'/>
-                <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros'/>
+                <LinkHeader texto='Predios' lista={[]} pagina='predios' />
+                <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
             </div>
         </div>
     )

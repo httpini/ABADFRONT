@@ -43,7 +43,6 @@ export const getServerSideProps = async ({ params: { id } }) => {
   // let torneosJson = JSON.stringify(torneos)
   return {
     props: {
-      allTorneos: allTorneos.data.torneos,
       id,
       torneos: torneos.data
     }
