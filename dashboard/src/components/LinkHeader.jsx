@@ -6,7 +6,6 @@ export default function LinkHeader({ texto, lista, pagina }) {
     const [list, setList] = useState([])
     const [visible, setVisible] = useState(false)
     
-    console.log('lista', lista);
     useEffect(() => {
         setList(lista)
     }, [lista])
