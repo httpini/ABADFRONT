@@ -128,7 +128,7 @@ module.exports={
                 //TE PASO LOS COLORES DE LOS EQUIPOS PARA PONER COMO SI FUERA EL ESCUDO
                 let data ={
                     pos: index+1,
-                    equipo:g.equipo.name,
+                    equipo:g.equipo.team_name,
                     colores_equipo:[],
                     apellido: g.last_name,
                     nombre: g.name,
