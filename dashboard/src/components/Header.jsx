@@ -5,13 +5,14 @@ import LinkHeader from './LinkHeader'
 import Link from 'next/link'
 import { torneos, copas } from '../../utils/constants'
 
-export default function Header() {
+
+export default function Header({allTorneos}) {
     const [toggleMenu, setToggleMenu] = useState(false)
 
     return (
         <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
             <div className='md:flex hidden justify-around flex-grow mr-[5em]'>
-                <LinkHeader texto='Torneos' lista={torneos} pagina='torneo'/>
+                <LinkHeader texto='Torneos' lista={allTorneos} pagina='torneo'/>
                 <LinkHeader texto='Copas' lista={copas} pagina='copa'/>
             </div>
             <Link href='/'>
@@ -27,7 +28,7 @@ export default function Header() {
                         <li className='text-xl w-full my-2'>
                             <AiOutlineClose onClick={() => setToggleMenu(false)} />
                         </li>
-                        <LinkHeader texto='Torneos' lista={torneos} pagina='torneo'/>
+                        <LinkHeader texto='Torneos' lista={allTorneos} pagina='torneo'/>
                         <LinkHeader texto='Copas' lista={copas} pagina='copa' />
                         <LinkHeader texto='Predios' lista={[]} pagina='predios' />
                         <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />

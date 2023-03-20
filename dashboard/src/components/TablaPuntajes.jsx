@@ -35,5 +35,13 @@ export default function TablaPuntajes({ partidos }) {
         </div >
     )
 }
-
+export const getServerSideProps = async ({ params: { id } }) => {
+    let torneos = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
+    return {
+      props: {
+        id,
+        torneos: torneos.data.torneos
+      }
+    }
+  }
 
