@@ -10,11 +10,15 @@ export default function TablaPuntajes({ partidos }) {
                 <thead className='bg-white'>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Puntaje</th>
-                        <th>Ganados</th>
-                        <th>Empatados</th>
-                        <th>Perdidos</th>
+                        <th>Equipo</th>
+                        <th>PTS</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PE</th>
+                        <th>PP</th>
+                        <th>GF</th>
+                        <th>GC</th>
+                        <th>DG</th>
                     </tr>
                 </thead>
                 <tbody>
