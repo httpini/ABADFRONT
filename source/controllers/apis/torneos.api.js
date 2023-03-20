@@ -1,4 +1,4 @@
-const{torneo, equipo_torneo, fair_play, goleador}=require("../../database/models/index")
+const{torneo, equipo_torneo, fair_play, goleador, sancionado}=require("../../database/models/index")
 module.exports={
     //ESTE allTorneos es el que vas a requerir en el home en el desplegable del header "torneos", van a estar de mas nuevos a mas viejos
     
@@ -145,10 +145,30 @@ module.exports={
                     data.colores_equipo.push(g.equipo.color_3)
                 }
                 return data
+            })
 
+            let sancionados = await sancionado.findAll({
+                include:{all:true},
+                where:{
+                    torneo_id: elTorneo.id
+                },
+                order:[
+                    ["f_sancion", "ASC"]
+                ]
+            })
+            sancionados = sancionados.map(sanc=>{
+                let data={
+                    equipo:sanc.equipo.team_name,
+                    nombre: `${sanc.last_name} ${sanc.name}`,
+                    f_sancion:sanc.fecha.name,
+                    sancion: sanc.sancion,
+                    vuelta: sanc.f_vuelta,
+                    aclaraciones: sanc.aclaraciones?sanc.aclaraciones:null
+                }
+                return data
             })
 // DE ACA SOLO FALTARIAN LAS FECHAS Y LOS PARTIDOS.
-            return res.send({torneo: elTorneo, tabla:tabla,goleadores:goleadores, fair_play:fp}).status(200)
+            return res.send({torneo: elTorneo, tabla:tabla,goleadores:goleadores, sanciones:sancionados, fair_play:fp}).status(200)
         }
         catch(error){
             return res.status(505).json(error)
