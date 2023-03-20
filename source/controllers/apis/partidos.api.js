@@ -181,7 +181,7 @@ module.exports={
             let partidos = await partido.findAll({
                 include:{all:true},
                 where:{
-                    // [Op.or]:fechas_ids
+                    [Op.or]:fechas_ids
                 },
                 order:[
                     ["dia","ASC"],

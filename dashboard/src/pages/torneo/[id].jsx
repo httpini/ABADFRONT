@@ -11,6 +11,7 @@ import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
 
 export default function Torneo({ allTorneos, id, torneos, partidos }) {
+  console.log(partidos);
   // console.log(allTorneos);
   const activeTopicStyle = 'underline font-bold'
   const topicStyle = ''
