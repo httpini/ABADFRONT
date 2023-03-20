@@ -15,7 +15,7 @@ export default function Torneo({ id, torneos, datosTorneo }) {
   const topicStyle = ''
   return (
     <div>
-      <Header />
+      <Header torneos=''/>
       <section>
         <LinksTorneos torneos={torneos} id={id} />
         {/* <div className='flex w-[50%] justify-around m-auto mt-3'>
@@ -44,5 +44,4 @@ export const getServerSideProps = async ({ params: { id } }) => {
       torneos: torneos.data.torneos
     }
   }
-
 }

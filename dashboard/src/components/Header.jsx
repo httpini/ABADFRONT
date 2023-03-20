@@ -17,6 +17,7 @@ export default function Header() {
             <Link href='/'>
                 <h1 className='flex-grow flex justify-center'>LOGO</h1>
             </Link>
+
             <div>
                 {toggleMenu ?
                     <AiOutlineClose fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(false)} />
@@ -34,6 +35,7 @@ export default function Header() {
                     </ul>
                 )}
             </div>
+
             <div className='md:flex hidden justify-around flex-grow ml-[5em]'>
                 <LinkHeader texto='Predios' lista={[]} pagina='predios'/>
                 <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros'/>
@@ -41,3 +43,4 @@ export default function Header() {
         </div>
     )
 }
+
