@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function TablaPuntajes({ equipos }) {
+export default function TablaPuntajes({ tabla }) {
+    
     return (
         <div className='bg-red-300'>
-            <h1>Puntajes</h1>
+            <h1>Tabla de Posiciones</h1>
             <table className='w-full'>
                 <thead className='bg-white'>
                     <tr>
@@ -21,15 +22,22 @@ export default function TablaPuntajes({ equipos }) {
                     </tr>
                 </thead>
                 <tbody>
+                
                     {
-                        equipos && equipos.map((e, i) => (
+                        tabla && tabla.map((t, i) => (
                             <tr key={i}>
-                                <th>{i}</th>
-                                <th><Link href={`/equipo/${e.nombre}`}>{e.nombre}</Link></th>
-                                <th>{e.puntaje}</th>
-                                <th>{e.partidos.ganado}</th>
-                                <th>{e.partidos.empate}</th>
-                                <th>{e.partidos.perdido}</th>
+                                <th>{i+1}</th>
+                                {/* FALTA AGREGAR LOS COLORES DE LOS EQUIPOS DELANTE DEL NOMBRE EN EL MISMO <th></th>*/}
+                                <th><Link href={`/equipo/${""}`}>{t.equipo}</Link></th>
+                                <th>{t.pts}</th>
+                                <th>{t.p_jugados}</th>
+                                <th>{t.p_ganados}</th>
+                                <th>{t.p_empatados}</th>
+                                <th>{t.p_perdidos}</th>
+                                <th>{t.g_favor}</th>
+                                <th>{t.g_contra}</th>
+                                <th>{t.g_dif}</th>
+                                
                             </tr>
                         ))
                     }
@@ -38,15 +46,4 @@ export default function TablaPuntajes({ equipos }) {
         </div >
     )
 }
-export const getServerSideProps = async ({ params: { id } }) => {
-    let torneos = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
-    let equipos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
-    return {
-      props: {
-        id,
-        torneos: torneos.data.torneos,
-        equipos:equipos.data
-      }
-    }
-  }
 
