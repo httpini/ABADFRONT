@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function TablaPuntajes({ equipos }) {
+export default function TablaPuntajes({ tabla }) {
     return (
         <div className='bg-red-300'>
             <h1>Tabla de Posiciones</h1>
@@ -48,6 +48,7 @@ export default function TablaPuntajes({ equipos }) {
 export const getServerSideProps = async ({ params: { id } }) => {
     let torneos = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
     let equipos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
+    console.log(equipos);
     return {
       props: {
         id,

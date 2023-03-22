@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 export default function LinkHeader({ texto, lista, pagina }) {
     const [list, setList] = useState([])
     const [visible, setVisible] = useState(false)
-    
+
     useEffect(() => {
         setList(lista)
     }, [lista])

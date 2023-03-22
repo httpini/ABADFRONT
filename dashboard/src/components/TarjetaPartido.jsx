@@ -2,8 +2,6 @@ import React from 'react'
 import Puntaje from './Puntaje'
 
 export default function TarjetaPartido({ data, jugado = false }) {
-  console.log(jugado);
-
   return (
     <div className='w-[250px] bg-blue-300 p-3 rounded-md'>
       <div className='flex justify-between'>

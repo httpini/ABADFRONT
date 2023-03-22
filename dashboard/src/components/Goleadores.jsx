@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 
-export default function Goleadores({goleadores}) {
+export default function Goleadores({ goleadores }) {
     return (
         <div className='bg-green-300 '>
             <h1>Goleadores/as</h1>
@@ -20,7 +20,7 @@ export default function Goleadores({goleadores}) {
                     {
                         goleadores && goleadores.map((g, i) => (
                             <tr key={i}>
-                                <th>{i+1}</th>
+                                <th>{i + 1}</th>
                                 {/*FALTA LO MISMO DE AGREGAR LOS COLORES A LOS EQUIPOS Y HAY QUE VER QUE LOGICA ARMAMOS PARA EL href=""*/}
                                 <th><Link href={`/equipo/${g.equipo}`}>{g.equipo}</Link></th>
                                 <th>{g.nombre}</th>
