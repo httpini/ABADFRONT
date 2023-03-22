@@ -55,6 +55,10 @@ module.exports=(sequelize,DataTypes)=>{
         motivo_postergado:{
             allowNull: true,
             type: DataTypes.STRING
+        },
+        torneo_id:{
+            allowNull: false,
+            type: DataTypes.INTEGER
         }
     }
     const Partido = sequelize.define(alias, cols, config)
@@ -83,6 +87,10 @@ module.exports=(sequelize,DataTypes)=>{
         Partido.belongsTo(model.equipo_torneo,{
             as:"visitante",
             foreignKey:"visitante_id",
+        })
+        Partido.belongsTo(model.torneo,{
+            as:"torneo",
+            foreignKey:"torneo_id",
         })
        
     }

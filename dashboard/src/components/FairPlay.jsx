@@ -2,7 +2,7 @@ import React from 'react'
 import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 
-export default function FairPlay() {
+export default function FairPlay({fair_play}) {
   return (
     <div className='bg-orange-300'>
             <h1>Fair Play</h1>
@@ -10,23 +10,24 @@ export default function FairPlay() {
                 <thead className='bg-white'>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Puntaje</th>
-                        <th>Ganados</th>
-                        <th>Empatados</th>
-                        <th>Perdidos</th>
+                        <th>Equipo</th>
+                        <th>Puntos</th>
+                        <th>Amarillas</th>
+                        <th>Rojas</th>
+                        <th>Amonestaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        equipos && equipos.map((e, i) => (
+                        fair_play && fair_play.map((fp, i) => (
                             <tr key={i}>
-                                <th>{i}</th>
-                                <th><Link href={`/equipo/${e.nombre}`}>{e.nombre}</Link></th>
-                                <th>{e.puntaje}</th>
-                                <th>{e.partidos.ganado}</th>
-                                <th>{e.partidos.empate}</th>
-                                <th>{e.partidos.perdido}</th>
+                                <th>{i+1}</th>
+                                {/*LO MISMO FALTA PONERLE COLORES A LOS EQUIPOS*/}
+                                <th><Link href={`/equipo/${fp.equipo}`}>{fp.equipo}</Link></th>
+                                <th>{fp.puntos}</th>
+                                <th>{fp.amarillas}</th>
+                                <th>{fp.rojas}</th>
+                                <th>{fp.amonestaciones}</th>
                             </tr>
                         ))
                     }

@@ -4,6 +4,7 @@ module.exports={
     
     allTorneos:async(req,res)=>{
         try{
+
             let torneos = await torneo.findAll({
                 include:{all:true},
                 order:[
@@ -125,7 +126,7 @@ module.exports={
                     ["goles","DESC"]
                 ]
             })
-            console.log(goleadores);
+        
             goleadores = goleadores.map((g, index)=>{
                 //TE PASO LOS COLORES DE LOS EQUIPOS PARA PONER COMO SI FUERA EL ESCUDO
                 let data ={
@@ -147,8 +148,6 @@ module.exports={
                 }
                 return data
             })
-            
-            console.log(goleadores);
             let sancionados = await sancionado.findAll({
                 include:{all:true},
                 where:{
@@ -169,6 +168,8 @@ module.exports={
                 }
                 return data
             })
+
+
             console.log(sancionados);
 // DE ACA SOLO FALTARIAN LAS FECHAS Y LOS PARTIDOS.
             return res.send({
@@ -179,6 +180,7 @@ module.exports={
                 sanciones:sancionados,
                 }
                 ).status(200)
+
         }
         catch(error){
             return res.status(505).json(error)

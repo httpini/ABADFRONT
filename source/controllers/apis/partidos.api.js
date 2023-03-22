@@ -153,90 +153,6 @@ module.exports={
         }
     },
     porTorneo: async(req,res)=>{
-        console.log('bodys', req.params);
-        try{
-            let fechas = await fecha.findAll({
-                include:{all:true},
-                where:{
-                    torneo_id:req.params.torneo_id
-                },
-                order:[
-                    ["nro", "ASC"]
-                ]
-            })
-            console.log('test', fechas.length);
-            let fechas_ids=[]
-            fechas.forEach(f=>{
-                fechas_ids.push({fecha_id:f.id})
-            })
-            fechas = fechas.map(f=>{
-                let data = {
-                    id: f.id,
-                    nro: f.nro,
-                    name: f.name
-                }
-                return data
-            })
-
-            let partidos = await partido.findAll({
-                include:{all:true},
-                where:{
-                    [Op.or]:fechas_ids
-                },
-                order:[
-                    ["dia","ASC"],
-                    ["hora", "ASC"]
-                ]
-            })
-            console.log('iop', partidos.length);
-
-            partidos = partidos.map(p=>{
-                let data = {
-                    fecha_id: p.fecha_id,
-                    estado:p.estado.name,
-                    motivo_postergado:p.motivo_postergado,
-                    dia:p.dia,
-                    hora:p.hora,
-                    local_name:p.local.team_name,
-                    local_colores:[],
-                    g_local:p.g_local,
-                    g_visitante:p.g_visitante,
-                    visitante_colores:[],
-                    visitante_name:p.visitante.team_name,
-                    predio_name:p.predio?p.predio.name:null,
-                    predio_url:p.predio?p.predio.map:null
-                    
-                }
-                if(p.local.color_1 != null){
-                    data.local_colores.push(p.local.color_1)
-                }
-                if(p.local.color_2 != null){
-                    data.local_colores.push(p.local.color_2)
-                }
-                if(p.local.color_3 != null){
-                    data.local_colores.push(p.local.color_3)
-                }
-                if(p.visitante.color_1 != null){
-                    data.visitante_colores.push(p.visitante.color_1)
-                }
-                if(p.visitante.color_2 != null){
-                    data.visitante_colores.push(p.visitante.color_2)
-                }
-                if(p.visitante.color_3 != null){
-                    data.visitante_colores.push(p.visitante.color_3)
-                }
-                return data
-            })
-
-            console.log(fechas.length, partidos.length);
-            return res.send({fechas:fechas, partidos: partidos}).status(200)
-        }catch(error){
-            return res.status(505).json(error)
-        }
-        
-
-    },
-    porTorneo2: async(req,res)=>{
         try{         
             let elTorneo = await torneo.findOne({
                 include:{all:true},
@@ -273,7 +189,7 @@ module.exports={
                     visitante_name:p.visitante.team_name,
                     predio_name:p.predio?p.predio.name:null,
                     predio_url:p.predio?p.predio.map:null,
-                    nro: p.fecha.nro
+                    nro:p.fecha.nro
                 }
                 if(p.local.color_1 != null){
                     data.local_colores.push(p.local.color_1)
@@ -295,7 +211,7 @@ module.exports={
                 }
                 return data
             })
-            console.log(partidos);
+             console.log(partidos);
             // console.log(fechas.length, partidos.length);
             return res.send({partidos}).status(200)
         }catch(error){
