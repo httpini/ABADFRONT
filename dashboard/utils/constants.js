@@ -28,3 +28,5 @@ export const equipos = [{
     }
 }
 ]
+
+export const dia = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
