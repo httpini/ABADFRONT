@@ -14,7 +14,7 @@ export default function Torneo({ allTorneos, id, torneos, partidos, tabla, golea
   const activeTopicStyle = 'underline font-bold'
   const topicStyle = ''
   return (
-    <div>
+    <div className='relative'>
       <Header allTorneos={allTorneos} />
       <section>
         <LinksTorneos torneos={allTorneos} id={id} />

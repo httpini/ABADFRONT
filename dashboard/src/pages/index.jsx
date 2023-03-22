@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Home({ partidosConfirmados, partidosDisputados }) {
   // console.log(partidosConfirmados, partidosDisputados);
   return (
-    <div className="h-screen">
+    <div className="h-screen relative">
       <Header />
       <section>
         <Banner />
