@@ -10,10 +10,11 @@ router.get("/torneos/:torneo_url",oneTorneo)
 
 
 //PARTIDOS
-router.get("/partidosConfirmados", confirmados)
 router.get("/partidosDisputados", disputados)
 router.get("/partidos/torneo/:torneo_id", porTorneo)
 
-
+//EQUIPOS
+// router.get("/equipo", allEquipos)
+// router.get("/equipo/:id", oneEquipo)
 
 module.exports= router
