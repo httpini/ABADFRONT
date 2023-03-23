@@ -5,7 +5,6 @@ module.exports = {
     created:async(req,res)=> {
 
         req.body.name_url = req.body.name.toLowerCase().replace(/\s+/g, '_');
-        console.log(req.body.name_url)
         await club.create(req.body)
 
         return res.redirect ("/equipos/")
