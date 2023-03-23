@@ -150,11 +150,12 @@ module.exports= {
         })
         if(!elPartido){
             //NO SE PUEDE ASI
-            let laFecha= await fecha.findByPk(req.params.id,{
-                include:{all:true}
-            })
+            
             return res.redirect(`/fechas/torneo/${laFecha.torneo_id}/edit/${laFecha.id}`)
         }
+        let laFecha= await fecha.findByPk(elPartido.fecha_id,{
+            include:{all:true}
+        })
 
         let elPartidoAntes= elPartido
         //HAY QUE TRAER LA TABLA DE EQUIPOS_TORNEOS, DONDE SE VAN A ACTUALIZAR LOS DATOS REFERENTES A LA TABLA DE POSICIONES
@@ -194,11 +195,11 @@ module.exports= {
 
 
 
-        let laFecha = await fecha.findByPk(elPartidoDespues.fecha_id,{
+        let laFechaDsp = await fecha.findByPk(elPartidoDespues.fecha_id,{
             include:{all:true}
         })
 
-        return res.redirect(`/fechas/torneo/${laFecha.torneo_id}/edit/${laFecha.id}`)
+        return res.redirect(`/fechas/torneo/${laFechaDsp.torneo_id}/edit/${laFecha.id}`)
 
     },
     destroid: async(req,res)=>{
