@@ -29,7 +29,7 @@ export default function Header({ allTorneos }) {
                 <LinkHeader texto='Copas' lista={copas} pagina='copa' />
             </div>
             <Link href='/'>
-                <h1 className='flex-grow flex justify-center mx-[5em]'><Image alt='logo' className='w-[40px]' src={ABADlogo}></Image></h1>
+                <h1 className='flex-grow flex justify-center mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[40px]' src={ABADlogo}></Image></h1>
             </Link>
 
             <div>
