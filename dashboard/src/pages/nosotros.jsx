@@ -6,7 +6,9 @@ export default function nosotros() {
     return (
         <div>
             <Header />
-            <h1>hola</h1>
+            <section>
+                <h1>nosotros</h1>
+            </section>
             <Footer />
         </div>
     )

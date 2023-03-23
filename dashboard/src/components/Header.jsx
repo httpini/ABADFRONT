@@ -42,14 +42,14 @@ export default function Header({ allTorneos }) {
                         </li>
                         <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
                         <LinkHeader texto='Copas' lista={copas} pagina='copa' />
-                        <LinkHeader texto='Predios' lista={[]} pagina='predios' />
+                        <LinkHeader texto='Equipos' lista={[]} pagina='equipos' />
                         <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
                     </ul>
                 )}
             </div>
 
             <div className='md:flex hidden justify-around flex-grow ml-[5em]'>
-                <LinkHeader texto='Predios' lista={[]} pagina='predios' />
+                <LinkHeader texto='Equipos' lista={[]} pagina='equipos' />
                 <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
             </div>
         </div>

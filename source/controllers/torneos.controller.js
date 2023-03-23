@@ -78,7 +78,7 @@ module.exports={
             name_url:nameURL(req.body.name,req.body.temporada),
         })
 
-        if(req.files || req.files.length>0){
+        if(req.files.length>0){
            await nuevoTorneo.update({
             reglamento_path: req.files[0].filename
 
@@ -292,7 +292,7 @@ module.exports={
             subcategoria_id:req.body.subcategoria_id?req.body.subcategoria_id:null,
             name_url:nameURL(req.body.name,req.body.temporada)
         })
-        if(req.files || req.files.length > 0){
+        if(req.files.length > 0){
             unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",torneos.reglamento_path))
             await torneos.update({
              reglamento_path: req.files[0].filename

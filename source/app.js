@@ -28,6 +28,8 @@ app.use("/categorias",require("./routes/categorias.routes")) //rutas de categori
 
 app.use("/subcategorias",require("./routes/subcategorias.routes")) 
 
+app.use("/clubes", require("./routes/clubes.routes"))
+
 app.use("/equipos", require("./routes/equipos.routes"))
 
 app.use("/delegados", require("./routes/delegados.routes"))
