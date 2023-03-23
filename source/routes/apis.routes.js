@@ -11,6 +11,7 @@ router.get("/torneos/:torneo_url",oneTorneo)
 
 //PARTIDOS
 router.get("/partidosDisputados", disputados)
+router.get("/partidosConfirmados", confirmados)
 router.get("/partidos/torneo/:torneo_id", porTorneo)
 
 //EQUIPOS
