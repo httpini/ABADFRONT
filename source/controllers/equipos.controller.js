@@ -1,4 +1,4 @@
-const {categoria, equipo, equipo_torneo}= require("../database/models/index")
+const {categoria, equipo, equipo_torneo, club}= require("../database/models/index")
 
 
 module.exports = {
@@ -30,6 +30,11 @@ module.exports = {
                 ["name", "ASC"]
             ]
         })
+        let listaClubes = await club.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
         
 
         return res.render ("equipos/create",{
@@ -37,7 +42,8 @@ module.exports = {
             listaEquipos: listaEquipos,
             recentsEquipos: recentsEquipos,
             categorias: listaCategorias,
-            count:listaEquipos.length
+            count:listaEquipos.length,
+            clubes:listaClubes
         })
     },
     created:async(req,res)=> {
@@ -52,10 +58,16 @@ module.exports = {
         if (!equipos){
             res.redirect("/equipos/")
         }
+        let listaClubes = await club.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
         return res.render("equipos/edit",{
             title: "Editar equipo",
             equipo: equipos,
-            categorias: categorias
+            categorias: categorias,
+            clubes:listaClubes
         })
     
     },
@@ -64,6 +76,7 @@ module.exports = {
         let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
         await equipos.update({
             name: req.body.name,
+            club_id: req.body.club_id,
             categoria_id: req.body.categoria_id,
             color_1: req.body.color_1 != ""? req.body.color_1:null,
             color_2: req.body.color_2 != ""? req.body.color_2:null,

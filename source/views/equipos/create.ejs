@@ -5,10 +5,29 @@
 <body>
     <%- include("../includes/header.ejs") %>
     <main>
+        <form method="post" action="/clubes/created">
+            <h3>Nuevo Club <i class="fa-solid fa-plus"></i></h3>
+
+            <label for="name">Nombre del Club</label>
+            <input type="text" name="name" id="name">
+
+            <button type="submit">Crear Club</button>
+            <br>
+
+            <a href="/clubes/">Ver Lista de Clubes</a>
+        </form>
         <form method="post" action="/equipos/created" >
             <h3>Nuevo Equipo <i class="fa-solid fa-plus"></i></h3>
             <label for="name">Nombre del Equipo</label>
             <input type="text" name="name" id="name">
+
+            <label for="club_id">Club al que pertenece</label>
+            <select name="club_id" id="club_id">
+                <option selected disabled>Elegí un Club</option>
+                <% clubes.forEach(c =>{ %>
+                    <option value="<%=c.id%>"><%= c.name %> </option> 
+                <% }) %> 
+            </select>
 
             <label for="categoria_id">Categoria a la que pertenece</label>
             <select name="categoria_id" id="categoria_id">
