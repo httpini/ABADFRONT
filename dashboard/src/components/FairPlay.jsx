@@ -23,7 +23,7 @@ export default function FairPlay({fair_play}) {
                             <tr key={i}>
                                 <th>{i+1}</th>
                                 {/*LO MISMO FALTA PONERLE COLORES A LOS EQUIPOS*/}
-                                <th><Link href={`/equipo/${fp.equipo}`}>{fp.equipo}</Link></th>
+                                <th><Link href={`/club/${fp.equipo}`}>{fp.equipo}</Link></th>
                                 <th>{fp.puntos}</th>
                                 <th>{fp.amarillas}</th>
                                 <th>{fp.rojas}</th>

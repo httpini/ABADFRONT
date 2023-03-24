@@ -27,7 +27,7 @@ export default function TablaPuntajes({ tabla }) {
                             <tr key={i}>
                                 <th>{i+1}</th>
                                 {/* FALTA AGREGAR LOS COLORES DE LOS EQUIPOS DELANTE DEL NOMBRE EN EL MISMO <th></th>*/}
-                                <th><Link href={`/equipo/${""}`}>{t.equipo}</Link></th>
+                                <th><Link href={`/club/${""}`}>{t.equipo}</Link></th>
                                 <th>{t.pts}</th>
                                 <th>{t.p_jugados}</th>
                                 <th>{t.p_ganados}</th>

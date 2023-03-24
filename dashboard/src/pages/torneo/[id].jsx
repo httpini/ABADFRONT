@@ -33,7 +33,6 @@ export default function Torneo({ allTorneos, id, torneos, partidos, tabla, golea
 
 export const getServerSideProps = async ({ params: { id } }) => {
   try {
-
     let torneos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
     // let torneoTable = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id  SE PUEDE BORRAR?})
     let partidos = await axios.post('http://localhost:3500/api/partidos', { torneo: id })
