@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../includes/head.ejs")  %> 
+
+<body>
+    <%- include("../includes/header.ejs") %>
+    <main>
+        <h2>Editar Club <%= club.name %></h2>
+
+        <h3>Equipos que pertenecen a este club:</h3>
+        <% equipos.forEach(e => { %>
+            <span><%= e.name %> <% categorias.forEach(cat => { %>
+                <%= cat.id == e.categoria_id? cat.name :"" %>
+            <% }) %>- </span>
+         
+        <% }) %>
+
+
+        <form action="/clubes/edit/<%= club.id %>?m=PUT" method="post">
+            <label for="name">Nombre del Club</label>
+            <input type="text" id="name" name="name" value="<%= club.name %>">
+        
+            <button type="submit">Actualizar Nombre del club</button>
+        </form>
+
+    </main>
+</body>
+</html>

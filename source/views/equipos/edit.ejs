@@ -11,6 +11,15 @@
             <input type="text" name="name" id="name"
             value="<%= equipo.name%>">
 
+            <label for="club_id">Club</label>
+            <select name="club_id" id="club_id">
+                <option  <%= !equipo.club_id ? "selected": "" %>  >Elige un club</option>
+                <% clubes.forEach(c => { %>
+                    <option value="<%=c.id%>" <%= c.id === equipo.club_id ? "selected": null %> ><%= c.name %></option>
+                 
+                <% }) %>
+            </select>
+
             <label for="categoria_id">Categoria</label>
             <select name="categoria_id" id="categoria_id">
                 <% categorias.forEach(c => { %>
