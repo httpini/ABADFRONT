@@ -33,19 +33,29 @@ export default function Torneo({ allTorneos, id, torneos, partidos, tabla, golea
 
 export const getServerSideProps = async ({ params: { id } }) => {
   try {
-    console.time('torneos')
-    let torneos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
-    console.timeEnd('torneos')
-    // let torneoTable = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id  SE PUEDE BORRAR?})
-    console.time('partidos')
-    let partidos = await axios.post('http://localhost:3500/api/partidos', { torneo: id })
-    console.timeEnd('partidos')
-    console.time('allTorneos')
-    let allTorneos = await axios.get('http://localhost:3500/api/torneos')
-    console.timeEnd('allTorneos')
-    console.time('torneo')
-    let torneo = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
-    console.timeEnd('torneo')
+    // console.time('separado')
+    // console.time('torneos')
+    // let torneos2 = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
+    // console.timeEnd('torneos')
+    // // let torneoTable = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id  SE PUEDE BORRAR?})
+    // console.time('partidos')
+    // let partidos2 = await axios.post('http://localhost:3500/api/partidos', { torneo: id })
+    // console.timeEnd('partidos')
+    // console.time('allTorneos')
+    // let allTorneos2 = await axios.get('http://localhost:3500/api/torneos')
+    // console.timeEnd('allTorneos')
+    // console.time('torneo')
+    // let torneo2 = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
+    // console.timeEnd('torneo')
+    // console.timeEnd('separado')
+    console.time('all')
+    let results = await Promise.all([axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id }), axios.post('http://localhost:3500/api/partidos', { torneo: id }), axios.get('http://localhost:3500/api/torneos'), axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })])
+    let torneos = results[0]
+    let partidos = results[1]
+    let allTorneos = results[2]
+    let torneo = results[3]
+    // console.log(results[0].data);
+    console.timeEnd('all')
     // let goleadores = await axios.post('http://localhost:3500/api/torneo-goleadores', { torneo: id })
 
     // let fair_play = await axios.post('http://localhost:3500/api/torneo-fairplay', { torneo: id })
