@@ -176,19 +176,19 @@ module.exports = {
 
             partidos = partidos.map(p => {
                 let data = {
-                    estado: p.estado.name,
-                    motivo_postergado: p.motivo_postergado,
-                    dia: p.dia,
-                    hora: p.hora,
-                    local_name: p.local.team_name,
-                    local_colores: [],
-                    g_local: p.g_local,
-                    g_visitante: p.g_visitante,
-                    visitante_colores: [],
-                    visitante_name: p.visitante.team_name,
-                    predio_name: p.predio ? p.predio.name : null,
-                    predio_url: p.predio ? p.predio.map : null,
-                    fecha_numero: p.fecha.nro
+                    estado:p.estado.name,
+                    motivo_postergado:p.motivo_postergado,
+                    dia:p.dia== "0000-00-00"? "A Confirmar":p.dia,
+                    hora:p.hora,
+                    local_name:p.local.team_name,
+                    local_colores:[],
+                    g_local:p.g_local,
+                    g_visitante:p.g_visitante,
+                    visitante_colores:[],
+                    visitante_name:p.visitante.team_name,
+                    predio_name:p.predio?p.predio.name:null,
+                    predio_url:p.predio?p.predio.map:null,
+                    fecha_numero:p.fecha.nro
                 }
                 if (p.local.color_1 != null) {
                     data.local_colores.push(p.local.color_1)
