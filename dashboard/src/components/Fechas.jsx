@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 // import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 
-let cantPartidos = 24
-
 export default function Fechas({ partidos }) {
     const [fecha, setFecha] = useState(1)
+    const [cantPartidos, setCantPartidos] = useState(5)
     const [partidosFecha, setPartidosFecha] = useState([])
     const activeTopicStyle = 'underline font-bold'
 
@@ -15,12 +14,16 @@ export default function Fechas({ partidos }) {
 
     useEffect(() => {
         if (partidos.length) {
-            let parts = partidos.filter(p => p.nro == fecha);
+            let parts = partidos.filter(p => p.fecha_numero == fecha);
             return setPartidosFecha(parts);
         }
-
     }, [partidos, fecha])
 
+    useEffect(() => {
+        let fechasPartidos = []
+        partidos.map(p => { if (!fechasPartidos.includes(p.fecha_numero)) fechasPartidos.push(p.fecha_numero) })
+        return setCantPartidos(fechasPartidos.length)
+    }, [partidos])
 
     return (
         <div className='bg-blue-500'>

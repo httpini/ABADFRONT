@@ -1,7 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
+import ColoresEquipo from './ColoresEquipo'
 
 export default function TablaPuntajes({ tabla }) {
+    console.log(tabla);
     return (
         <div className='bg-red-300'>
             <h1>Tabla de Posiciones</h1>
@@ -21,13 +23,13 @@ export default function TablaPuntajes({ tabla }) {
                     </tr>
                 </thead>
                 <tbody>
-                
+
                     {
                         tabla && tabla.map((t, i) => (
                             <tr key={i}>
-                                <th>{i+1}</th>
+                                <th>{i + 1}</th>
                                 {/* FALTA AGREGAR LOS COLORES DE LOS EQUIPOS DELANTE DEL NOMBRE EN EL MISMO <th></th>*/}
-                                <th><Link href={`/club/${""}`}>{t.equipo}</Link></th>
+                                <th><Link href={`/club/${""}`}><div className='flex justify-center gap-5'>{t.equipo} <ColoresEquipo colores={t.colores}/></div></Link></th>
                                 <th>{t.pts}</th>
                                 <th>{t.p_jugados}</th>
                                 <th>{t.p_ganados}</th>
@@ -36,7 +38,7 @@ export default function TablaPuntajes({ tabla }) {
                                 <th>{t.g_favor}</th>
                                 <th>{t.g_contra}</th>
                                 <th>{t.g_dif}</th>
-                                
+
                             </tr>
                         ))
                     }
@@ -50,11 +52,11 @@ export const getServerSideProps = async ({ params: { id } }) => {
     let equipos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
     console.log(equipos);
     return {
-      props: {
-        id,
-        torneos: torneos.data.torneos,
-        equipos:equipos.data
-      }
+        props: {
+            id,
+            torneos: torneos.data.torneos,
+            equipos: equipos.data
+        }
     }
-  }
+}
 

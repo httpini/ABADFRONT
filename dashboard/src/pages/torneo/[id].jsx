@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Link from 'next/link';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios, { all } from 'axios';
 import Fechas from '@/components/Fechas';
 import TablaPuntajes from '@/components/TablaPuntajes';
@@ -11,13 +11,18 @@ import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
 
 export default function Torneo({ allTorneos, id, torneos, partidos, tabla, goleadores, fair_play, sanciones }) {
-  const activeTopicStyle = 'underline font-bold'
-  const topicStyle = ''
+  const [title, setTitle] = useState('Torneo')
+  useEffect(() => {
+    let nombreTorneo = allTorneos.find(t => t.name_url == id)
+    return setTitle(nombreTorneo.name);
+  }, [id])
+
   return (
     <div className='relative'>
       <Header allTorneos={allTorneos} />
       <section>
         <LinksTorneos torneos={allTorneos} id={id} />
+        <h1 className='text-center font-bold text-2xl mt-5'>Torneo - {title}</h1>
         <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
           <TablaPuntajes tabla={tabla} />
           <Fechas partidos={partidos} />
@@ -56,11 +61,7 @@ export const getServerSideProps = async ({ params: { id } }) => {
     let torneo = results[3]
     // console.log(results[0].data);
     console.timeEnd('all')
-    // let goleadores = await axios.post('http://localhost:3500/api/torneo-goleadores', { torneo: id })
 
-    // let fair_play = await axios.post('http://localhost:3500/api/torneo-fairplay', { torneo: id })
-
-    // let sanciones = await axios.post('http://localhost:3500/api/torneo-sanciones', { torneo: id })
     return {
       props: {
         id,
