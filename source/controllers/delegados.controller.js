@@ -32,6 +32,7 @@ module.exports ={
             ],
             limit:3
         })
+        console.log(recentsDelegados);
        
         let categorias =await categoria.findAll({
             include: {all:true},

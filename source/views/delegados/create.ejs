@@ -32,23 +32,29 @@
         <section>
             <h3>Creados Recientemente</h3>
             <nav>
-                <% recentsDelegados.forEach(d => { %>
-                    <div>
-                        <p><%= d.equipo.name %> / <%= d.categoria.name %> - <%= d.last_name %> <%= d.name %>  </p>
-                        <a href="/delegados/edit/<%=d.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form action="/delegados/delete/<%=d.id%>?m=DELETE" method="post">
-                            <button type="submit">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+                <% if (recentsDelegados.length > 0) { %>
 
-                        </form>
-                    </div>
+                    <% recentsDelegados.forEach(d => { %>
+                        <div>
+                            <p><%= d.equipo.name %> / <%= d.categoria.name %> - <%= d.last_name %> <%= d.name %>  </p>
+                            <a href="/delegados/edit/<%=d.id%>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="/delegados/delete/<%=d.id%>?m=DELETE" method="post">
+                                <button type="submit">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+    
+                            </form>
+                        </div>
+                     
+                    <% }) %>
                  
-                <% }) %>
+                <% } %>
+                
             </nav>
         </section>
         <section>
-            <h3>Lista de Delegados - (<%= count %> )</h3>
+            <% if (delegados.length > 0) { %>
+                <h3>Lista de Delegados - (<%= count %> )</h3>
             <form action="/delegados/" method="get">
                 <input type="text" name="name" id="name" placeholder="Buscar por Nombre">
 
@@ -85,6 +91,9 @@
                  
                 <% }) %>
             </nav>
+         
+            <% } %>
+            
         </section>
         
     </main>
