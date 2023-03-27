@@ -6,14 +6,17 @@ module.exports={
     
     allTorneos:async(req,res)=>{
         try{
-
+            console.time(1)
             let torneos = await torneo.findAll({
-                include:{all:true},
+                // include:{all:true},
                 order:[
                     ["temporada","DESC"],
                     ["id","DESC"]
                 ]
             })
+            console.timeEnd(1)
+
+            console.time(2)
             torneos = torneos.map(t=>{
                 let data={
                     id:t.id,
@@ -22,7 +25,8 @@ module.exports={
                 }
                 return data
             })
-            return res.send({torneos:torneos}).status(200)
+            console.timeEnd(2)
+            return res.send({torneos}).status(200)
         }catch(error){
             return res.status(505).json(error)
         }
