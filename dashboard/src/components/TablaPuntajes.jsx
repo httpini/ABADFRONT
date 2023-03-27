@@ -3,7 +3,6 @@ import Link from 'next/link'
 import ColoresEquipo from './ColoresEquipo'
 
 export default function TablaPuntajes({ tabla }) {
-    console.log(tabla);
     return (
         <div className='bg-red-300'>
             <h1>Tabla de Posiciones</h1>
