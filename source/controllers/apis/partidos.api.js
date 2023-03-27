@@ -211,7 +211,7 @@ module.exports={
                 }
                 return data
             })
-             console.log(partidos);
+            //  console.log(partidos);
             // console.log(fechas.length, partidos.length);
             return res.send({partidos}).status(200)
         }catch(error){

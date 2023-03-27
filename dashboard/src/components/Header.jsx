@@ -3,8 +3,10 @@ import { HiMenuAlt4 } from 'react-icons/hi'
 import { AiOutlineClose } from 'react-icons/ai'
 import LinkHeader from './LinkHeader'
 import Link from 'next/link'
+import Image from 'next/image'
 import { torneos, copas } from '../../utils/constants'
 import axios from 'axios'
+import ABADlogo from '../../public/ABADlogo.svg'
 
 
 export default function Header({ allTorneos }) {
@@ -22,12 +24,12 @@ export default function Header({ allTorneos }) {
 
     return (
         <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
-            <div className='md:flex hidden justify-around flex-grow mr-[5em]'>
+            <div className='md:flex hidden justify-around flex-grow'>
                 <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
                 <LinkHeader texto='Copas' lista={copas} pagina='copa' />
             </div>
             <Link href='/'>
-                <h1 className='flex-grow flex justify-center'>LOGO</h1>
+                <h1 className='flex-grow flex justify-center mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[40px]' src={ABADlogo}></Image></h1>
             </Link>
 
             <div>
@@ -48,7 +50,7 @@ export default function Header({ allTorneos }) {
                 )}
             </div>
 
-            <div className='md:flex hidden justify-around flex-grow ml-[5em]'>
+            <div className='md:flex hidden justify-around flex-grow'>
                 <LinkHeader texto='Equipos' lista={[]} pagina='equipos' />
                 <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
             </div>

@@ -75,8 +75,6 @@ module.exports=(sequelize, DataTypes)=>{
             as:"partidos",
             foreignKey:"torneo_id",
         })
-          
-       
     }
 
     return Torneo
