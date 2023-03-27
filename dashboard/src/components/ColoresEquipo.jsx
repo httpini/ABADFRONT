@@ -10,8 +10,8 @@ export default function ColoresEquipo({ colores }) {
     }, [colores])
 
     return (
-        <div className='flex w-5 h-5 rounded-md border-l-pink-900'>
-            {cols && cols.map(c => <div style={{ backgroundColor: `#${c}` }} key={c} className={`h-full w-full`}></div>)}
+        <div className='flex w-5 h-5 rounded-md overflow-hidden'>
+            {cols && cols.map(c => <div style={{ backgroundColor: `#${c}` }} key={c} className={`h-full w-full `}></div>)}
         </div>
     )
 }
