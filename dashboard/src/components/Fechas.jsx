@@ -48,7 +48,7 @@ export default function Fechas({ partidos }) {
                         {
                             partidosFecha.map((e, i) => (
                                 <tr key={i}>
-                                    <th>{e.local_name}</th>
+                                    <th>{e.estado}</th>
                                     <th>{e.local_name}</th>
                                     <th>{e.g_local}</th>
                                     <th>{e.g_visitante}</th>

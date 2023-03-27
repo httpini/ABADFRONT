@@ -179,7 +179,7 @@ module.exports={
                     fecha_id: p.fecha_id,
                     estado:p.estado.name,
                     motivo_postergado:p.motivo_postergado,
-                    dia:p.dia,
+                    dia:p.dia== "0000-00-00"? "A Confirmar":p.dia,
                     hora:p.hora,
                     local_name:p.local.team_name,
                     local_colores:[],
