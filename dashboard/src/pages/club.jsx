@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import LinksClubes from '@/components/LinksClubes'
 
-export default function Equipo({ id, dataEquipo }) {
+export default function Equipo({ dataEquipo }) {
   const [query, setQuery] = useState({})
   let router = useRouter();
   console.log(query);
@@ -23,7 +23,8 @@ export default function Equipo({ id, dataEquipo }) {
       <Header />
       <section className='w-full'>
         {/* <LinksTorneos torneos={torneos} id={id} /> */}
-        <LinksClubes query={query} id={id} equipo={query.equipo} torneo={query.torneo} />
+        <LinksClubes query={query} equipo={'hola'} torneo={query.torneo} />
+        <LinksClubes query={query} equipo={'chau'} torneo={query.torneo} />
         <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
           {/* <Link href={{ pathname: `/club/${id}`, query: { torneo: 'chau', equipo: query.equipo } }}>chau</Link> */}
           <InformacionEquipo />
@@ -36,13 +37,12 @@ export default function Equipo({ id, dataEquipo }) {
 }
 
 
-export const getServerSideProps = async ({ params: { id }, query: { torneo, equipo } }) => {
+export const getServerSideProps = async ({ query: { torneo, equipo } }) => {
   // let torneos = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
   let dataEquipo = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo, equipo })
 
   return {
     props: {
-      id,
       dataEquipo: dataEquipo.data.torneos
     }
   }
