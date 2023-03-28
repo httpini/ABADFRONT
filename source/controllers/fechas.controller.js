@@ -3,8 +3,11 @@ const{actualizar,restablecer}= require("../modules/actualizarTabla")
 module.exports ={
     select: async (req,res)=>{
             let torneos = await torneo.findAll({
-            include:{all:true}
-        })
+                order:[
+                    ["temporada", "DESC"],
+                    ["name", "ASC"]
+                ]
+            })
 
         res.render("fechas/select",{
             title: "Selecciona un torneo",
@@ -22,9 +25,7 @@ module.exports ={
             ]
         })
             
-        let torneos = await torneo.findByPk(req.params.torneo_id,{
-            include:{all:true}
-        })
+        let torneos = await torneo.findByPk(req.params.torneo_id)
         
         return res.render("fechas/list",{
             title:`Fechas ${torneos.name} ${torneos.temporada}`,
