@@ -1,11 +1,10 @@
-const {equipo, club}=require("../../database/models/index")
+const {equipo, club, categoria, torneo}=require("../../database/models/index")
 
 module.exports={
     allClubes:async(req,res)=>{
         try{
 
             let clubes = await club.findAll({
-                include:{all:true},
                 order:[
                     ["name","ASC"]
                 ]
@@ -37,7 +36,18 @@ module.exports={
             }
             
             let equipos = await equipo.findAll({
-                include:{all:true},
+                include:[
+                    {
+                        model:categoria,
+                        as:"categoria",
+                        atributes:["name"]
+                    },
+                    {
+                        model:torneo,
+                        as:"torneos",
+                        attributes:["name","temporada", "name_url"]
+                    }
+                ],
                 where:{
                     club_id:oneClub.id
                 },
@@ -55,7 +65,6 @@ module.exports={
                     categoria:e.categoria.name,
                     torneos:e.torneos.map(t=>{
                         let dataT={
-                            id:t.id,
                             name: `${t.name} ${t.temporada}`,
                             name_url:t.name_url,
                         }

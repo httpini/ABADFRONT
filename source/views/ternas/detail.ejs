@@ -85,12 +85,12 @@
             <% partidos.forEach(p => { %>
                 <tr>
                     <td><%= p.dia %></td>
-                    <td><%= p.local.teamName %></td>
+                    <td><%= p.local.team_name %></td>
                     <td><%= p.g_local %></td>
                     <td><%= p.g_visitante %></td>
-                    <td><%= p.visitante.teamName %></td>
+                    <td><%= p.visitante.team_name %></td>
                     <td><%= p.hora %></td>
-                    <td><%= p.predio.name %></td>
+                    <td><%= p.predio ? p.predio.name :null%></td>
                     <td><%= p.estado.name %></td>
                 </tr>
                 
