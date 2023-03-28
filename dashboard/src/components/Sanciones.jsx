@@ -3,7 +3,6 @@ import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 
 export default function Sanciones({sanciones}) {
-  console.log(sanciones)
   return (
     <div className='md:col-span-2 flex flex-wrap justify-center w-full'>
       <div className='bg-yellow-300 w-full md:w-auto'>

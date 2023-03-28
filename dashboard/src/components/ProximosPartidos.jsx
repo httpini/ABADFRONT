@@ -2,7 +2,7 @@ import React from 'react'
 import TarjetaPartido from './TarjetaPartido'
 import Carousel from 'better-react-carousel'
 
-export default function ProximosPartidos({ partidos, data }) {
+export default function ProximosPartidos({ data }) {
     return (
         <Carousel
             responsiveLayout={[

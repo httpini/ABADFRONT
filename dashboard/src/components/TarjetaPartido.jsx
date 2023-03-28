@@ -1,6 +1,7 @@
 import React from 'react'
 import Puntaje from './Puntaje'
 import hola from '../../utils/getDay';
+import Link from 'next/link';
 
 export default function TarjetaPartido({ data }) {
   const dia = hola(data.dia, data.hora)
@@ -15,8 +16,9 @@ export default function TarjetaPartido({ data }) {
         <div className='h-[75%] w-[1px] bg-white'></div>
         <Puntaje equipo={data.visitante_name} goles={data.visitante_goles} colores={data.visitante_colores} />
       </div>
-      <div className='text-center cursor-pointer flex justify-around bg-slate-200'>
-        <p>{data.predio_name ? data.predio_name : 'predio a confirmar'}</p>
+      <div className='text-center  flex justify-around bg-slate-200'>
+        <Link href={data.predio_url ? data.predio_url : '#'} target={data.predio_url ? "_blank" : ''} style={data.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{data.predio_name ? data.predio_name : 'a confirmar'}</Link>
+        {/* <p className='cursor-pointer'>{data.predio_name ? data.predio_name : 'predio a confirmar'}</p> */}
         <p>-</p>
         <p>{data.torneo_name}</p>
       </div>

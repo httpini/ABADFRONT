@@ -12,10 +12,10 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
       <section>
         <Banner />
         <h2 className="font-bold text-center p-5 underline">Partidos a jugar</h2>
-        <ProximosPartidos partidos={[1, 2, 3, 4, 5, 6, 7]} data={partidosConfirmados}/>
+        <ProximosPartidos data={partidosConfirmados} />
         <br />
         <h2 className="font-bold text-center p-5 underline">Partidos jugados</h2>
-        <ProximosPartidos partidos={[1, 2, 3]} data={partidosDisputados} />
+        <ProximosPartidos data={partidosDisputados} />
       </section>
       <Footer />
     </div>
@@ -25,12 +25,15 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
 
 export const getServerSideProps = async () => {
   try {
-    let partidosDisputados = await axios.get('http://localhost:3500/api/partidos-disputados');
-    let partidosConfirmados = await axios.get('http://localhost:3500/api/partidos-confirmados');
+    let calls = await Promise.all([
+      axios.get('http://localhost:3500/api/partidos-disputados'),
+      axios.get('http://localhost:3500/api/partidos-confirmados')
+    ])
+    
     return {
       props: {
-        partidosDisputados: partidosDisputados.data,
-        partidosConfirmados: partidosConfirmados.data
+        partidosDisputados: calls[0].data,
+        partidosConfirmados: calls[1].data
       }
     }
   } catch (error) {
