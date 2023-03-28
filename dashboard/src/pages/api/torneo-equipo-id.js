@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export default async function handler(req, res) {
-  let equipos = await axios.get(`http://localhost:8020/api/torneos/${req.body.id}`)
+  let equipos = await axios.get('http://localhost:8020/equipos/all')
   console.log(equipos);
   // let equiposTorneo = equipos.data.filter(e => e.)
   // console.log(req.body);

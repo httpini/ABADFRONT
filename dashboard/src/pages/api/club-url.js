@@ -2,6 +2,6 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-    let clubes = await axios.get(`http://localhost:8020/api/clubes`)
-    res.status(200).json({ clubes: clubes.data.clubes })
+    let club = await axios.get(`http://localhost:8020/api/clubes/${req.body.club}`)
+    res.status(200).json({ club: club.data })
 }
