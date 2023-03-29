@@ -2,11 +2,7 @@ import React from 'react'
 // import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 
-let equipos = [1, 2, 3, 4, 5, 6, 7]
-
 export default function Fechas({ partidos }) {
-    console.log(partidos);
-
     return (
         <div className='bg-blue-500 w-full'>
             <h1>Fechas</h1>

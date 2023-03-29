@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { equipos } from '../../utils/constants'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-let partidos = 24
-
-export default function InformacionEquipo({ equipo }) {
+export default function InformacionEquipo({ equipo, fairPlay, goleadores, tabla, sancionados }) {
     return (
         <div className='bg-blue-500 p-5 w-[100%]'>
             <h1 className='underline'>Nombre de equipo</h1>
@@ -12,9 +11,9 @@ export default function InformacionEquipo({ equipo }) {
                 <h2>Torneo Amateur</h2>
                 <h2>Datos de tabla</h2>
                 <ul className='ml-10'>
-                    <li>Posición: #2</li>
+                    <li>Posición: #{tabla.pos}</li>
                     <li>Posición fair play: #4</li>
-                    <li>Puntos: 13</li>
+                    <li>Puntos: {2}</li>
                     <li>Partidos jugados: 5</li>
                     <li>Partidos ganados: 4</li>
                     <li>Partidos empatados: 1</li>

@@ -303,7 +303,7 @@ module.exports = {
 
             //DATOS DEL EQUIPO
             let equipoDatos = {
-                id: datosEquipo.id,
+                // id: datosEquipo.id,
                 name: datosEquipo.team_name,
                 colores: [],
                 predio_name: datosEquipo.predio ? datosEquipo.predio.name : null,
@@ -324,15 +324,15 @@ module.exports = {
 
             //DATOS DE LA TABLA
             let tablaDatos = {
-                pos: laPos,
-                pts: datosEquipo.pts,
-                pj: datosEquipo.p_jugados,
-                pg: datosEquipo.p_ganados,
-                pe: datosEquipo.p_empatados,
-                pp: datosEquipo.p_perdidos,
-                gf: datosEquipo.g_favor,
-                gc: datosEquipo.g_contra,
-                dg: datosEquipo.g_dif
+                posicion: laPos,
+                puntos: datosEquipo.pts,
+                partidosJugados: datosEquipo.p_jugados,
+                partidosGanados: datosEquipo.p_ganados,
+                partidosEmpatados: datosEquipo.p_empatados,
+                partidosPerdidos: datosEquipo.p_perdidos,
+                golesFavor: datosEquipo.g_favor,
+                golesContra: datosEquipo.g_contra,
+                diferenciaGol: datosEquipo.g_dif
             }
 
             let goleadores = await goleador.findAll({
@@ -390,6 +390,7 @@ module.exports = {
                 order: [
                     ["puntos", "ASC"]
                 ],
+                include: { all: true },
                 where: {
                     torneo_id: elTorneo.id
                 }
@@ -398,10 +399,11 @@ module.exports = {
                 let data = {
                     pos: i + 1,
                     equipo_id: fp.equipo_id,
+                    nombre: fp.equipo.name
                 }
                 return data
             })
-            posFP = pos.filter(p => {
+            posFP = posFP.find(p => {
                 return p.equipo_id == elEquipo.id
             })//filtramos el equipo que queremos para dejar como dato su posicion enla tabla
             let laPosFP = posFP.pos
@@ -414,9 +416,9 @@ module.exports = {
                 }
             })
             let fpDatos = {
-                pos: laPosFP,
-                ta: fp.amarillas,
-                tr: fp.rojas,
+                posicion: laPosFP,
+                tarjetasAmarillas: fp.amarillas,
+                tarjetasRojas: fp.rojas,
                 amonestaciones: fp.amonestaciones
             }
 
@@ -457,7 +459,6 @@ module.exports = {
                 data.goles.equipo !== null ? data.puntos = acumulador : null
                 return data
             })
-            console.log('holaaa', partidosDatos, datosEquipo.id);
 
 
             return res.send({
