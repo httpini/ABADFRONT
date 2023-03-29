@@ -15,9 +15,19 @@ export default function Copa({ id }) {
 }
 
 export const getServerSideProps = async ({ params: { id } }) => {
-  return {
-    props: {
-      id
+  try {
+
+    return {
+      props: {
+        id
+      }
     }
+  } catch (error) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      }
+    };
   }
 }

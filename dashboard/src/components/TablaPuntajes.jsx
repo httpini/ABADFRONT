@@ -57,5 +57,6 @@ export const getServerSideProps = async ({ params: { id } }) => {
             equipos: equipos.data
         }
     }
+
 }
 
