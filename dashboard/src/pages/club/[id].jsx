@@ -13,12 +13,16 @@ import LinksTorneoEquipo from '@/components/LinksTorneoEquipo'
 
 export default function ClubId({ id, club, equipos, torneos, equipo }) {
   const [query, setQuery] = useState({})
+  const [equ, setEqu] = useState({})
+  const [torn, setTorn] = useState({})
+  console.log(torn);
   let router = useRouter();
 
-  console.log('equipo', equipo);
   useEffect(() => {
+    setEqu(equipos.find(e => e.name_url === router.query.equipo));
+    setTorn(torneos.find(t => t.name_url === router.query.torneo));
     setQuery(router.query)
-  }, [equipos, torneos])
+  }, [query])
 
   return (
     <div>
@@ -44,7 +48,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
         {
           equipo && (
             <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
-              <InformacionEquipo equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
+              <InformacionEquipo nombreTorneo={torn.name} nombreEquipo={equ.name} equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
               <FechasEquipo partidos={equipo.partidos} />
             </div>
           )
