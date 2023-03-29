@@ -23,7 +23,7 @@ export default function Header({ allTorneos }) {
 
 
     return (
-        <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed'>
+        <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed z-50'>
             <div className='md:flex hidden justify-around flex-grow'>
                 <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
                 {/* <LinkHeader texto='Copas' lista={copas} pagina='copa' /> */}

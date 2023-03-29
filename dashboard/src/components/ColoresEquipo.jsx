@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { mask } from '../../public/ABADlogo.svg'
 
 export default function ColoresEquipo({ colores }) {
     const [cols, setCols] = useState([])
@@ -9,8 +10,10 @@ export default function ColoresEquipo({ colores }) {
     }, [colores])
 
     return (
-        <div className='flex w-5 h-5 rounded-md overflow-hidden'>
-            {cols && cols.map(c => <div style={{ backgroundColor: `#${c}` }} key={c} className={`h-full w-full `}></div>)}
+        <div className='mask w-[20px] h-[20px]'>
+            <div className='flex w-full h-full rounded-md overflow-hidden'>
+                {cols && cols.map(c => <div style={{ backgroundColor: `#${c}` }} key={c} className={`h-full w-full`}></div>)}
+            </div>
         </div>
     )
 }
