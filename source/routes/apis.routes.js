@@ -9,7 +9,7 @@ const { allClubes, oneClub } = require("../controllers/apis/equipos.api.js")
 //TORNEOS
 router.get("/torneos", allTorneos)
 router.get("/torneos/:torneo_url", oneTorneo)
-router.get("/torneos/:torneo_url/:equipo_id", equipoEnTorneo)
+router.get("/torneos/:torneo_url/:equipo_url", equipoEnTorneo)
 
 
 //PARTIDOS

@@ -14,7 +14,8 @@ import LinksTorneoEquipo from '@/components/LinksTorneoEquipo'
 export default function ClubId({ id, club, equipos, torneos, dataEquipo }) {
   const [query, setQuery] = useState({})
   let router = useRouter();
-  // console.log('torneos', torneos);
+
+  // console.log('torneos', equipos);
   useEffect(() => {
     setQuery(router.query)
   }, [equipos, torneos])
@@ -52,22 +53,22 @@ export default function ClubId({ id, club, equipos, torneos, dataEquipo }) {
 
 
 export const getServerSideProps = async ({ params: { id }, query: { torneo, equipo } }) => {
-  let calls = await Promise.all([
-    axios.post('http://localhost:3500/api/club-url', { club: id }),
-    // axios.post(`http://localhost:3500/api/${torneo}`)
-  ])
-  let dataClub = calls[0]
+  let clubData = await axios.post('http://localhost:3500/api/club-url', { club: id })
+  // console.log(torneo, equipo);
+  let equipoData
+  if (torneo && equipo) equipoData = await axios.post(`http://localhost:3500/api/equipo-torneo`, { torneo, equipo })
+  // console.log(equipoData.data);
   // let dataEquipo = calls[1]
   // console.log(dataClub.data.club.equipos, equipo);
   let torneos
   if (equipo) {
-    torneos = dataClub.data.club.equipos.find(e => e.name_url === equipo).torneos
+    torneos = clubData.data.club.equipos.find(e => e.name_url === equipo).torneos
   }
 
   let props = {
     id,
-    club: dataClub.data.club.club,
-    equipos: dataClub.data.club.equipos
+    club: clubData.data.club.club,
+    equipos: clubData.data.club.equipos
   }
 
   if (torneos) props.torneos = torneos
