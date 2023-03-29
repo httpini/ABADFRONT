@@ -15,14 +15,13 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
   const [query, setQuery] = useState({})
   const [equ, setEqu] = useState({})
   const [torn, setTorn] = useState({})
-  console.log(torn);
   let router = useRouter();
 
   useEffect(() => {
-    setEqu(equipos.find(e => e.name_url === router.query.equipo));
-    setTorn(torneos.find(t => t.name_url === router.query.torneo));
+    if (router.query.equipo) setEqu(equipos.find(e => e.name_url === router.query.equipo));
+    if (router.query.torneo) setTorn(torneos.find(t => t.name_url === router.query.torneo));
     setQuery(router.query)
-  }, [query])
+  }, [equipos, torneos, query])
 
   return (
     <div>
@@ -37,14 +36,20 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
             ))
           }
         </div>
-        <h2 className='text-2xl text-center'>Torneos</h2>
-        <div className='flex flex-wrap w-full justify-around'>
-          {
-            torneos && torneos.map(t => (
-              <LinksTorneoEquipo key={t.name_url} query={query} torneo={t} />
-            ))
-          }
-        </div>
+        {
+          torneos &&
+          <div>
+            <h2 className='text-2xl text-center'>Torneos</h2>
+            <div className='flex flex-wrap w-full justify-around'>
+              {
+                torneos.map(t => (
+                  <LinksTorneoEquipo key={t.name_url} query={query} torneo={t} />
+                ))
+              }
+            </div>
+          </div>
+        }
+
         {
           equipo && (
             <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
