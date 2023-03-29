@@ -3,7 +3,9 @@ import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head >
+        <title>My page title</title>
+      </Head>
       <body className='height-full'>
         <Main />
         <NextScript />
@@ -11,3 +13,4 @@ export default function Document() {
     </Html>
   )
 }
+ 

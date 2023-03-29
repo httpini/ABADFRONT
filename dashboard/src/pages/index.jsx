@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProximosPartidos from "@/components/ProximosPartidos";
 import axios from "axios";
+import Head from "next/head";
 
 export default function Home({ partidosConfirmados, partidosDisputados }) {
   // console.log(partidosConfirmados, partidosDisputados);
