@@ -32,18 +32,18 @@ module.exports = {
     oneTorneo: async (req, res) => {
         try {
             let datosElTorneo = await torneo.findOne({
-                include:[
+                include: [
                     {
-                        model:categoria,
-                        as:"categoria",
-                        atributes:["id", "description"]
+                        model: categoria,
+                        as: "categoria",
+                        atributes: ["id", "description"]
                     }
                 ],
                 where: {
                     name_url: req.params.torneo_url
                 }
             })
-            
+
             let elTorneo = {
                 //COLOCAR UN NAME O ALGO PARA QUE FIGURE EN LA RUTA PARA QUE QUEDE MEJOR
                 id: datosElTorneo.id,
@@ -51,10 +51,10 @@ module.exports = {
                 name_url: datosElTorneo.name_url,
                 reglamento: "reglamento"
             }
-            
-            
-            async function funcionTabla () {
-                let result =  await equipo_torneo.findAll({
+
+
+            async function funcionTabla() {
+                let result = await equipo_torneo.findAll({
                     where: {
                         torneo_id: elTorneo.id
                     },
@@ -65,7 +65,7 @@ module.exports = {
                         ["p_ganados", "DESC"],
                     ]
                 })
-                let mappedResult =result.map((e, index) => {
+                let mappedResult = result.map((e, index) => {
                     let data = {
                         //YA VA CON LA POSICION DE LA TABLA PUESTA
                         pos: index + 1,
@@ -91,17 +91,17 @@ module.exports = {
                     }
                     return data
                 })
-                
+
                 return mappedResult
             }
 
-            async function funcionFp () {
+            async function funcionFp() {
                 let result = await fair_play.findAll({
-                    include:[
+                    include: [
                         {
-                            model:equipo,
-                            as:"equipo",
-                            atributes:["id", "name","color_1", "color_2", "color_3"]
+                            model: equipo,
+                            as: "equipo",
+                            atributes: ["id", "name", "color_1", "color_2", "color_3"]
                         }
                     ],
                     where: {
@@ -112,7 +112,7 @@ module.exports = {
                         ["amonestaciones", "ASC"]
                     ]
                 })
-                let mappedResult =result.map((f, index) => {
+                let mappedResult = result.map((f, index) => {
 
                     let data = {
                         pos: index + 1,
@@ -134,19 +134,19 @@ module.exports = {
                         data.colores_equipo.push(f.equipo.color_3)
                     }
                     return data;
-    
+
                 })
-                
+
                 return mappedResult
             }
-            
-            async function funcionGoleadores () {
+
+            async function funcionGoleadores() {
                 let result = await goleador.findAll({
                     include: [
                         {
-                            model:equipo_torneo,
-                            as:"equipo",
-                            atributes:["id", "team_name", "color_1", "color_2", "color_3"]
+                            model: equipo_torneo,
+                            as: "equipo",
+                            atributes: ["id", "team_name", "color_1", "color_2", "color_3"]
 
                         }
                     ],
@@ -158,14 +158,14 @@ module.exports = {
                     ]
                 })
 
-                let mappedResult =result.map((g, index) => {
+                let mappedResult = result.map((g, index) => {
                     let data = {
                         pos: index + 1,
                         equipo: g.equipo.team_name,
                         colores_equipo: [],
                         nombre: `${g.last_name} ${g.name}`,
                         goles: g.goles
-    
+
                     }
                     if (g.equipo.color_1 != null) {
                         data.colores_equipo.push(g.equipo.color_1)
@@ -178,23 +178,23 @@ module.exports = {
                     }
                     return data
                 })
-                
-                
+
+
                 return mappedResult
             }
 
-            async function funcionSancionado () {
+            async function funcionSancionado() {
                 let result = await sancionado.findAll({
-                    include:[
+                    include: [
                         {
-                        model:equipo_torneo,
-                        as:"equipo",
-                        atributes:["team_name"]
+                            model: equipo_torneo,
+                            as: "equipo",
+                            atributes: ["team_name"]
                         },
                         {
-                            model:fecha,
-                            as:"fecha",
-                            atributes:["name"]
+                            model: fecha,
+                            as: "fecha",
+                            atributes: ["name"]
                         }
                     ],
                     where: {
@@ -229,13 +229,13 @@ module.exports = {
                 console.log(mappedResult);
                 return mappedResult
             }
-            
-        
+
+
             let calls = await Promise.all([funcionTabla(), funcionFp(), funcionGoleadores(), funcionSancionado()])
 
 
 
-           
+
             // DE ACA SOLO FALTARIAN LAS FECHAS Y LOS PARTIDOS.
             return res.send({
                 torneo: elTorneo,
@@ -252,6 +252,8 @@ module.exports = {
     },
     equipoEnTorneo: async (req, res) => {
         try {
+            // console.log('holaaa');
+            // console.log(req.params);
             //VOY A DIVIDIR LA INFORMACION ENTRE DATOS DEL EQUIPO, TABLA, FAIR PLAY, GOLEADORES, SANCIONADOS Y PARTIDOS
             let elTorneo = await torneo.findOne({
                 where: {
@@ -259,7 +261,12 @@ module.exports = {
                 }
             })
 
-            let elEquipo = await equipo.findByPk(req.params.equipo_id)
+            // let elEquipo = await equipo.findByPk(req.params.equipo_id)
+            let elEquipo = await equipo.findOne({
+                where: {
+                    name_url: req.params.equipo_url
+                }
+            })
 
             //traemos todos los equipos para mapearle la posicion en la tabla
             let pos = await equipo_torneo.findAll({
@@ -292,6 +299,7 @@ module.exports = {
                     equipo_id: elEquipo.id
                 }
             })
+            // console.log('holaaa' , datosEquipo);
 
             //DATOS DEL EQUIPO
             let equipoDatos = {
@@ -312,6 +320,7 @@ module.exports = {
             if (datosEquipo.color_3 != null) {
                 equipoDatos.colores.push(datosEquipo.color_3)
             }
+
 
             //DATOS DE LA TABLA
             let tablaDatos = {
@@ -412,7 +421,7 @@ module.exports = {
             }
 
             //AHORA VOY A TRAER LOS DATOS DE LOS PARTIDOS
-
+            // console.log('equipoId:', datosEquipo.id);
             let partidos = await partido.findAll({
                 include: { all: true },
                 order: [
@@ -420,13 +429,16 @@ module.exports = {
                 ],
                 where: {
                     torneo_id: elTorneo.id,
-                    estado_id: 4,
+                    // estado_id: 4,
                     [Op.or]: [
                         { visitante_id: datosEquipo.id },
                         { local_id: datosEquipo.id }
                     ]
                 }
             })
+
+            // console.log('partidos', partidos, elTorneo.id);
+
 
             let partidosDatos = partidos.map(p => {
                 let data = {
@@ -435,10 +447,16 @@ module.exports = {
                     fecha: p.fecha.name,
                     localVisitante: p.local_id == datosEquipo.id ? "L" : "V",
                     rival: p.local_id == datosEquipo.id ? p.visitante.team_name : p.local.team_name,
-                    resultado: p.local_id == datosEquipo.id ? `${p.g_local} - ${p.g_visitante}` : `${p.g_visitante} - ${p.g_local}`
+                    resultado: {
+                        golesVisitante: p.g_visitante,
+                        golesLocal: p.g_local
+                    },
+                    // resultado: p.local_id == datosEquipo.id ? `${p.g_local} - ${p.g_visitante}` : `${p.g_visitante} - ${p.g_local}`
                 }
                 return data
             })
+            console.log('holaaa', partidosDatos, datosEquipo.id);
+
 
             return res.send({
                 equipo: equipoDatos,
