@@ -81,6 +81,7 @@ module.exports = {
                     let data = {
                         //YA VA CON LA POSICION DE LA TABLA PUESTA
                         pos: index + 1,
+                        torneo_url:datosElTorneo.name_url,
                         club_url:e.club.name_url,
                         equipo_url:e.equipo.name_url,
                         equipo: e.team_name,
@@ -218,7 +219,7 @@ module.exports = {
                         ["f_sancion", "ASC"]
                     ]
                 })
-                console.log(result);
+                
                 let mappedResult = result.map(sanc => {
                     let data = {
                         equipo: sanc.equipo.team_name,
@@ -240,7 +241,6 @@ module.exports = {
                     }
                     return data
                 })
-                console.log(mappedResult);
                 return mappedResult
             }
 
