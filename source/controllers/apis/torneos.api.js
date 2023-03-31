@@ -266,8 +266,6 @@ module.exports = {
     },
     equipoEnTorneo: async (req, res) => {
         try {
-            // console.log('holaaa');
-            // console.log(req.params);
             //VOY A DIVIDIR LA INFORMACION ENTRE DATOS DEL EQUIPO, TABLA, FAIR PLAY, GOLEADORES, SANCIONADOS Y PARTIDOS
             let elTorneo = await torneo.findOne({
                 where: {
@@ -275,6 +273,7 @@ module.exports = {
                 }
             })
 
+            
             // let elEquipo = await equipo.findByPk(req.params.equipo_id)
             let elEquipo = await equipo.findOne({
                 where: {
@@ -420,6 +419,7 @@ module.exports = {
             posFP = posFP.find(p => {
                 return p.equipo_id == elEquipo.id
             })//filtramos el equipo que queremos para dejar como dato su posicion enla tabla
+            
             let laPosFP = posFP.pos
 
             let fp = await fair_play.findOne({
@@ -476,7 +476,6 @@ module.exports = {
                 data.goles.equipo !== null ? data.puntos = acumulador : null
                 return data
             })
-
 
             return res.send({
                 equipo: equipoDatos,

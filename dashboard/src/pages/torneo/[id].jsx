@@ -62,7 +62,7 @@ export const getServerSideProps = async ({ params: { id } }) => {
       axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
     ])
     console.timeEnd('apis')
-    
+
     let torneos = results[0]
     let partidos = results[1]
     let allTorneos = results[2]
@@ -81,6 +81,11 @@ export const getServerSideProps = async ({ params: { id } }) => {
       }
     }
   } catch (error) {
-
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      }
+    };
   }
 }
