@@ -15,12 +15,27 @@ function nameURL(nombre, temporada) {
 module.exports={
     create: async (req,res)=>{
         let torneos = await torneo.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                },
+                {
+                    model:subcategoria,
+                    as:"subcategoria",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
             order:[
                 ["temporada", "DESC"]
             ]
         })
-
         if(req.query && req.query.name){
             torneos = torneos.filter(t=> t.name.toLowerCase().indexOf(req.query.name.toLowerCase())> -1)
         }
@@ -30,29 +45,36 @@ module.exports={
         if(req.query && req.query.subCat){
             torneos= torneos.filter(t => t.subcategoria_id == req.query.subCat)
         }
-
-
         let lastTorneos = await torneo.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                },
+                {
+                    model:subcategoria,
+                    as:"subcategoria",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
             order:[
                 ["id", "DESC"]
             ],
             limit:3
         })
-        let equipos = await equipo.findAll({
-            include:{all:true},
-            order:[
-                ["name", "ASC"]
-            ]
-        })
+        
         let categorias = await categoria.findAll({
-            include:{all:true},
             order:[
                 ["name", "ASC"]
             ]
         })
         let subcategorias = await subcategoria.findAll({
-            include:{all:true},
             order:[
                 ["name", "ASC"]
             ]
@@ -62,7 +84,6 @@ module.exports={
             title:"Torneos",
             lastTorneos:lastTorneos,
             torneos:torneos,
-            equipos:equipos,
             categorias:categorias,
             subcategorias:subcategorias
         })
@@ -98,8 +119,7 @@ module.exports={
                 let equipon = await equipo.findOne({
                     where:{
                         id:e
-                    },
-                    include:{all:true}
+                    }
                 }); //
                 
 
@@ -257,7 +277,23 @@ module.exports={
     },
     edit:async(req, res)=>{
         let torneos = await torneo.findByPk(req.params.id,{
-            include:{all:true}
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                },
+                {
+                    model:subcategoria,
+                    as:"subcategoria",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["id", "name"]
+                }
+            ]
         })
         if(!torneos){
             res.redirect("/torneos")
