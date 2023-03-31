@@ -3,7 +3,7 @@ const {torneo, sancionado, equipo_torneo, fecha}= require("../database/models/in
 module.exports ={
     select: async (req,res)=>{
         let torneos = await torneo.findAll({
-            include:{all:true},
+
             order:[
                 ["temporada","DESC"]
             ]
@@ -16,18 +16,13 @@ module.exports ={
     },
     create: async(req,res)=>{
         let sancionados= await sancionado.findAll({
-            include:{all:true},
             order:[
                 ["f_sancion", "ASC"]
             ]
         })
         //FALTAN LOS QUERYS DE LOS FILTROS Y EL ORDER
-        let elTorneo = await torneo.findByPk(req.params.torneo_id,{
-            include:{all:true},
-    
-        })
+        let elTorneo = await torneo.findByPk(req.params.torneo_id)
         let fechas = await fecha.findAll({
-            include:{all:true},
             where:{
                 torneo_id:req.params.torneo_id
             },
@@ -59,9 +54,7 @@ module.exports ={
         return res.redirect(`/sancionados/torneo/${req.body.torneo_id}`)
     },
     edited: async(req,res)=>{
-        let oneSancionado = await sancionado.findByPk(req.params.id,{
-            include:{all:true}
-        })
+        let oneSancionado = await sancionado.findByPk(req.params.id)
         if(!oneSancionado){
             return res.redirect(`/sancionados/torneo/${req.params.torneo_id}`)
         }
@@ -69,9 +62,7 @@ module.exports ={
         return res.redirect(`/sancionados/torneo/${oneSancionado.torneo_id}`)
     },
     destroid: async(req,res)=>{
-        let oneSancionado = await sancionado.findByPk(req.params.id,{
-            include:{all:true}
-        })
+        let oneSancionado = await sancionado.findByPk(req.params.id)
         if(!oneSancionado){
             return res.redirect(`/sancionados/`)
         }
