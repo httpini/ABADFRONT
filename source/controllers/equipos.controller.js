@@ -84,7 +84,6 @@ module.exports = {
         })
 
         let equiposTorneos= await equipo_torneo.findAll({
-            include:{all:true},
             where:{
                 equipo_id:equipos.id
             }
@@ -92,6 +91,7 @@ module.exports = {
         if(equiposTorneos.length > 0){
             equiposTorneos.forEach(async et=>{
                 await et.update({
+                    club_id:equipos.club_id,
                     team_name:equipos.name,
                     color_1:equipos.color_1,
                     color_2:equipos.color_2,

@@ -16,6 +16,10 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull: false,
             type: DataTypes.STRING
         },
+        name_url:{
+            allowNull: false,
+            type: DataTypes.STRING
+        },
         categoria_id:{
             allowNull: true,
             type: DataTypes.INTEGER

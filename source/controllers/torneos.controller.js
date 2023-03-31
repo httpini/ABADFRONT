@@ -106,6 +106,7 @@ module.exports={
                 await equipo_torneo.create({
                     torneo_id: nuevoTorneo.id,
                     equipo_id: e,
+                    club_id:equipon.club_id,
                     team_name:equipon.name,
                     color_1:equipon.color_1,
                     color_2:equipon.color_2,
