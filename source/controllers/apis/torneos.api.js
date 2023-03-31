@@ -7,7 +7,6 @@ module.exports = {
     allTorneos: async (req, res) => {
         try {
             let torneos = await torneo.findAll({
-                // include:{all:true},
                 order: [
                     ["temporada", "DESC"],
                     ["id", "DESC"]
@@ -45,13 +44,11 @@ module.exports = {
             })
 
             let elTorneo = {
-                //COLOCAR UN NAME O ALGO PARA QUE FIGURE EN LA RUTA PARA QUE QUEDE MEJOR
                 id: datosElTorneo.id,
                 name: `${datosElTorneo.name} ${datosElTorneo.temporada}`,
                 name_url: datosElTorneo.name_url,
                 reglamento: "reglamento"
             }
-
 
             async function funcionTabla() {
                 let result = await equipo_torneo.findAll({
@@ -273,8 +270,6 @@ module.exports = {
                 }
             })
 
-            
-            // let elEquipo = await equipo.findByPk(req.params.equipo_id)
             let elEquipo = await equipo.findOne({
                 where: {
                     name_url: req.params.equipo_url
@@ -312,11 +307,9 @@ module.exports = {
                     equipo_id: elEquipo.id
                 }
             })
-            // console.log('holaaa' , datosEquipo);
 
             //DATOS DEL EQUIPO
             let equipoDatos = {
-                // id: datosEquipo.id,
                 name: datosEquipo.team_name,
                 colores: [],
                 predio_name: datosEquipo.predio ? datosEquipo.predio.name : null,
@@ -469,7 +462,6 @@ module.exports = {
                         equipo: p.local_id == datosEquipo.id ? p.g_local : p.g_visitante,
                         rival: p.local_id == datosEquipo.id ? p.g_visitante : p.g_local
                     }
-                    // resultado: p.local_id == datosEquipo.id ? `${p.g_local} - ${p.g_visitante}` : `${p.g_visitante} - ${p.g_local}`
                 }
                 if (data.goles.equipo > data.goles.rival) acumulador += 3
                 if (data.goles.equipo == data.goles.rival) acumulador += 1
