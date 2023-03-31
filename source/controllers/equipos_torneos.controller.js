@@ -1,9 +1,20 @@
-const {torneo, categoria, predio, equipo_torneo}= require("../database/models/index")
+const {torneo, categoria, predio, equipo_torneo, equipo}= require("../database/models/index")
 
 module.exports={
     list:async (req,res)=>{
         let equipos_torneos = await equipo_torneo.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model: equipo,
+                    as:"equipo",
+                    atributes:["name","categoria_id"]
+                },
+                {
+                    model:torneo,
+                    as:"torneo",
+                    atributes:["name","temporada"]
+                }
+            ],
             order:[
                 ["torneo_id", "DESC"]
             ]
@@ -23,20 +34,17 @@ module.exports={
         }
         
         let torneos = await torneo.findAll({
-            include:{all:true},
             order:[
                 ["id", "DESC"]
             ]
         })       
         let categorias = await categoria.findAll({
-            include:{all:true},
             order:[
                 ["name", "ASC"]
             ]
         })
        
         let predios = await predio.findAll({
-            include:{all:true},
             order:[
                 ["name","ASC"]
             ]
@@ -53,7 +61,18 @@ module.exports={
     oneEquipo:async (req,res)=>{},
     edit:async (req,res)=>{
         let equipos_torneos= await equipo_torneo.findByPk(req.params.id , {
-            include:{all:true}
+            include:[
+                {
+                    model: equipo,
+                    as:"equipo",
+                    atributes:["name"]
+                },
+                {
+                    model:torneo,
+                    as:"torneo",
+                    atributes:["name","temporada"]
+                }
+            ]
         })
         if(!equipos_torneos){
             return res.redirect("/equipos-torneos")
@@ -75,7 +94,7 @@ module.exports={
     },
     edited:async (req,res)=>{
         let equipos_torneos = await equipo_torneo.findByPk(req.params.id,{
-            includes:{all:true}
+
         })
         if(!equipos_torneos){
             return res.redirect("/equipos-torneos")
