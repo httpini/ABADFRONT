@@ -10,7 +10,7 @@ import FairPlay from '@/components/FairPlay';
 import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
 
-export default function Torneo({ allTorneos, id, torneos, partidos, tabla, goleadores, fair_play, sanciones }) {
+export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fair_play, sanciones }) {
   const [title, setTitle] = useState('Torneo')
   useEffect(() => {
     let nombreTorneo = allTorneos.find(t => t.name_url == id)
@@ -56,22 +56,19 @@ export const getServerSideProps = async ({ params: { id } }) => {
     console.time('apis')
 
     let results = await Promise.all([
-      axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id }),
       axios.post('http://localhost:3500/api/partidos', { torneo: id }),
       axios.get('http://localhost:3500/api/torneos'),
       axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
     ])
     console.timeEnd('apis')
 
-    let torneos = results[0]
-    let partidos = results[1]
-    let allTorneos = results[2]
-    let torneo = results[3]
+    let partidos = results[0]
+    let allTorneos = results[1]
+    let torneo = results[2]
 
     return {
       props: {
         id,
-        torneos: torneos.data,
         partidos: partidos.data.partidos,
         tabla: torneo.data.tabla,
         goleadores: torneo.data.goleadores,
