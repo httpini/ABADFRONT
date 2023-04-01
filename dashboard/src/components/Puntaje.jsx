@@ -2,7 +2,6 @@ import React from 'react'
 import ColoresEquipo from './ColoresEquipo'
 
 export default function Puntaje({ equipo, goles, colores }) {
-    console.log(equipo, goles, colores);
     return (
         <div className={`h-full w-full flex-wrap flex gap-1 justify-center`}>
             <div className='flex w-full justify-center items-center gap-2'>
