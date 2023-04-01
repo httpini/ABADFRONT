@@ -290,7 +290,7 @@ module.exports = {
                         estado:p.estado.name,
                         motivo_postergado:p.motivo_postergado,
                         dia: p.dia == "0000-00-00" || p.dia == null? "A Conf..":dateFormated,
-                        hora:p.hora.slice(0,-3),
+                        hora:p.hora!= null && p.hora!= ""? p.hora.slice(0,-3):"A Conf..",
                         local_name:p.local.team_name,
                         local_colores:[],
                         g_local:p.g_local,
