@@ -285,12 +285,12 @@ module.exports = {
                 let mappedResult = result.map(p=>{ 
                     let fechaOriginal = p.dia
                     let elementosDia = fechaOriginal.split("-")
-                    let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
+                    let dateFormated = elementosDia[2] + "-" + elementosDia[1]
                     let data = {
                         estado:p.estado.name,
                         motivo_postergado:p.motivo_postergado,
-                        dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
-                        hora:p.hora,
+                        dia: p.dia == "0000-00-00" || p.dia == null? "A Conf..":dateFormated,
+                        hora:p.hora.slice(0,-3),
                         local_name:p.local.team_name,
                         local_colores:[],
                         g_local:p.g_local,
