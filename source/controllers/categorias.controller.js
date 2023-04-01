@@ -1,15 +1,27 @@
-const {categoria, subcategoria}= require("../database/models/index")
+const {categoria, subcategoria, equipo}= require("../database/models/index")
 
 module.exports={
     create: async(req,res)=>{
         let listaCategorias = await categoria.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model: equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
             order:[
                 ["name", "ASC"]
             ]
         })
         let listaSub = await subcategoria.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
             order:[
                 ["categoria_id", "ASC"],
                 ["name", "ASC"]
@@ -23,7 +35,7 @@ module.exports={
         })
     },
     edit: async(req, res)=>{
-        let categorias= await categoria.findByPk(req.params.id,{include:{all:true}})
+        let categorias= await categoria.findByPk(req.params.id)
         if (!categorias){
             res.redirect("/categorias/")
         }
@@ -37,20 +49,21 @@ module.exports={
         return res.redirect("/categorias/")
     },
     edited: async(req,res)=>{
-        let categorias= await categoria.findByPk(req.params.id,{include:{all:true}})
+        let categorias= await categoria.findByPk(req.params.id)
         await categorias.update(req.body)
         return res.redirect("/categorias/")
     },
     destroid: async (req,res)=>{
-        let categorias= categoria.findByPk(req.params.id,{include:{all:true}})
+        let categorias= categoria.findByPk(req.params.id)
         if (!categorias){
             res.redirect("/categorias/")
         }
+        await subcategoria.destroy({
+            where:{categoria_id:req.params.id}
+        })
         await categoria.destroy({
-            include:{all:true},
             where:{id:req.params.id}
         })
-       
         res.redirect("/categorias/")
     },
     allCategorias: async (req,res)=>{

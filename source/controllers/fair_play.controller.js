@@ -3,7 +3,6 @@ const {fair_play, torneo}= require("../database/models/index")
 module.exports ={
     select: async (req,res)=>{
         let torneos = await torneo.findAll({
-            include:{all:true}
         })
 
         res.render("fair_play/select",{
@@ -25,7 +24,6 @@ module.exports ={
             return res.redirect("/fair-play")
         }
         let torneos = await torneo.findByPk(req.params.torneo_id,{
-            include:{all:true}
         })
         
         return res.render("fair_play/list",{
@@ -36,13 +34,10 @@ module.exports ={
     },
     agregarTarjetas: async(req,res)=>{
         let fp = await fair_play.findByPk(req.params.id,{
-            include:{all:true}
         })
         if(!fp){
             return res.redirect("/fair-play")
         }
-        // console.log(fp.amarillas)
-        // console.log(req.body.amarillas)
         
         let totalAmarillas = parseInt(fp.amarillas) + parseInt(req.body.amarillas)
         let totalRojas = parseInt(fp.rojas) + parseInt(req.body.rojas)
@@ -63,7 +58,7 @@ module.exports ={
     },
     edit:async(req,res)=>{
         let fp = await fair_play.findByPk(req.params.id,{
-            include:{all:true}
+
         })
         if(!fp){
             return res.redirect("/fair-play")
@@ -76,7 +71,7 @@ module.exports ={
     },
     edited: async(req,res)=>{
         let fp = await fair_play.findByPk(req.params.id,{
-            include:{all:true}
+
         })
         if(!fp){
             return res.redirect("/fair-play")

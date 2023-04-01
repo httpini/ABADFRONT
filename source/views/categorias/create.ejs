@@ -42,7 +42,7 @@
 
             <label for="categoria_id">Categoria a la que pertenece</label>
             <select name="categoria_id" id="categoria_id">
-                <option value="selected" disabled>Elegí una Categoria</option>
+                <option selected disabled>Elegí una Categoria</option>
                 <% categorias.forEach(c =>{ %>
                     <option value="<%=c.id%>"><%= c.name %> </option> 
                 <% }) %> 

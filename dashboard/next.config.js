@@ -3,7 +3,16 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["storage.googleapis.com", "lh3.googleusercontent.com"]
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/about',
+        destination: '/',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

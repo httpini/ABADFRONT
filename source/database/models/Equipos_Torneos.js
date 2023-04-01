@@ -16,6 +16,10 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull: false,
             type: DataTypes.INTEGER
         },
+        club_id:{
+            allowNull: false,
+            type: DataTypes.INTEGER
+        },
         equipo_id:{
             allowNull: false,
             type: DataTypes.INTEGER
@@ -75,8 +79,7 @@ module.exports=(sequelize,DataTypes)=>{
         horario_local:{
             allowNull:true,
             type: DataTypes.TIME
-        }
-       
+        }       
     }
     const Equipo_Torneo = sequelize.define(alias, cols, config)
 
@@ -85,6 +88,10 @@ module.exports=(sequelize,DataTypes)=>{
             as: 'torneo',
             foreignKey: 'torneo_id',
           });
+        Equipo_Torneo.belongsTo(model.club, {
+            as: 'club',
+            foreignKey: 'club_id',
+        });
         Equipo_Torneo.belongsTo(model.equipo, {
             as: 'equipo',
             foreignKey: 'equipo_id',

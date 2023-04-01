@@ -58,11 +58,14 @@ module.exports = {
             let count = partidos.length
 
             partidos = partidos.map(p => {
+                let fechaOriginal = p.dia
+                let elementosDia = fechaOriginal.split("-")
+                let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
 
                 let data = {
 
                     hora:p.hora,
-                    dia:p.dia,
+                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
                     fecha:p.fecha.name,              
                     local_name:p.local.team_name,
                     local_colores:[],
@@ -77,22 +80,22 @@ module.exports = {
                 if (p.estado_id == 5 || p.estado_id == 7) {
                     data.motivo_postergado = p.motivo_postergado
                 }
-                if (p.local.color_1 != null) {
+                if (p.local.color_1 != null && p.local.color_1 != "") {
                     data.local_colores.push(p.local.color_1)
                 }
-                if (p.local.color_2 != null) {
+                if (p.local.color_2 != null && p.local.color_2 != "") {
                     data.local_colores.push(p.local.color_2)
                 }
-                if (p.local.color_3 != null) {
+                if (p.local.color_3 != null && p.local.color_3!= "") {
                     data.local_colores.push(p.local.color_3)
                 }
-                if (p.visitante.color_1 != null) {
+                if (p.visitante.color_1 != null && p.visitante.color_1 != "") {
                     data.visitante_colores.push(p.visitante.color_1)
                 }
-                if (p.visitante.color_2 != null) {
+                if (p.visitante.color_2 != null && p.visitante.color_2 !="") {
                     data.visitante_colores.push(p.visitante.color_2)
                 }
-                if (p.visitante.color_3 != null) {
+                if (p.visitante.color_3 != null && p.visitante.color_3 !="") {
                     data.visitante_colores.push(p.visitante.color_3)
                 }
 
@@ -104,7 +107,6 @@ module.exports = {
             return res.send({count: count, partidos: partidos}).status(200)
 
 
-            return res.send({ count: count, partidos: partidos }).status(200)
 
         } catch (error) {
             return res.status(505).json(error)
@@ -162,10 +164,13 @@ module.exports = {
 
 
             partidos = partidos.map(p => {
+                let fechaOriginal = p.dia
+                let elementosDia = fechaOriginal.split("-")
+                let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                 let data = {
 
                     hora:p.hora,
-                    dia:p.dia,
+                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
                     fecha:p.fecha.name,
                     torneo_name: `${p.torneo.name} ${p.torneo.temporada}`, 
                     local_name:p.local.team_name,
@@ -183,22 +188,22 @@ module.exports = {
                 if (p.estado_id == 5 || p.estado_id == 7) {
                     data.motivo_postergado = p.motivo_postergado
                 }
-                if (p.local.color_1 != null) {
+                if (p.local.color_1 != null && p.local.color_1 != "") {
                     data.local_colores.push(p.local.color_1)
                 }
-                if (p.local.color_2 != null) {
+                if (p.local.color_2 != null && p.local.color_2 != "") {
                     data.local_colores.push(p.local.color_2)
                 }
-                if (p.local.color_3 != null) {
+                if (p.local.color_3 != null && p.local.color_3 != "") {
                     data.local_colores.push(p.local.color_3)
                 }
-                if (p.visitante.color_1 != null) {
+                if (p.visitante.color_1 != null && p.visitante.color_1 != "") {
                     data.visitante_colores.push(p.visitante.color_1)
                 }
-                if (p.visitante.color_2 != null) {
+                if (p.visitante.color_2 != null && p.visitante.color_2 != "") {
                     data.visitante_colores.push(p.visitante.color_2)
                 }
-                if (p.visitante.color_3 != null) {
+                if (p.visitante.color_3 != null && p.visitante.color_3 != "") {
                     data.visitante_colores.push(p.visitante.color_3)
                 }
 
@@ -278,10 +283,13 @@ module.exports = {
                     ]
                 })
                 let mappedResult = result.map(p=>{ 
+                    let fechaOriginal = p.dia
+                    let elementosDia = fechaOriginal.split("-")
+                    let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                     let data = {
                         estado:p.estado.name,
                         motivo_postergado:p.motivo_postergado,
-                        dia:p.dia== "0000-00-00"? "A Confirmar":p.dia,
+                        dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
                         hora:p.hora,
                         local_name:p.local.team_name,
                         local_colores:[],
@@ -293,22 +301,22 @@ module.exports = {
                         predio_url:p.predio?p.predio.map:null,
                         fecha_numero:p.fecha.nro
                     }
-                    if(p.local.color_1 != null){
+                    if(p.local.color_1 != null && p.local.color_1 != ""){
                         data.local_colores.push(p.local.color_1)
                     }
-                    if(p.local.color_2 != null){
+                    if(p.local.color_2 != null && p.local.color_2 != ""){
                         data.local_colores.push(p.local.color_2)
                     }
-                    if(p.local.color_3 != null){
+                    if(p.local.color_3 != null && p.local.color_3 != ""){
                         data.local_colores.push(p.local.color_3)
                     }
-                    if(p.visitante.color_1 != null){
+                    if(p.visitante.color_1 != null && p.visitante.color_1 != ""){
                         data.visitante_colores.push(p.visitante.color_1)
                     }
-                    if(p.visitante.color_2 != null){
+                    if(p.visitante.color_2 != null && p.visitante.color_2 != ""){
                         data.visitante_colores.push(p.visitante.color_2)
                     }
-                    if(p.visitante.color_3 != null){
+                    if(p.visitante.color_3 != null && p.visitante.color_3 != ""){
                         data.visitante_colores.push(p.visitante.color_3)
                     }
                     return data
