@@ -2,7 +2,7 @@ import React from 'react'
 import TarjetaPartido from './TarjetaPartido'
 import Carousel from 'better-react-carousel'
 
-export default function ProximosPartidos({ data }) {
+export default function ProximosPartidos({ data, disputado }) {
     return (
         <Carousel
             responsiveLayout={[
@@ -15,7 +15,7 @@ export default function ProximosPartidos({ data }) {
             {
                 data && data.partidos.map((p, i) => (
                     <Carousel.Item key={i}>
-                        <TarjetaPartido data={p} />
+                        <TarjetaPartido data={p} disputado={disputado} />
                     </Carousel.Item>
                 ))
             }

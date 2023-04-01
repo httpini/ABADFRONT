@@ -12,11 +12,23 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
       <Header />
       <section>
         <Banner />
-        <h2 className="font-bold text-center p-5 underline">Partidos a jugar</h2>
-        <ProximosPartidos data={partidosConfirmados} />
+        {
+          partidosConfirmados &&
+          <>
+            <h2 className="font-bold text-center p-5 underline">Partidos a jugar</h2>
+            <ProximosPartidos data={partidosConfirmados} disputado={false}/>
+          </>
+
+        }
         <br />
-        <h2 className="font-bold text-center p-5 underline">Partidos jugados</h2>
-        <ProximosPartidos data={partidosDisputados} />
+        {
+          partidosConfirmados &&
+          <>
+            <h2 className="font-bold text-center p-5 underline">Partidos jugados</h2>
+            <ProximosPartidos data={partidosDisputados} disputado={true}/>
+          </>
+        }
+
       </section>
       <Footer />
     </div>
@@ -30,7 +42,7 @@ export const getServerSideProps = async () => {
       axios.get('http://localhost:3500/api/partidos-disputados'),
       axios.get('http://localhost:3500/api/partidos-confirmados')
     ])
-    
+
     return {
       props: {
         partidosDisputados: calls[0].data,

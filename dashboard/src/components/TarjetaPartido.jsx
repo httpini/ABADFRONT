@@ -3,7 +3,7 @@ import Puntaje from './Puntaje'
 import hola from '../../utils/getDay';
 import Link from 'next/link';
 
-export default function TarjetaPartido({ data }) {
+export default function TarjetaPartido({ data, disputado }) {
   const dia = hola(data.dia, data.hora)
   return (
     <div className='w-[350px] bg-blue-300 p-3 rounded-md'>
