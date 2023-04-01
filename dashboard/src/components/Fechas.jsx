@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 // import { equipos } from '../../utils/constants'
 import Link from 'next/link'
+const activeTopicStyle = 'font-bold underline hover:underline text-center'
+const notActive = 'hover:underline'
 
 export default function Fechas({ partidos }) {
     const [fecha, setFecha] = useState(1)
     const [cantPartidos, setCantPartidos] = useState(5)
     const [partidosFecha, setPartidosFecha] = useState([])
-    const activeTopicStyle = 'underline font-bold'
 
     let cambioFecha = (i) => {
         return setFecha(i.target.innerHTML)
@@ -26,25 +27,27 @@ export default function Fechas({ partidos }) {
     }, [partidos])
 
     return (
-        <div className='tarjeta shadow-md shadow-oscuro3'>
-            <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Fechas y Partidos</h1>
-            <div className={`cursor-pointer flex flex-wrap gap-2 `}>
-                {Array(cantPartidos).fill(0).map((x, i) =>
-                    <div key={i + 1} onClick={cambioFecha} className={`${i == fecha - 1 ? activeTopicStyle : ''}`}>{i + 1}</div>
-                )}
+        <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
+            <div className={`cursor-pointer flex flex-wrap justify-between items-center gap-1 border-b-2`}>
+                <h1 className='text-center font-bold text-xl'>Fechas y Partidos</h1>
+                <div className='flex gap-1 flex-wrap bg-oscuro1 px-5 text-claro1 rounded-lg mb-2'>
+                    {Array(cantPartidos).fill(0).map((x, i) =>
+                        <div key={i + 1} onClick={cambioFecha} className='my-1'><h3 className={`${i == fecha - 1 ? activeTopicStyle : notActive}`}>{i + 1}</h3></div>
+                    )}
+                </div>
             </div>
             {partidosFecha.length > 0 ?
                 (<table className='w-full'>
-                    <thead className='bg-white'>
+                    <thead className='font-thin bg-claro1 bg-opacity-30'>
                         <tr>
-                            <th>Estado</th>
+                            <th className='rounded-bl-md'>Estado</th>
                             <th>Local</th>
                             <th></th>
                             <th></th>
                             <th>Visitante</th>
                             <th>Dia</th>
                             <th>Hora</th>
-                            <th>Predio</th>
+                            <th className='rounded-br-md'>Predio</th>
                         </tr>
                     </thead>
                     <tbody>

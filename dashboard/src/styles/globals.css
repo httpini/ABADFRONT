@@ -24,7 +24,7 @@ html {
 }
 
 .tarjeta {
-    background-color: #5FA8D3;
+    /* background-color: #5FA8D3; */
     padding: 1em;
     border-radius: 1em;
 }
@@ -33,4 +33,12 @@ html {
     -webkit-mask-image: url(../../public/ABADlogo.svg);
     mask-repeat: no-repeat;
     mask-position: center;
+}
+
+th{
+    font-weight: 200;
+    text-align: left;
+}
+
+thead {
 }

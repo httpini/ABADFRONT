@@ -4,15 +4,15 @@ import Link from 'next/link'
 
 export default function Goleadores({ goleadores }) {
     return (
-        <div className='tarjeta shadow-md shadow-oscuro3'>
-            <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Goleadores/as</h1>
+        <div className='tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
+            <h1 className='font-bold text-xl border-b-2 border-oscuro1'>Goleadores/as</h1>
             {goleadores.length > 0 ? <table className='w-full'>
-                <thead className='bg-white'>
+                <thead className='font-thin bg-claro1 bg-opacity-70'>
                     <tr>
-                        <th>#</th>
+                        <th className='rounded-bl-md'>#</th>
                         <th>Equipo</th>
                         <th>Jugador/a</th>
-                        <th>Goles Realizados</th>
+                        <th className='rounded-br-md'>Goles Realizados</th>
 
                     </tr>
                 </thead>
