@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 const activeTopicStyle = 'underline font-bold'
-const topicStyle = ''
+const topicStyle = 'hover:underline'
 
 export default function LinksTorneos({ torneos, id }) {
     return (

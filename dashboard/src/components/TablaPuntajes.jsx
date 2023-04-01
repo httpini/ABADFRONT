@@ -4,8 +4,8 @@ import ColoresEquipo from './ColoresEquipo'
 
 export default function TablaPuntajes({ tabla }) {
     return (
-        <div className='bg-red-300'>
-            <h1>Tabla de Posiciones</h1>
+        <div className='tarjeta shadow-md shadow-oscuro3'>
+            <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Tabla de Posiciones</h1>
             <table className='w-full'>
                 <thead className='bg-white'>
                     <tr>

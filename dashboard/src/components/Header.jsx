@@ -23,13 +23,13 @@ export default function Header({ allTorneos }) {
 
 
     return (
-        <div className='flex w-full justify-around h-[75px] items-center bg-black text-white fixed z-50'>
+        <div className='flex w-full justify-around h-[75px] items-center bg-oscuro1 shadow-md shadow-oscuro1 text-[#fdf0d5]  fixed z-50'>
             <div className='md:flex hidden justify-around flex-grow'>
                 <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
                 {/* <LinkHeader texto='Copas' lista={copas} pagina='copa' /> */}
             </div>
             <Link href='/'>
-                <h1 className='flex-grow flex justify-center mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[40px]' src={ABADlogo}></Image></h1>
+                <h1 className='flex-grow flex justify-center mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[45px]' src={ABADlogo}></Image></h1>
             </Link>
 
             <div>

@@ -26,8 +26,8 @@ export default function Fechas({ partidos }) {
     }, [partidos])
 
     return (
-        <div className='bg-blue-500'>
-            <h1>Fechas y Partidos</h1>
+        <div className='tarjeta shadow-md shadow-oscuro3'>
+            <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Fechas y Partidos</h1>
             <div className={`cursor-pointer flex flex-wrap gap-2 `}>
                 {Array(cantPartidos).fill(0).map((x, i) =>
                     <div key={i + 1} onClick={cambioFecha} className={`${i == fecha - 1 ? activeTopicStyle : ''}`}>{i + 1}</div>
@@ -50,15 +50,15 @@ export default function Fechas({ partidos }) {
                     <tbody>
                         {
                             partidosFecha.map((e, i) => (
-                                <tr key={i}>
-                                    <th>{e.estado}</th>
-                                    <th>{e.local_name}</th>
-                                    <th>{e.g_local}</th>
-                                    <th>{e.g_visitante}</th>
-                                    <th>{e.visitante_name}</th>
-                                    <th>{e.dia ? e.dia : 'a confirmar'}</th>
-                                    <th>{e.hora ? e.hora : 'a confirmar'}</th>
-                                    <th><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name : 'a confirmar'}</Link></th>
+                                <tr className='font-thin' key={i}>
+                                    <th className='font-thin'>{e.estado}</th>
+                                    <th className='font-thin'>{e.local_name}</th>
+                                    <th className='font-thin'>{e.g_local}</th>
+                                    <th className='font-thin'>{e.g_visitante}</th>
+                                    <th className='font-thin'>{e.visitante_name}</th>
+                                    <th className='font-thin'>{e.dia ? e.dia : 'a confirmar'}</th>
+                                    <th className='font-thin'>{e.hora ? e.hora : 'a confirmar'}</th>
+                                    <th className='font-thin'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name : 'a confirmar'}</Link></th>
                                 </tr>
                             ))
                         }

@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 export default function FairPlay({fair_play}) {
   return (
-    <div className='bg-orange-300'>
-            <h1>Fair Play</h1>
+    <div className='tarjeta shadow-md shadow-oscuro3'>
+            <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Fair Play</h1>
             <table className='w-full'>
                 <thead className='bg-white'>
                     <tr>

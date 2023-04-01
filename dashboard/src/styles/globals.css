@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    background-color: gray;
+    background-color: #CAE9FF;
 }
 
 section {
@@ -23,21 +23,11 @@ html {
     overflow-y: overlay;
 }
 
-/* .mask1 {
-    -webkit-mask-image: url(../../public/ABADlogo.svg);
-    mask-image: url(../../public/ABADlogo.svg);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    mask-size: 87%;
+.tarjeta {
+    background-color: #5FA8D3;
+    padding: 1em;
+    border-radius: 1em;
 }
-
-.container div {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    -webkit-mask-image: url(#mask);
-    mask-image: url(#mask);
-} */
 
 .mask {
     -webkit-mask-image: url(../../public/ABADlogo.svg);

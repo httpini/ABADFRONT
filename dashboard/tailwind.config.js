@@ -10,6 +10,15 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      'oscuro1' : '#1B4965',
+      'oscuro2' : '#62B6CB',
+      'oscuro3' : '#5FA8D3',
+      'claro1' : '#CAE9FF',
+      'amarillo' : '#fdf0d5',
+      'logoClaro' : '#60C2E5',
+      'logoOscuro' : '#0F639F',
+    },
     fontFamily: {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
