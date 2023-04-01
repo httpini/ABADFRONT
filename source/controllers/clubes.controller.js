@@ -16,7 +16,13 @@ module.exports = {
             res.redirect("/clubes/")
         }
         let equipos = await equipo.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
             where:{
                 club_id:req.params.id
             },
@@ -44,7 +50,14 @@ module.exports = {
     },
     list: async (req,res)=>{
         let clubes = await club.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["name", "categoria_id"]
+                        
+                }
+            ],
             order:[
                 ["name", "ASC"]
             ]

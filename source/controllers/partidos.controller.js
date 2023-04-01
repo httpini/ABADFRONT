@@ -1,4 +1,4 @@
-const {partido, terna, torneo, fecha, equipo_torneo, estado_partido, predio}= require("../database/models/index")
+const {partido, terna, torneo, fecha, equipo_torneo, estado_partido, predio, equipo}= require("../database/models/index")
 const{actualizar,restablecer}= require("../modules/actualizarTabla")
 
 /*al momento de editar el partido, debemos restar el partido ganado/empatado/perdido de la tabla, restar los goles en contra y los goles a favor, y rehacer el calculo de partidos jugados, puntos y diferencia de gol.
@@ -9,7 +9,7 @@ Lo mismo cuando eliminamos un partido deberiamos restar todo lo que mencione ant
 module.exports= {
     select: async (req,res)=>{
         let torneos = await torneo.findAll({
-        include:{all:true}
+    
         })
 
         return res.render("partidos/select",{
@@ -19,7 +19,38 @@ module.exports= {
     },
     porTorneo: async (req,res)=>{
         let partidos = await partido.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model: fecha,
+                    as:"fecha",
+                    atributes:["name"]
+                },
+                {
+                    model:terna,
+                    as:"terna",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo_torneo,
+                    as:"local",
+                    atributes:["team_name"]
+                },
+                {
+                    model:equipo_torneo,
+                    as:"visitante",
+                    atributes:["team_name"]                
+                },
+                {
+                    model:predio,
+                    as:"predio",
+                    atributes:["name"]
+                },
+                {
+                    model:estado_partido,
+                    as:"estado",
+                    atributes:["name"]
+                }
+            ],
             order:[
                 ["dia", "DESC"]
             ]
@@ -28,8 +59,6 @@ module.exports= {
         partidos = partidos.filter(partido=>{
            return partido.fecha.torneo_id == req.params.torneo_id
         })
-       
-        
 
         if(req.query && req.query.fecha_id){
             partidos = partidos.filter(p=> {
@@ -39,7 +68,6 @@ module.exports= {
         if(req.query && req.query.equipo){
 
             let elEquipo= await equipo_torneo.findOne({
-                include:{all:true},
                 where:{
                     equipo_id: req.query.equipo,
                     torneo_id:req.params.torneo_id
@@ -64,21 +92,18 @@ module.exports= {
               return p.predio_id == req.query.predio
             })
         }
-        let estados = await estado_partido.findAll({include:{all:true}})
+        let estados = await estado_partido.findAll()
         let ternas = await terna.findAll({
-            include:{all:true},
             order:[
                 ["name", "ASC"]
             ]
         })
         let predios = await predio.findAll({
-            include:{all:true},
             order:[
                 ["name", "ASC"]
             ]
         })
         let fechas = await fecha.findAll({
-            include:{all:true},
             where:{
                 torneo_id:req.params.torneo_id
             },
@@ -88,7 +113,13 @@ module.exports= {
         })
 
         let torneos = await torneo.findByPk(req.params.torneo_id,{
-            include:{all:true}
+            include:[
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["name","id"]
+                }
+            ]
         })
         
         return res.render("partidos/list",{
@@ -104,7 +135,6 @@ module.exports= {
     partido: async (req, res)=>{
         let partidos = await partido.findAll({include:{all:true}})
         return res.send(partidos)
-
     },
     edit: async(req,res)=>{
         let elPartido = await partido.findByPk(req.params.id,{include:{all:true}})

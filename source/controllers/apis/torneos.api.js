@@ -1,4 +1,4 @@
-const { equipo, torneo, equipo_torneo, fair_play, goleador, sancionado, partido, categoria, fecha } = require("../../database/models/index")
+const { equipo, torneo, equipo_torneo, fair_play, goleador, sancionado, partido, categoria, fecha, club } = require("../../database/models/index")
 const { Op } = require('sequelize');
 
 module.exports = {
@@ -7,7 +7,6 @@ module.exports = {
     allTorneos: async (req, res) => {
         try {
             let torneos = await torneo.findAll({
-                // include:{all:true},
                 order: [
                     ["temporada", "DESC"],
                     ["id", "DESC"]
@@ -45,19 +44,29 @@ module.exports = {
             })
 
             let elTorneo = {
-                //COLOCAR UN NAME O ALGO PARA QUE FIGURE EN LA RUTA PARA QUE QUEDE MEJOR
                 id: datosElTorneo.id,
                 name: `${datosElTorneo.name} ${datosElTorneo.temporada}`,
                 name_url: datosElTorneo.name_url,
                 reglamento: "reglamento"
             }
 
-
             async function funcionTabla() {
                 let result = await equipo_torneo.findAll({
                     where: {
                         torneo_id: elTorneo.id
                     },
+                    include:[
+                        {
+                            model:equipo,
+                            as:"equipo",
+                            atributes:["name_url"]
+                        },
+                        {
+                            model:club,
+                            as:"club",
+                            atributes:["name_url"]
+                        }
+                    ],
                     order: [
                         ["pts", "DESC"],
                         ["g_dif", "DESC"],
@@ -69,6 +78,9 @@ module.exports = {
                     let data = {
                         //YA VA CON LA POSICION DE LA TABLA PUESTA
                         pos: index + 1,
+                        torneo_url:datosElTorneo.name_url,
+                        club_url:e.club.name_url,
+                        equipo_url:e.equipo.name_url,
                         equipo: e.team_name,
                         pts: e.pts,
                         p_jugados: e.p_jugados,
@@ -80,13 +92,13 @@ module.exports = {
                         g_dif: e.g_dif,
                         colores: []
                     }
-                    if (e.color_1 != null) {
+                    if (e.color_1 != null && e.color_1 != "") {
                         data.colores.push(e.color_1)
                     }
-                    if (e.color_2 != null) {
+                    if (e.color_2 != null && e.color_2 != "") {
                         data.colores.push(e.color_2)
                     }
-                    if (e.color_3 != null) {
+                    if (e.color_3 != null && e.color_3 != "") {
                         data.colores.push(e.color_3)
                     }
                     return data
@@ -124,13 +136,13 @@ module.exports = {
                         amonestaciones: f.amonestaciones,
                         motivos_amonestaciones: f.motivos_amon
                     }
-                    if (f.equipo.color_1 != null) {
+                    if (f.equipo.color_1 != null && f.equipo.color_1 != "") {
                         data.colores_equipo.push(f.equipo.color_1)
                     }
-                    if (f.equipo.color_2 != null) {
+                    if (f.equipo.color_2 != null && f.equipo.color_2 != "") {
                         data.colores_equipo.push(f.equipo.color_2)
                     }
-                    if (f.equipo.color_3 != null) {
+                    if (f.equipo.color_3 != null && f.equipo.color_3 != "") {
                         data.colores_equipo.push(f.equipo.color_3)
                     }
                     return data;
@@ -167,13 +179,13 @@ module.exports = {
                         goles: g.goles
 
                     }
-                    if (g.equipo.color_1 != null) {
+                    if (g.equipo.color_1 != null && g.equipo.color_1 != "") {
                         data.colores_equipo.push(g.equipo.color_1)
                     }
-                    if (g.equipo.color_2 != null) {
+                    if (g.equipo.color_2 != null && g.equipo.color_2 != "") {
                         data.colores_equipo.push(g.equipo.color_2)
                     }
-                    if (g.equipo.color_3 != null) {
+                    if (g.equipo.color_3 != null && g.equipo.color_3 != "") {
                         data.colores_equipo.push(g.equipo.color_3)
                     }
                     return data
@@ -204,7 +216,7 @@ module.exports = {
                         ["f_sancion", "ASC"]
                     ]
                 })
-                console.log(result);
+                
                 let mappedResult = result.map(sanc => {
                     let data = {
                         equipo: sanc.equipo.team_name,
@@ -215,18 +227,17 @@ module.exports = {
                         vuelta: sanc.f_vuelta,
                         aclaraciones: sanc.aclaraciones ? sanc.aclaraciones : null
                     }
-                    if (sanc.equipo.color_1 != null) {
+                    if (sanc.equipo.color_1 != null && sanc.equipo.color_1 != "") {
                         data.colores_equipo.push(sanc.equipo.color_1)
                     }
-                    if (sanc.equipo.color_2 != null) {
+                    if (sanc.equipo.color_2 != null  && sanc.equipo.color_2 != "") {
                         data.colores_equipo.push(sanc.equipo.color_2)
                     }
-                    if (sanc.equipo.color_3 != null) {
+                    if (sanc.equipo.color_3 != null  && sanc.equipo.color_3 != "") {
                         data.colores_equipo.push(sanc.equipo.color_3)
                     }
                     return data
                 })
-                console.log(mappedResult);
                 return mappedResult
             }
 
@@ -259,8 +270,6 @@ module.exports = {
                 }
             })
 
-            
-            // let elEquipo = await equipo.findByPk(req.params.equipo_id)
             let elEquipo = await equipo.findOne({
                 where: {
                     name_url: req.params.equipo_url
@@ -298,11 +307,9 @@ module.exports = {
                     equipo_id: elEquipo.id
                 }
             })
-            // console.log('holaaa' , datosEquipo);
 
             //DATOS DEL EQUIPO
             let equipoDatos = {
-                // id: datosEquipo.id,
                 name: datosEquipo.team_name,
                 colores: [],
                 predio_name: datosEquipo.predio ? datosEquipo.predio.name : null,
@@ -310,13 +317,13 @@ module.exports = {
                 predio_url: datosEquipo.predio ? datosEquipo.predio.map : null,
                 horario_local: datosEquipo.horario_local ? datosEquipo.horario_local : null,
             }
-            if (datosEquipo.color_1 != null) {
+            if (datosEquipo.color_1 != null && datosEquipo.color_1 != "") {
                 equipoDatos.colores.push(datosEquipo.color_1)
             }
-            if (datosEquipo.color_2 != null) {
+            if (datosEquipo.color_2 != null && datosEquipo.color_2 != "") {
                 equipoDatos.colores.push(datosEquipo.color_2)
             }
-            if (datosEquipo.color_3 != null) {
+            if (datosEquipo.color_3 != null && datosEquipo.color_3 != "") {
                 equipoDatos.colores.push(datosEquipo.color_3)
             }
 
@@ -443,8 +450,11 @@ module.exports = {
             let acumulador = 0
 
             let partidosDatos = partidos.map(p => {
+                let fechaOriginal = p.dia
+                let elementosDia = fechaOriginal.split("-")
+                let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                 let data = {
-                    dia: p.dia,
+                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
                     fecha: p.fecha.nro,
                     localVisitante: p.local_id == datosEquipo.id ? "L" : "V",
                     rival: p.local_id == datosEquipo.id ? p.visitante.team_name : p.local.team_name,
@@ -452,7 +462,6 @@ module.exports = {
                         equipo: p.local_id == datosEquipo.id ? p.g_local : p.g_visitante,
                         rival: p.local_id == datosEquipo.id ? p.g_visitante : p.g_local
                     }
-                    // resultado: p.local_id == datosEquipo.id ? `${p.g_local} - ${p.g_visitante}` : `${p.g_visitante} - ${p.g_local}`
                 }
                 if (data.goles.equipo > data.goles.rival) acumulador += 3
                 if (data.goles.equipo == data.goles.rival) acumulador += 1

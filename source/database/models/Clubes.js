@@ -28,6 +28,10 @@ module.exports=(sequelize,DataTypes)=>{
             as:"equipos",
             foreignKey:"club_id",
         })
+        Club.hasMany(model.equipo_torneo,{
+            as:"equipos_torneo",
+            foreignKey:"club_id",
+        })
  
     }
 

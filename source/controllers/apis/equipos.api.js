@@ -72,13 +72,13 @@ module.exports={
                     }),
                     colores:[]
                 }
-                if(e.color_1 != null){
+                if(e.color_1 != null && e.color_1 != ""){
                     data.colores.push(e.color_1)
                 }
-                if(e.color_2 != null){
+                if(e.color_2 != null && e.color_2 != ""){
                     data.colores.push(e.color_2)
                 }
-                if(e.color_3 != null){
+                if(e.color_3 != null && e.color_3 != ""){
                     data.colores.push(e.color_3)
                 }
                 return data
