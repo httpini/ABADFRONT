@@ -38,21 +38,6 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
 
 export const getServerSideProps = async ({ params: { id } }) => {
   try {
-    // console.time('separado')
-    // console.time('torneos')
-    // let torneos2 = await axios.post('http://localhost:3500/api/torneo-equipos', { torneo: id })
-    // console.timeEnd('torneos')
-    // // let torneoTable = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id  SE PUEDE BORRAR?})
-    // console.time('partidos')
-    // let partidos2 = await axios.post('http://localhost:3500/api/partidos', { torneo: id })
-    // console.timeEnd('partidos')
-    // console.time('allTorneos')
-    // let allTorneos2 = await axios.get('http://localhost:3500/api/torneos')
-    // console.timeEnd('allTorneos')
-    // console.time('torneo')
-    // let torneo2 = await axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
-    // console.timeEnd('torneo')
-    // console.timeEnd('separado')
     console.time('apis')
 
     let results = await Promise.all([

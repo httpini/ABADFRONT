@@ -1,5 +1,5 @@
 
-const {partido, torneo, fecha, predio, equipo_torneo, estado_partido}=require("../../database/models/index")
+const { partido, torneo, fecha, predio, equipo_torneo, estado_partido } = require("../../database/models/index")
 
 
 const { Op } = require('sequelize');
@@ -12,34 +12,34 @@ module.exports = {
 
                 include: [
                     {
-                        model:fecha,
-                        as:"fecha",
-                        atributes:["name"]
+                        model: fecha,
+                        as: "fecha",
+                        atributes: ["name"]
                     },
                     {
-                        model:estado_partido,
-                        as:"estado",
-                        atributes:["name"]
+                        model: estado_partido,
+                        as: "estado",
+                        atributes: ["name"]
                     },
                     {
-                        model:predio,
-                        as:"predio",
-                        atributes:["name", "map"]
+                        model: predio,
+                        as: "predio",
+                        atributes: ["name", "map"]
                     },
                     {
-                        model:equipo_torneo,
-                        as:"local",
-                        atributes:["team_name", "color_1", "color_2", "color_3"]
+                        model: equipo_torneo,
+                        as: "local",
+                        atributes: ["team_name", "color_1", "color_2", "color_3"]
                     },
                     {
-                        model:equipo_torneo,
-                        as:"visitante",
-                        atributes:["team_name", "color_1", "color_2", "color_3"]
+                        model: equipo_torneo,
+                        as: "visitante",
+                        atributes: ["team_name", "color_1", "color_2", "color_3"]
                     },
                     {
-                        model:torneo,
-                        as:"torneo",
-                        atributes:["name", "temporada"]
+                        model: torneo,
+                        as: "torneo",
+                        atributes: ["name", "temporada"]
                     }
                 ],
 
@@ -64,17 +64,17 @@ module.exports = {
 
                 let data = {
 
-                    hora:p.hora,
-                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
-                    fecha:p.fecha.name,              
-                    local_name:p.local.team_name,
-                    local_colores:[],
+                    hora: p.hora,
+                    dia: p.dia == "0000-00-00" || p.dia == null ? "A Confirmar" : dateFormated,
+                    fecha: p.fecha.name,
+                    local_name: p.local.team_name,
+                    local_colores: [],
                     visitante_name: p.visitante.team_name,
-                    visitante_colores:[],
-                    predio_name:p.predio_id ==null? null: p.predio.name,
-                    predio_url:p.predio_id ==null? null : p.predio.map,
-                    estado:p.estado.name,
-                    torneo_name: `${p.torneo.name} ${p.torneo.temporada}`                
+                    visitante_colores: [],
+                    predio_name: p.predio_id == null ? null : p.predio.name,
+                    predio_url: p.predio_id == null ? null : p.predio.map,
+                    estado: p.estado.name,
+                    torneo_name: `${p.torneo.name} ${p.torneo.temporada}`
 
                 }
                 if (p.estado_id == 5 || p.estado_id == 7) {
@@ -86,16 +86,16 @@ module.exports = {
                 if (p.local.color_2 != null && p.local.color_2 != "") {
                     data.local_colores.push(p.local.color_2)
                 }
-                if (p.local.color_3 != null && p.local.color_3!= "") {
+                if (p.local.color_3 != null && p.local.color_3 != "") {
                     data.local_colores.push(p.local.color_3)
                 }
                 if (p.visitante.color_1 != null && p.visitante.color_1 != "") {
                     data.visitante_colores.push(p.visitante.color_1)
                 }
-                if (p.visitante.color_2 != null && p.visitante.color_2 !="") {
+                if (p.visitante.color_2 != null && p.visitante.color_2 != "") {
                     data.visitante_colores.push(p.visitante.color_2)
                 }
-                if (p.visitante.color_3 != null && p.visitante.color_3 !="") {
+                if (p.visitante.color_3 != null && p.visitante.color_3 != "") {
                     data.visitante_colores.push(p.visitante.color_3)
                 }
 
@@ -104,7 +104,7 @@ module.exports = {
             })
 
 
-            return res.send({count: count, partidos: partidos}).status(200)
+            return res.send({ count: count, partidos: partidos }).status(200)
 
 
 
@@ -118,34 +118,34 @@ module.exports = {
 
                 include: [
                     {
-                        model:fecha,
-                        as:"fecha",
-                        atributes:["name"]
+                        model: fecha,
+                        as: "fecha",
+                        atributes: ["name"]
                     },
                     {
-                        model:estado_partido,
-                        as:"estado",
-                        atributes:["name"]
+                        model: estado_partido,
+                        as: "estado",
+                        atributes: ["name"]
                     },
                     {
-                        model:predio,
-                        as:"predio",
-                        atributes:["name", "map"]
+                        model: predio,
+                        as: "predio",
+                        atributes: ["name", "map"]
                     },
                     {
-                        model:equipo_torneo,
-                        as:"local",
-                        atributes:["team_name", "color_1", "color_2", "color_3"]
+                        model: equipo_torneo,
+                        as: "local",
+                        atributes: ["team_name", "color_1", "color_2", "color_3"]
                     },
                     {
-                        model:equipo_torneo,
-                        as:"visitante",
-                        atributes:["team_name", "color_1", "color_2", "color_3"]
+                        model: equipo_torneo,
+                        as: "visitante",
+                        atributes: ["team_name", "color_1", "color_2", "color_3"]
                     },
                     {
-                        model:torneo,
-                        as:"torneo",
-                        atributes:["name", "temporada"]
+                        model: torneo,
+                        as: "torneo",
+                        atributes: ["name", "temporada"]
                     }
                 ],
 
@@ -168,14 +168,13 @@ module.exports = {
                 let elementosDia = fechaOriginal.split("-")
                 let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                 let data = {
-
-                    hora:p.hora,
-                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
-                    fecha:p.fecha.name,
-                    torneo_name: `${p.torneo.name} ${p.torneo.temporada}`, 
-                    local_name:p.local.team_name,
-                    local_colores:[],
-                    local_goles:p.g_local,
+                    hora: p.hora,
+                    dia: p.dia == "0000-00-00" || p.dia == null ? "A Confirmar" : dateFormated,
+                    fecha: p.fecha.name,
+                    torneo_name: `${p.torneo.name} ${p.torneo.temporada}`,
+                    local_name: p.local.team_name,
+                    local_colores: [],
+                    local_goles: p.g_local,
 
                     visitante_name: p.visitante.team_name,
                     visitante_colores: [],
@@ -222,21 +221,21 @@ module.exports = {
         try {
             let elTorneo = await torneo.findOne({
 
-                where:{
-                    name_url:req.params.torneo_id
+                where: {
+                    name_url: req.params.torneo_id
 
                 }
             })
-            async function functionFechas(){
+            async function functionFechas() {
                 let result = await fecha.findAll({
-                    where:{
-                        torneo_id:elTorneo.id
+                    where: {
+                        torneo_id: elTorneo.id
                     },
-                    order:[
-                        ["nro","ASC"]
+                    order: [
+                        ["nro", "ASC"]
                     ]
                 })
-                let mappedResult=result.map(f=>{
+                let mappedResult = result.map(f => {
                     let data = {
                         numero: f.nro,
                         name: f.name
@@ -245,78 +244,78 @@ module.exports = {
                 })
                 return mappedResult
             }
-            async function functionPartidos(){
+            async function functionPartidos() {
                 let result = await partido.findAll({
-                    include:[
+                    include: [
                         {
-                            model:fecha,
-                            as:"fecha",
-                            atributes:["nro"]
+                            model: fecha,
+                            as: "fecha",
+                            atributes: ["nro"]
                         },
                         {
-                            model:estado_partido,
-                            as:"estado",
-                            atributes:["name"]
+                            model: estado_partido,
+                            as: "estado",
+                            atributes: ["name"]
                         },
                         {
-                            model:predio,
-                            as:"predio",
-                            atributes:["name", "map"]
+                            model: predio,
+                            as: "predio",
+                            atributes: ["name", "map"]
                         },
                         {
-                            model:equipo_torneo,
-                            as:"local",
-                            atributes:["team_name", "color_1", "color_2", "color_3"]
+                            model: equipo_torneo,
+                            as: "local",
+                            atributes: ["team_name", "color_1", "color_2", "color_3"]
                         },
                         {
-                            model:equipo_torneo,
-                            as:"visitante",
-                            atributes:["team_name", "color_1", "color_2", "color_3"]
+                            model: equipo_torneo,
+                            as: "visitante",
+                            atributes: ["team_name", "color_1", "color_2", "color_3"]
                         }
                     ],
-                    where:{
+                    where: {
                         torneo_id: elTorneo.id
                     },
-                    order:[
-                        ["dia","ASC"],
+                    order: [
+                        ["dia", "ASC"],
                         ["hora", "ASC"]
                     ]
                 })
-                let mappedResult = result.map(p=>{ 
+                let mappedResult = result.map(p => {
                     let fechaOriginal = p.dia
                     let elementosDia = fechaOriginal.split("-")
                     let dateFormated = elementosDia[2] + "-" + elementosDia[1]
                     let data = {
-                        estado:p.estado.name,
-                        motivo_postergado:p.motivo_postergado,
-                        dia: p.dia == "0000-00-00" || p.dia == null? "A Conf..":dateFormated,
-                        hora:p.hora!= null && p.hora!= ""? p.hora.slice(0,-3):"A Conf..",
-                        local_name:p.local.team_name,
-                        local_colores:[],
-                        g_local:p.g_local,
-                        g_visitante:p.g_visitante,
-                        visitante_colores:[],
-                        visitante_name:p.visitante.team_name,
-                        predio_name:p.predio?p.predio.name:null,
-                        predio_url:p.predio?p.predio.map:null,
-                        fecha_numero:p.fecha.nro
+                        estado: p.estado.name,
+                        motivo_postergado: p.motivo_postergado,
+                        dia: p.dia == "0000-00-00" || p.dia == null ? "A Conf.." : dateFormated,
+                        hora: p.hora != null && p.hora != "" ? p.hora.slice(0, -3) : "A Conf..",
+                        local_name: p.local.team_name,
+                        local_colores: [],
+                        g_local: p.g_local,
+                        g_visitante: p.g_visitante,
+                        visitante_colores: [],
+                        visitante_name: p.visitante.team_name,
+                        predio_name: p.predio ? p.predio.name : null,
+                        predio_url: p.predio ? p.predio.map : null,
+                        fecha_numero: p.fecha.nro
                     }
-                    if(p.local.color_1 != null && p.local.color_1 != ""){
+                    if (p.local.color_1 != null && p.local.color_1 != "") {
                         data.local_colores.push(p.local.color_1)
                     }
-                    if(p.local.color_2 != null && p.local.color_2 != ""){
+                    if (p.local.color_2 != null && p.local.color_2 != "") {
                         data.local_colores.push(p.local.color_2)
                     }
-                    if(p.local.color_3 != null && p.local.color_3 != ""){
+                    if (p.local.color_3 != null && p.local.color_3 != "") {
                         data.local_colores.push(p.local.color_3)
                     }
-                    if(p.visitante.color_1 != null && p.visitante.color_1 != ""){
+                    if (p.visitante.color_1 != null && p.visitante.color_1 != "") {
                         data.visitante_colores.push(p.visitante.color_1)
                     }
-                    if(p.visitante.color_2 != null && p.visitante.color_2 != ""){
+                    if (p.visitante.color_2 != null && p.visitante.color_2 != "") {
                         data.visitante_colores.push(p.visitante.color_2)
                     }
-                    if(p.visitante.color_3 != null && p.visitante.color_3 != ""){
+                    if (p.visitante.color_3 != null && p.visitante.color_3 != "") {
                         data.visitante_colores.push(p.visitante.color_3)
                     }
                     return data
@@ -324,10 +323,10 @@ module.exports = {
                 return mappedResult
 
             }
-            let calls = await Promise.all([functionFechas(),functionPartidos()])
+            let calls = await Promise.all([functionFechas(), functionPartidos()])
 
-            return res.send({fechas:calls[0], partidos:calls[1]}).status(200)
-        }catch(error){
+            return res.send({ fechas: calls[0], partidos: calls[1] }).status(200)
+        } catch (error) {
 
             return res.status(505).json(error)
         }
