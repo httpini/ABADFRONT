@@ -4,17 +4,17 @@ import Link from 'next/link'
 
 export default function FairPlay({fair_play}) {
   return (
-    <div className='tarjeta shadow-md shadow-oscuro3'>
-            <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Fair Play</h1>
+    <div className='tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
+            <h1 className='font-bold text-xl border-b-2 border-oscuro1'>Fair Play</h1>
             <table className='w-full'>
-                <thead className='bg-white'>
+                <thead className='font-thin bg-claro1 bg-opacity-70'>
                     <tr>
-                        <th>#</th>
+                        <th className='rounded-bl-md'>#</th>
                         <th>Equipo</th>
                         <th>Puntos</th>
                         <th>Amarillas</th>
                         <th>Rojas</th>
-                        <th>Amonestaciones</th>
+                        <th className='rounded-br-md'>Amonestaciones</th>
                     </tr>
                 </thead>
                 <tbody>

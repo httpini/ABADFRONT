@@ -4,17 +4,17 @@ import Link from 'next/link'
 
 export default function Sanciones({ sanciones }) {
   return (
-    <div className='md:col-span-2 justify-self-center flex flex-wrap justify-center w-full md:w-[50%] tarjeta shadow-md shadow-oscuro3'>
+    <div className='md:col-span-2 justify-self-center flex flex-wrap justify-center w-full md:w-[50%] tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
       <div className='bg-yellow-300 w-full md:w-[400px]'>
-        <h1 className='text-center font-bold text-xl border-b-2 border-oscuro1'>Sanciones</h1>
+        <h1 className='md:text-center font-bold text-xl border-b-2 border-oscuro1'>Sanciones</h1>
         {sanciones.length > 0 ? <table className='w-full'>
-          <thead className='bg-white'>
+          <thead className='font-thin bg-claro1 bg-opacity-70'>
             <tr>
-              <th>Equipo</th>
+              <th className='rounded-bl-md'>Equipo</th>
               <th>Jugador/a</th>
               <th>Fecha de Sancion</th>
               <th>Pena Aplicada</th>
-              <th>Vuelve a Jugar</th>
+              <th className='rounded-br-md'>Vuelve a Jugar</th>
             </tr>
           </thead>
           <tbody>

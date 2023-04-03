@@ -12,7 +12,7 @@ import ABADlogo from '../../public/ABADlogo.svg'
 export default function Header({ allTorneos }) {
     const [toggleMenu, setToggleMenu] = useState(false)
     const [torn, setTorn] = useState([])
-    
+
     useEffect(() => {
         let fetch = async () => {
             let data = await axios.get('http://localhost:3500/api/torneos')
@@ -23,14 +23,13 @@ export default function Header({ allTorneos }) {
 
 
     return (
-        <div className='flex w-full justify-around h-[75px] items-center bg-oscuro1 shadow-md shadow-oscuro1 text-[#fdf0d5]  fixed z-50'>
+        <div className='flex w-full flex-row justify-center h-[75px] items-center bg-oscuro1 shadow-md shadow-oscuro1 text-[#fdf0d5]  fixed z-50'>
+            <Link href='/'>
+                <h1 className='mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[45px]' src={ABADlogo}></Image></h1>
+            </Link>
             <div className='md:flex hidden justify-around flex-grow'>
-                <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
                 {/* <LinkHeader texto='Copas' lista={copas} pagina='copa' /> */}
             </div>
-            <Link href='/'>
-                <h1 className='flex-grow flex justify-center mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[45px]' src={ABADlogo}></Image></h1>
-            </Link>
 
             <div>
                 {toggleMenu ?
@@ -51,6 +50,8 @@ export default function Header({ allTorneos }) {
             </div>
 
             <div className='md:flex hidden justify-around flex-grow'>
+                <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
+
                 <LinkHeader texto='Clubs' lista={[]} pagina='club' />
                 <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
             </div>
