@@ -16,6 +16,9 @@ module.exports ={
     },
     create: async(req,res)=>{
         let sancionados= await sancionado.findAll({
+            where:{
+                torneo_id:req.params.torneo_id
+            },
             order:[
                 ["f_sancion", "ASC"]
             ]

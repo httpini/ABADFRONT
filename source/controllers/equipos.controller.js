@@ -47,7 +47,25 @@ module.exports = {
         })
     },
     created:async(req,res)=> {
-        equipo.create(req.body)
+        req.body.name_url = "-"
+        await equipo.create(req.body)
+        let ultimoEquipo = await equipo.findAll({
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
+            order:[
+                ["id", "DESC"]
+            ],
+            limit:1
+        })
+        console.log(ultimoEquipo[0]);
+        await ultimoEquipo[0].update({
+            name_url:`${ultimoEquipo[0].name.toLowerCase().replace(/\s+/g, '_')}_${ultimoEquipo[0].categoria.name.toLowerCase().charAt(0)}`
+        })
 
         return res.redirect("/equipos/")
 
