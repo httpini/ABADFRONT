@@ -64,7 +64,7 @@ module.exports = {
 
                 let data = {
 
-                    hora: p.hora,
+                    hora: p.hora!=null && p.hora != "00:00:00"?p.hora.slice(0,-3):null,
                     dia: p.dia == "0000-00-00" || p.dia == null ? "A Confirmar" : dateFormated,
                     fecha: p.fecha.name,
                     local_name: p.local.team_name,
@@ -168,7 +168,7 @@ module.exports = {
                 let elementosDia = fechaOriginal.split("-")
                 let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                 let data = {
-                    hora: p.hora,
+                    hora: p.hora!=null && p.hora != "00:00:00"?p.hora.slice(0,-3):null,
                     dia: p.dia == "0000-00-00" || p.dia == null ? "A Confirmar" : dateFormated,
                     fecha: p.fecha.name,
                     torneo_name: `${p.torneo.name} ${p.torneo.temporada}`,
