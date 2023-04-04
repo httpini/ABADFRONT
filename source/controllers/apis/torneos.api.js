@@ -17,7 +17,8 @@ module.exports = {
                 let data = {
                     id: t.id,
                     name: `${t.name} ${t.temporada}`,
-                    name_url: t.name_url
+                    name_url: t.name_url,
+                    reglamento:t.reglamento_path!= null?`http://localhost:8020/assets/reglamentos-torneos/${t.reglamento_path}`:null
                 }
                 return data
             })

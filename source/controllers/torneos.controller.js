@@ -252,9 +252,7 @@ module.exports={
         return res.redirect(`/torneos/${req.params.id}`)
     },
     destroid: async(req, res)=>{
-        let torneos = await torneo.findByPk(req.params.id,{
-            include:{all:true}
-        })
+        let torneos = await torneo.findByPk(req.params.id)
         if(!torneos){
             return res.redirect("/torneos")
         }
@@ -299,7 +297,6 @@ module.exports={
             res.redirect("/torneos")
         }
         let subcategorias = await subcategoria.findAll({
-            include:{all:true},
             where:{
                 categoria_id: torneos.categoria_id
             },
@@ -317,7 +314,6 @@ module.exports={
     },
     edited:async(req, res)=>{
         let torneos = await torneo.findByPk(req.params.id,{
-            include:{all:true}
         })
         if(!torneos){
             return res.redirect("/torneos")
@@ -329,8 +325,11 @@ module.exports={
             subcategoria_id:req.body.subcategoria_id?req.body.subcategoria_id:null,
             name_url:nameURL(req.body.name,req.body.temporada)
         })
-        if(req.files.length > 0){
+        if(req.files.length > 0 && torneos.reglamento_path){
             unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",torneos.reglamento_path))
+        }
+        if(req.files.length > 0 ){
+            
             await torneos.update({
              reglamento_path: req.files[0].filename
  
