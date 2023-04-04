@@ -7,7 +7,7 @@ const topicStyle = 'text-center'
 
 export default function LinksTorneoEquipo({ query, torneo }) {
     let router = useRouter();
-    console.log('query', query.id, query.equipo, torneo.name_url);
+    // console.log('query', query.id, query.equipo, torneo.name_url);
     return (
         <Link className={torneo.name_url == router.query.torneo ? activeTopicStyle : topicStyle} href={{ pathname: `/club/${query.id}`, query: { equipo: query.equipo, torneo: torneo.name_url } }}>{torneo.name}</Link>
     )

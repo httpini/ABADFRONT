@@ -5,11 +5,11 @@ import Link from 'next/link'
 export default function Fechas({ partidos }) {
     return (
         <div className='tarjeta bg-oscuro3 shadow-oscuro3 shadow-md w-full'>
-            <h1>Fechas</h1>
+            <h2 className='font-bold underline'>Fechas</h2>
             <table className='w-full'>
-                <thead className='bg-white'>
+                <thead className='bg-white ba'>
                     <tr>
-                        <th>Fecha</th>
+                        <th>#</th>
                         <th>Día</th>
                         <th>L/V</th>
                         <th>Resultado</th>

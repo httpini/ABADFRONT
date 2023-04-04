@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import LinksEquipos from '@/components/LinksEquipos'
 import LinksTorneoEquipo from '@/components/LinksTorneoEquipo'
 import { redirect } from 'next/navigation';
+import ColoresEquipo from '@/components/ColoresEquipo'
 
 
 export default function ClubId({ id, club, equipos, torneos, equipo }) {
@@ -18,7 +19,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
   const [equ, setEqu] = useState({})
   const [torn, setTorn] = useState({})
   let router = useRouter();
-  console.log(router.pathname);
+  console.log(equipo.equipo.colores);
 
   useEffect(() => {
     if (router.query.equipo) setEqu(equipos.find(e => e.name_url === router.query.equipo));
@@ -29,13 +30,14 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
   return (
     <div>
       <Header />
+      {/* <ColoresEquipo colores={equipo.equipo.colores} width={100} height={100}/> */}
       <section className='w-full'>
         {/* <LinksTorneos torneos={torneos} id={id} /> */}
         <h2 className='text-2xl text-center mt-5'>Equipos</h2>
         <div className='flex flex-wrap w-full justify-around'>
           {
             equipos && equipos.map(e => (
-              <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo} />
+              <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo}/>
             ))
           }
         </div>

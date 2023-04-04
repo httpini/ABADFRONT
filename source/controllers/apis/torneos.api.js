@@ -423,7 +423,6 @@ module.exports = {
                     equipo_id: elEquipo.id
                 }
             })
-            console.log('dataa', fp);
             let fpDatos = {
                 posicion: laPosFP,
                 puntos: fp.puntos,
