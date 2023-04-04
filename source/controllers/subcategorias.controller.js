@@ -1,7 +1,45 @@
-const {categoria, subcategoria}= require("../database/models/index")
+const {categoria, subcategoria, equipo}= require("../database/models/index")
+const {validationResult} = require('express-validator')
+
 
 module.exports = {
     created: async (req,res)=>{
+        let listaCategorias = await categoria.findAll({
+            include:[
+                {
+                    model: equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let listaSub = await subcategoria.findAll({
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
+            order:[
+                ["categoria_id", "ASC"],
+                ["name", "ASC"]
+            ]
+        })
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render ("categorias/create",{
+                title: "Categorias",
+                categorias: listaCategorias,
+                subcategorias:  listaSub,
+                oldDataSub: req.body,
+                errorsSub:validaciones.mapped()
+          })
+        }
         await subcategoria.create(req.body)
         return res.redirect("/categorias/")
 
