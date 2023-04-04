@@ -50,7 +50,7 @@ module.exports = {
                 oldData: req.body,
                 errors:validaciones.mapped()
           })
-      }
+        }
         await predio.create(req.body)
         return res.redirect("/predios/")
     },
