@@ -9,7 +9,10 @@
             <h3> Editar Categoria <%= categoria.name %> </h3>
             <label for="name">Nombre de la categoria</label>
             <input type="text" name="name" id="name"
-            value="<%= categoria.name%>">
+            value="<%= locals.oldData ? oldData.name: categoria.name %>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>  
 
             <label for="description">Descripcion (edad maxima, etc)</label>
             <textarea name="description" id="description" ><%= categoria.description %> </textarea>
