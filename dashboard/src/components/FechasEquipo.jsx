@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Fechas({ partidos }) {
     return (
-        <div className='bg-blue-500 w-full'>
+        <div className='tarjeta bg-oscuro3 shadow-oscuro3 shadow-md w-full'>
             <h1>Fechas</h1>
             <table className='w-full'>
                 <thead className='bg-white'>

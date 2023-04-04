@@ -3,39 +3,39 @@ import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default function InformacionEquipo({ nombreEquipo, nombreTorneo, equipo, torneo, fairPlay, goleadores, tabla, sancionados }) {
+export default function InformacionEquipo({ nombreEquipo, nombreTorneo, fairPlay, goleadores, tabla, sancionados, torneo }) {
     const [visible, setVisible] = useState(false)
+    console.log('fiar', fairPlay);
     return (
-        <div className='bg-blue-500 p-5 w-[100%]'>
-            <h1 className='underline'>{nombreEquipo}</h1>
+        <div className='tarjeta bg-oscuro3 shadow-md shadow-oscuro3 p-5 w-[100%]'>
+            <h1 className='underline font-bold'>{nombreEquipo}</h1>
             <div>
-                <h2>Torneo: {nombreTorneo}</h2>
-                <h2>Datos de tabla</h2>
+                <h2 className=''>Torneo: {nombreTorneo}</h2>
+                <h2 className='border-b-2'>Datos de tabla</h2>
                 <ul className='ml-10'>
-                    <li>Posición: {tabla.posicion}</li>
-                    <li>Puntos: {tabla.puntos}</li>
-                    <li>Partidos jugados: {tabla.partidosJugados}</li>
-                    <li>Partidos ganados: {tabla.partidosGanados}</li>
-                    <li>Partidos empatados: {tabla.partidosEmpatados}</li>
-                    <li>Partidos perdidos: {tabla.partidosPerdidos}</li>
-                    <li>Goles a favor: {tabla.golesFavor}</li>
-                    <li>Goles en contra: {tabla.golesContra}</li>
-                    <li>Diferencia de gol: {tabla.diferenciaGol}</li>
+                    <li className=''>Posición: <h3 className='inline font-bold'>{tabla.posicion}</h3></li>
+                    <li className=''>Puntos: <h3 className='inline font-bold'>{tabla.puntos}</h3></li>
+                    <li className=''>Partidos jugados: <h3 className='inline font-bold'>{tabla.partidosJugados}</h3></li>
+                    <li className=''>Partidos ganados: <h3 className='inline font-bold'>{tabla.partidosGanados}</h3></li>
+                    <li className=''>Partidos empatados: <h3 className='inline font-bold'>{tabla.partidosEmpatados}</h3></li>
+                    <li className=''>Partidos perdidos: <h3 className='inline font-bold'>{tabla.partidosPerdidos}</h3></li>
+                    <li className=''>Goles a favor: <h3 className='inline font-bold'>{tabla.golesFavor}</h3></li>
+                    <li className=''>Goles en contra: <h3 className='inline font-bold'>{tabla.golesContra}</h3></li>
+                    <li className=''>Diferencia de gol: <h3 className='inline font-bold'>{tabla.diferenciaGol}</h3></li>
                 </ul>
-                <h2>Fair play</h2>
+                <h2 className='border-b-2'>Fair play</h2>
                 <ul className='ml-10'>
-                    <li>Posición fair play: {fairPlay.posicion}</li>
-                    <li>Puntos: {fairPlay.puntos}</li>
-                    <li>Amarillas: {fairPlay.tarjetasAmarillas}</li>
-                    <li>Rojas: {fairPlay.tarjetasRojas}</li>
-                    <li>Rojas: {fairPlay.tarjetasRojas}</li>
-                    <li>Amonestaciones: {fairPlay.amonestaciones}</li>
+                    <li className=''>Posición fair play: <h3 className='inline font-bold'>{fairPlay.posicion}</h3></li>
+                    <li>Puntos: <h3 className='inline font-bold'>{fairPlay.puntos}</h3></li>
+                    <li>Amarillas: <h3 className='inline font-bold'>{fairPlay.tarjetasAmarillas}</h3></li>
+                    <li>Rojas: <h3 className='inline font-bold'>{fairPlay.tarjetasRojas}</h3></li>
+                    <li>Amonestaciones: <h3 className='inline font-bold'>{fairPlay.amonestaciones}</h3></li>
                 </ul>
-                <h2>Goleadores</h2>
+                <h2 className='border-b-2'>Goleadores</h2>
                 <ul className='ml-10'>
                     {goleadores.map(g => <li>{g.name}: {g.goles} goles</li>)}
                 </ul>
-                <h2>Sanciones</h2>
+                <h2 className='border-b-2'>Sanciones</h2>
                 <ul className='ml-10'>
                     {sancionados.map(s =>
                         <li>
