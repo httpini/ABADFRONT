@@ -9,7 +9,10 @@
             <h3>Editar Equipo <%= equipo.name %> </h3>
             <label for="name">Nombre del Equipo</label>
             <input type="text" name="name" id="name"
-            value="<%= equipo.name%>">
+            value="<%= locals.oldData ? oldData.name: equipo.name%>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>  
 
             <label for="club_id">Club</label>
             <select name="club_id" id="club_id">
