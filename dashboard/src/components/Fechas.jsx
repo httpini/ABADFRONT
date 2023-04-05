@@ -40,11 +40,11 @@ export default function Fechas({ partidos }) {
                 (<table className='w-full'>
                     <thead className='font-thin bg-claro1 bg-opacity-30 text-sm'>
                         <tr>
-                            <th className='rounded-bl-md'>Estado</th>
+                            <th className='rounded-bl-md hidden mini:block'>Estado</th>
                             <th>Local</th>
                             <th>resultado</th>
                             <th>Visitante</th>
-                            <th>Dia</th>
+                            <th className='hidden mini:block'>Dia</th>
                             <th>Hora</th>
                             <th className='rounded-br-md'>Predio</th>
                         </tr>
@@ -53,11 +53,11 @@ export default function Fechas({ partidos }) {
                         {
                             partidosFecha.map((e, i) => (
                                 <tr className='font-thin' key={i}>
-                                    <th className='font-thin'>{e.estado}</th>
+                                    <th className='font-thin hidden mini:block'>{e.estado}</th>
                                     <th className='font-thin'>{e.local_name}</th>
                                     <th className='font-thin'>{e.g_local} - {e.g_visitante}</th>
                                     <th className='font-thin'>{e.visitante_name}</th>
-                                    <th className='font-thin'>{e.dia ? e.dia : 'a confirmar'}</th>
+                                    <th className='font-thin hidden mini:block'>{e.dia ? e.dia : 'a confirmar'}</th>
                                     <th className='font-thin'>{e.hora ? e.hora : 'a confirmar'}</th>
                                     <th className='font-thin'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name.toLowerCase() : 'a confirmar'}</Link></th>
                                 </tr>

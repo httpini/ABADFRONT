@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios, { all } from 'axios';
 import Fechas from '@/components/Fechas';
 import TablaPuntajes from '@/components/TablaPuntajes';
@@ -9,9 +9,38 @@ import Goleadores from '@/components/Goleadores';
 import FairPlay from '@/components/FairPlay';
 import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
+// import useMediaQuery from '../../../utils/useMediaQuery';
+
+const useMediaQuery = (width) => {
+  const [targetReached, setTargetReached] = useState(false);
+
+  const updateTarget = useCallback((e) => {
+      if (e.matches) {
+          setTargetReached(true);
+      } else {
+          setTargetReached(false);
+      }
+  }, []);
+
+  useEffect(() => {
+      const media = window.matchMedia(`(max-width: ${width}px)`);
+      media.addListener(updateTarget);
+
+      // Check on mount (callback is not called until a change occurs)
+      if (media.matches) {
+          setTargetReached(true);
+      }
+
+      return () => media.removeListener(updateTarget);
+  }, []);
+
+  return targetReached;
+};
 
 export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fair_play, sanciones }) {
   const [title, setTitle] = useState('Torneo')
+  const isBreakpoint = useMediaQuery(400)
+
   useEffect(() => {
     let nombreTorneo = allTorneos.find(t => t.name_url == id)
     return setTitle(nombreTorneo.name);
@@ -21,8 +50,8 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
     <div className='relative'>
       <Header allTorneos={allTorneos} />
       <section>
-        <LinksTorneos torneos={allTorneos} id={id} />
-        <h1 className='text-center font-bold text-2xl mt-10 underline'>Torneo - {title}</h1>
+        <LinksTorneos torneos={allTorneos} id={id} hide={isBreakpoint}/>
+        <h1 className='text-center font-bold text-2xl mini:mt-10 underline'>Torneo - {title}</h1>
         <div className='flex flex-col break:grid grid-cols-2 justify w-full gap-7 justify-around py-10 sm:px-10'>
           <TablaPuntajes tabla={tabla} />
           <Fechas partidos={partidos} />

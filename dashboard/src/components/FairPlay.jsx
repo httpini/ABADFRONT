@@ -3,7 +3,6 @@ import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 
 export default function FairPlay({ fair_play }) {
-    console.log(fair_play);
     return (
         <div className='tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
             <h1 className='font-bold text-xl border-b-2 border-oscuro1'>Fair Play</h1>
