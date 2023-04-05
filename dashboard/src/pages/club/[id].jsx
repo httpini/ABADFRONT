@@ -19,7 +19,6 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
   const [equ, setEqu] = useState({})
   const [torn, setTorn] = useState({})
   let router = useRouter();
-  console.log(equipo.equipo.colores);
 
   useEffect(() => {
     if (router.query.equipo) setEqu(equipos.find(e => e.name_url === router.query.equipo));

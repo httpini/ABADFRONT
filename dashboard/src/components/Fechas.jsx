@@ -28,22 +28,21 @@ export default function Fechas({ partidos }) {
 
     return (
         <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
-            <div className={`cursor-pointer flex flex-wrap justify-between items-center gap-1 border-b-2`}>
+            <div className={`flex flex-wrap justify-between items-center gap-1 border-b-2`}>
                 <h1 className='text-center font-bold text-xl'>Fechas y Partidos</h1>
                 <div className='flex gap-1 flex-wrap bg-oscuro1 px-5 text-claro1 rounded-lg mb-2'>
                     {Array(cantPartidos).fill(0).map((x, i) =>
-                        <div key={i + 1} onClick={cambioFecha} className='my-1'><h3 className={`${i == fecha - 1 ? activeTopicStyle : notActive}`}>{i + 1}</h3></div>
+                        <div key={i + 1} onClick={cambioFecha} className='my-1 cursor-pointer'><h3 className={`${i == fecha - 1 ? activeTopicStyle : notActive}`}>{i + 1}</h3></div>
                     )}
                 </div>
             </div>
             {partidosFecha.length > 0 ?
                 (<table className='w-full'>
-                    <thead className='font-thin bg-claro1 bg-opacity-30'>
+                    <thead className='font-thin bg-claro1 bg-opacity-30 text-sm'>
                         <tr>
                             <th className='rounded-bl-md'>Estado</th>
                             <th>Local</th>
-                            <th></th>
-                            <th></th>
+                            <th>resultado</th>
                             <th>Visitante</th>
                             <th>Dia</th>
                             <th>Hora</th>
@@ -56,12 +55,11 @@ export default function Fechas({ partidos }) {
                                 <tr className='font-thin' key={i}>
                                     <th className='font-thin'>{e.estado}</th>
                                     <th className='font-thin'>{e.local_name}</th>
-                                    <th className='font-thin'>{e.g_local}</th>
-                                    <th className='font-thin'>{e.g_visitante}</th>
+                                    <th className='font-thin'>{e.g_local} - {e.g_visitante}</th>
                                     <th className='font-thin'>{e.visitante_name}</th>
                                     <th className='font-thin'>{e.dia ? e.dia : 'a confirmar'}</th>
                                     <th className='font-thin'>{e.hora ? e.hora : 'a confirmar'}</th>
-                                    <th className='font-thin'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name : 'a confirmar'}</Link></th>
+                                    <th className='font-thin'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name.toLowerCase() : 'a confirmar'}</Link></th>
                                 </tr>
                             ))
                         }

@@ -5,7 +5,7 @@ const topicStyle = 'hover:underline'
 
 export default function LinksTorneos({ torneos, id }) {
     return (
-        <div className='flex flex-wrap gap-3 justify-around m-auto mt-3 text-xs'>
+        <div className='flex flex-wrap gap-3 justify-around m-auto mt-3 mx-20 text-xs'>
             {torneos && torneos.map(t => (
                 <Link key={t.name} href={`/torneo/${t.name_url}`} className={id == t.name_url ? activeTopicStyle : topicStyle}>{t.name}</Link>
             ))}

@@ -23,7 +23,7 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
       <section>
         <LinksTorneos torneos={allTorneos} id={id} />
         <h1 className='text-center font-bold text-2xl mt-10 underline'>Torneo - {title}</h1>
-        <div className='grid md:grid-cols-2 justify w-full flex-wrap gap-10 justify-around p-10'>
+        <div className='flex flex-col break:grid grid-cols-2 justify w-full gap-7 justify-around p-10'>
           <TablaPuntajes tabla={tabla} />
           <Fechas partidos={partidos} />
           <Goleadores goleadores={goleadores} />

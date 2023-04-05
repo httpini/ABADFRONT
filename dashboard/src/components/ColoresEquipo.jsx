@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 export default function ColoresEquipo({ colores, width, height, className }) {
     const [cols, setCols] = useState([])
-    console.log(className);
+    
     useEffect(() => {
         let colorArray = [];
         colores.forEach(c => { if (c !== '') colorArray.push(c) })
