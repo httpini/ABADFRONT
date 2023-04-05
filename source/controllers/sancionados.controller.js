@@ -1,4 +1,5 @@
 const {torneo, sancionado, equipo_torneo, fecha}= require("../database/models/index")
+const {validationResult} = require('express-validator')
 
 module.exports ={
     select: async (req,res)=>{
@@ -23,7 +24,6 @@ module.exports ={
                 ["f_sancion", "ASC"]
             ]
         })
-        //FALTAN LOS QUERYS DE LOS FILTROS Y EL ORDER
         let elTorneo = await torneo.findByPk(req.params.torneo_id)
         let fechas = await fecha.findAll({
             where:{
@@ -53,6 +53,48 @@ module.exports ={
         })
     },
     created: async(req,res)=>{
+        let sancionados= await sancionado.findAll({
+            where:{
+                torneo_id:req.params.torneo_id
+            },
+            order:[
+                ["f_sancion", "ASC"]
+            ]
+        })
+        let elTorneo = await torneo.findByPk(req.params.torneo_id)
+        let fechas = await fecha.findAll({
+            where:{
+                torneo_id:req.params.torneo_id
+            },
+            order:[
+                ["nro", "ASC"]
+            ]
+        })
+
+        let equipos = await equipo_torneo.findAll({
+            include:{all:true},
+            where:{
+                torneo_id: req.params.torneo_id
+            },
+            order:[
+                ["team_name", "ASC"]
+            ]
+        })
+        
+
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("sancionados/create",{
+                title: `Sancionados ${elTorneo.name} ${elTorneo.temporada}`,
+                sancionados: sancionados,
+                equipos:equipos,
+                torneo:elTorneo,
+                fechas:fechas,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await sancionado.create(req.body)
         return res.redirect(`/sancionados/torneo/${req.body.torneo_id}`)
     },

@@ -12,13 +12,17 @@
             <label   for="torneo_id">Torneo ID</label>
             <input type="text" id="torneo_id" name="torneo_id" value="<%=torneo.id%>" readonly> 
 
-            <label for="f_sancion">Fecha de Sancion</label>
+            <label for="">Fecha de Sancion</label>
             <select name="f_sancion" id="f_sancion">
                 <option selected disabled>Seleccione...</option>
                 <% fechas.forEach(f => { %>
                     <option value="<%=f.id%>"><%= f.name %></option> 
                 <% }) %>
             </select>
+            <% if (locals.errors && errors.f_sancion) { %>
+                <p class="msg-error"><%= errors.f_sancion.msg %></p>
+            <% } %>   
+
 
             <label for="equipo_id">Equipo</label>
             <select name="equipo_id" id="equipo_id">
@@ -27,18 +31,37 @@
                     <option value="<%=e.id%>"><%= e.team_name %></option> 
                 <% }) %>
             </select>
+            <% if (locals.errors && errors.equipo_id) { %>
+                <p class="msg-error"><%= errors.equipo_id.msg %></p>
+            <% } %> 
 
             <label for="last_name">Apellido</label>
-            <input type="text" id="last_name" name="last_name">
+            <input type="text" id="last_name" name="last_name"
+            value="<%= locals.oldData ? oldData.last_name: null %>">
+            <% if (locals.errors && errors.last_name) { %>
+                <p class="msg-error"><%= errors.last_name.msg %></p>
+            <% } %>
 
             <label for="name">Nombre</label>
-            <input type="text" name="name" id="name">           
+            <input type="text" name="name" id="name"
+            value="<%= locals.oldData ? oldData.name: null %>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>            
 
             <label for="sancion">Sancion</label>
-            <input type="text" name="sancion" id="sancion">
+            <input type="text" name="sancion" id="sancion"
+            value="<%= locals.oldData ? oldData.sancion: null %>">
+            <% if (locals.errors && errors.sancion) { %>
+                <p class="msg-error"><%= errors.sancion.msg %></p>
+            <% } %> 
 
             <label for="f_vuelta">Vuelve a Jugar</label>
-            <input type="text" name="f_vuelta" id="f_vuelta">
+            <input type="text" name="f_vuelta" id="f_vuelta"
+            value="<%= locals.oldData ? oldData.f_vuelta: null %>">
+            <% if (locals.errors && errors.f_vuelta) { %>
+                <p class="msg-error"><%= errors.f_vuelta.msg %></p>
+            <% } %> 
 
             <label for="aclaraciones">Aclaraciones</label>
             <input type="text" name="aclaraciones" id="aclaraciones">
