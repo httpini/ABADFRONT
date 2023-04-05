@@ -23,11 +23,11 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
       <section>
         <LinksTorneos torneos={allTorneos} id={id} />
         <h1 className='text-center font-bold text-2xl mt-10 underline'>Torneo - {title}</h1>
-        <div className='flex flex-col break:grid grid-cols-2 justify w-full gap-7 justify-around p-10'>
+        <div className='flex flex-col break:grid grid-cols-2 justify w-full gap-7 justify-around py-10 sm:px-10'>
           <TablaPuntajes tabla={tabla} />
           <Fechas partidos={partidos} />
-          <Goleadores goleadores={goleadores} />
           <FairPlay fair_play={fair_play} />
+          <Goleadores goleadores={goleadores} />
           <Sanciones sanciones={sanciones} />
         </div>
       </section>

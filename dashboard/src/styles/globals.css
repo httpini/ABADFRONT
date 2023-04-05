@@ -19,8 +19,12 @@ body {
     min-height: 100vh;
 }
 
+html, body {
+    overflow-x:scroll 
+  } 
+
 html {
-    overflow-y: overlay;
+    /* overflow-y: overlay; */
 }
 
 .tarjeta {
@@ -35,21 +39,26 @@ html {
     mask-position: center;
 }
 
-th{
+th {
     font-weight: 200;
     text-align: left;
     font-size: .9em;
 }
 
-thead {
-}
+thead {}
 
 .md {
     font-size: .9em;
 }
+
 .sm {
     font-size: .9em;
 }
+
 .lg {
     font-size: .9em;
+}
+
+.par {
+    background-color: rgb(202, 233, 255, .3);
 }

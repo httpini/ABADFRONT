@@ -30,7 +30,7 @@ export default function Fechas({ partidos }) {
         <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
             <div className={`flex flex-wrap justify-between items-center gap-1 border-b-2`}>
                 <h1 className='text-center font-bold text-xl'>Fechas y Partidos</h1>
-                <div className='flex gap-1 flex-wrap bg-oscuro1 px-5 text-claro1 rounded-lg mb-2'>
+                <div className='flex gap-3 flex-wrap bg-oscuro1 px-5 text-claro1 rounded-lg mb-2 sm:gap-1'>
                     {Array(cantPartidos).fill(0).map((x, i) =>
                         <div key={i + 1} onClick={cambioFecha} className='my-1 cursor-pointer'><h3 className={`${i == fecha - 1 ? activeTopicStyle : notActive}`}>{i + 1}</h3></div>
                     )}

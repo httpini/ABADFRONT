@@ -27,6 +27,7 @@ module.exports = {
       screens: {
         mf: "1000px",
         break: "1050px",
+        mini: "400px",
       },
       keyframes: {
         "slide-in": {

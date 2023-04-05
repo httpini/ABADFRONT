@@ -6,7 +6,7 @@ export default function Fechas({ partidos }) {
     return (
         <div className='tarjeta bg-oscuro3 shadow-oscuro3 shadow-md w-full'>
             <h2 className='font-bold underline'>Fechas</h2>
-            <table className='w-full'>
+            <table className='w-full h-full'>
                 <thead className='bg-white ba bg-claro1 bg-opacity-50'>
                     <tr>
                         <th>#</th>
@@ -17,10 +17,10 @@ export default function Fechas({ partidos }) {
                         <th>Puntos</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className=''>
                     {
                         partidos.map((e, i) => (
-                            <tr key={i}>
+                            <tr key={i} className={`${i % 2 == 0 ? 'par' : ''}`}>
                                 <th>{e.fecha}</th>
                                 <th>{e.dia}</th>
                                 <th>{e.localVisitante}</th>
