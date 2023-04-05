@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Sanciones({ sanciones }) {
   return (
-    <div className='md:col-span-2 justify-self-center flex flex-wrap justify-center w-full md:w-[55%] tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
+    <div className='break:col-span-2 justify-self-center self-center flex flex-wrap justify-center w-full break:w-[70%] tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
       <div className='bg-yellow-300 w-full '>
         <h1 className='md:text-center font-bold text-xl border-b-2 border-oscuro1'>Sanciones</h1>
         {sanciones.length > 0 ? <table className='w-full'>

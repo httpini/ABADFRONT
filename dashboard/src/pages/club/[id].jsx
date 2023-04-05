@@ -11,6 +11,8 @@ import { useRouter } from 'next/router'
 import LinksEquipos from '@/components/LinksEquipos'
 import LinksTorneoEquipo from '@/components/LinksTorneoEquipo'
 import { redirect } from 'next/navigation';
+import ColoresEquipo from '@/components/ColoresEquipo'
+import GoleadoresSanciones from '@/components/GoleadoresSanciones'
 
 
 export default function ClubId({ id, club, equipos, torneos, equipo }) {
@@ -28,20 +30,21 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
   return (
     <div>
       <Header />
+      {/* <ColoresEquipo colores={equipo.equipo.colores} width={100} height={100}/> */}
       <section className='w-full'>
         {/* <LinksTorneos torneos={torneos} id={id} /> */}
-        <h2 className='text-2xl text-center'>Equipos</h2>
-        <div className='flex flex-wrap w-full justify-around'>
+        <h2 className='text-2xl text-center mt-5'>Equipos</h2>
+        <div className='flex flex-wrap w-full justify-around px-20'>
           {
             equipos && equipos.map(e => (
-              <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo} />
+              <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo}/>
             ))
           }
         </div>
         {
           torneos &&
           <div>
-            <h2 className='text-2xl text-center'>Torneos</h2>
+            <h2 className='text-2xl text-center mt-5'>Torneos</h2>
             <div className='flex flex-wrap w-full justify-around'>
               {
                 torneos.map(t => (
@@ -54,9 +57,10 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
 
         {
           equipo && (
-            <div className='grid md:grid-cols-2 w-full flex-wrap gap-10 justify-around p-10'>
+            <div className='flex flex-col break:grid grid-cols-2 w-full flex-wrap gap-10 justify-around py-10 sm:px-10'>
               <InformacionEquipo nombreTorneo={torn.name} nombreEquipo={equ.name} equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
               <FechasEquipo partidos={equipo.partidos} />
+              <GoleadoresSanciones nombreTorneo={torn.name} nombreEquipo={equ.name} equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
             </div>
           )
         }
