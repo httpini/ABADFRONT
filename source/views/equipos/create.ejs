@@ -19,7 +19,11 @@
         <form method="post" action="/equipos/created" >
             <h3>Nuevo Equipo <i class="fa-solid fa-plus"></i></h3>
             <label for="name">Nombre del Equipo</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name"
+            value="<%= locals.oldData ? oldData.name: null %>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>  
 
             <label for="club_id">Club al que pertenece</label>
             <select name="club_id" id="club_id">
@@ -28,6 +32,9 @@
                     <option value="<%=c.id%>"><%= c.name %> </option> 
                 <% }) %> 
             </select>
+            <% if (locals.errors && errors.club_id) { %>
+                <p class="msg-error"><%= errors.club_id.msg %></p>
+            <% } %> 
 
             <label for="categoria_id">Categoria a la que pertenece</label>
             <select name="categoria_id" id="categoria_id">
@@ -36,6 +43,9 @@
                     <option value="<%=c.id%>"><%= c.name %> </option> 
                 <% }) %> 
             </select>
+            <% if (locals.errors && errors.categoria_id) { %>
+                <p class="msg-error"><%= errors.categoria_id.msg %></p>
+            <% } %> 
 
             <label for="color_1">Color 1</label>
             <input type="text" id="color_1" name="color_1">

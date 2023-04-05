@@ -1,14 +1,13 @@
 const {Router} = require('express')
 const router = Router()
 const {create,created,edit,edited,destroid, oneTorneo, quitarEquipos, agregarEquipos} = require('../controllers/torneos.controller')
-const multer = require('multer');
-const storage = require('../modules/storage')
-const upload = multer({storage: storage('reglamentos-torneos')});
+const createMiddleware = require("../middlewares/torneosCreate")
+const  editMiddleware= require("../middlewares/torneosEdit")
 
 router.get("/", create)
-router.post("/created",upload.any(), created)
+router.post("/created",[createMiddleware], created)
 router.get("/edit/:id",edit)
-router.put("/edit/:id",upload.any(),edited)
+router.put("/edit/:id",[editMiddleware],edited)
 router.delete("/delete/:id",destroid)
 router.get("/:id",oneTorneo)
 router.put("/:id/quitarEquipos",quitarEquipos)

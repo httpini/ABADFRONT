@@ -9,18 +9,25 @@
             <h3>Editar Predio <%= predio.name %> </h3>
             <label for="name">Nombre del Predio</label>
             <input type="text" name="name" id="name"
-            value="<%= predio.name%>">
+            value="<%=locals.oldData ? locals.oldData.name : predio.name%>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>
 
             <label for="adress">Dirección</label>
             <input type="text" name="adress" id="adress"
-            value="<%=predio.adress%>">
+            value="<%=locals.oldData ? locals.oldData.adress : predio.adress%>">
+            <% if (locals.errors && errors.adress) { %>
+                <p class="msg-error"><%= errors.adress.msg %></p>
+            <% } %>
 
-            <label for="map">HTML de Google maps</label>
+            <label for="map">URL Google maps</label>
             <input type="text" name="map" id="map"
-            value="<%=predio.map%>">
+            value="<%=locals.oldData ? locals.oldData.map : predio.map%>">
+            <% if (locals.errors && errors.map) { %>
+                <p class="msg-error"><%= errors.map.msg %></p>
+            <% } %>
             
-            
-            <iframe src="<%= predio.map %>" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
             <button type="submit">Guardar Cambios</button>
         </form>

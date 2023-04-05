@@ -1,4 +1,5 @@
 const {categoria, subcategoria, equipo}= require("../database/models/index")
+const {validationResult} = require('express-validator')
 
 module.exports={
     create: async(req,res)=>{
@@ -40,16 +41,62 @@ module.exports={
             res.redirect("/categorias/")
         }
         return res.render("categorias/edit",{
-            title:"Editar Categoria",
+            title:`Editar Categoria ${categorias.name}`,
             categoria: categorias
         })
     },
     created:async (req,res)=>{
+        let listaCategorias = await categoria.findAll({
+            include:[
+                {
+                    model: equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let listaSub = await subcategoria.findAll({
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
+            order:[
+                ["categoria_id", "ASC"],
+                ["name", "ASC"]
+            ]
+        })
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render ("categorias/create",{
+                title: "Categorias",
+                categorias: listaCategorias,
+                subcategorias:  listaSub,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await categoria.create(req.body)
         return res.redirect("/categorias/")
     },
     edited: async(req,res)=>{
         let categorias= await categoria.findByPk(req.params.id)
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("categorias/edit",{
+                title:`Editar Categoria ${categorias.name}`,
+                categoria: categorias,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await categorias.update(req.body)
         return res.redirect("/categorias/")
     },
