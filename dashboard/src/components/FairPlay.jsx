@@ -5,7 +5,7 @@ import {TbRectangleVerticalFilled} from "react-icons/tb"
 
 export default function FairPlay({ fair_play }) {
     return (
-        <div className='tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
+        <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
             <h1 className='font-bold text-xl border-b-2 border-oscuro1 text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>Fair Play</h1>
             <table className='w-full'>
                 <thead className='font-thin bg-opacity-70 border-b-2 border-oscuro1'>
@@ -13,10 +13,10 @@ export default function FairPlay({ fair_play }) {
                     <tr>
                         <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>#</th>
                         <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>Equipo</th>
-                        <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>PTS</th>
-                        <th className=' text-amarillo-tarjeta drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'><TbRectangleVerticalFilled></TbRectangleVerticalFilled></th>
-                        <th className=' text-rojo-tarjeta drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'><TbRectangleVerticalFilled></TbRectangleVerticalFilled></th>
-                        <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>Amonestaciones</th>
+                        <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>PTS</th>
+                        <th className=' text-amarillo-tarjeta drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-rowitems-center justify-center '><TbRectangleVerticalFilled></TbRectangleVerticalFilled></div></th>
+                        <th className=' text-rojo-tarjeta drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-rowitems-center justify-center '><TbRectangleVerticalFilled></TbRectangleVerticalFilled></div></th>
+                        <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>Amon.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,10 +26,10 @@ export default function FairPlay({ fair_play }) {
                                 <th>{i + 1}</th>
                                 {/*LO MISMO FALTA PONERLE COLORES A LOS EQUIPOS*/}
                                 <th><Link href={`/club/${fp.equipo}`}>{fp.equipo}</Link></th>
-                                <th>{fp.puntos}</th>
-                                <th>{fp.amarillas}</th>
-                                <th>{fp.rojas}</th>
-                                <th>{fp.amonestaciones}</th>
+                                <th className='text-center'>{fp.puntos}</th>
+                                <th className='text-center'>{fp.amarillas}</th>
+                                <th className='text-center'>{fp.rojas}</th>
+                                <th className='text-center'>{fp.amonestaciones}</th>
                             </tr>
                         ))
                     }
