@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 // import { equipos } from '../../utils/constants'
 import Link from 'next/link'
+
+import {GiSoccerField} from "react-icons/gi" //PARA IMPORTAR ICONOS DESTRUCTURAR EL NOMBRE DEL ICONO, FROM react-icons/ las dos primeras iniciales
+import{AiOutlineClockCircle} from "react-icons/ai"
+
 const activeTopicStyle = 'font-bold underline hover:underline text-center'
 const notActive = 'hover:underline'
 
@@ -29,7 +33,7 @@ export default function Fechas({ partidos }) {
     return (
         <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
             <div className={`flex flex-wrap justify-between items-center gap-1 border-b-2`}>
-                <h1 className='text-center font-bold text-xl'>Fechas y Partidos</h1>
+                <h1 className='text-center font-bold text-xl text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-2'>Fechas y Partidos</h1>
                 <div className='flex gap-3 flex-wrap bg-oscuro1 px-5 text-claro1 rounded-lg mb-2 sm:gap-1'>
                     {Array(cantPartidos).fill(0).map((x, i) =>
                         <div key={i + 1} onClick={cambioFecha} className='my-1 cursor-pointer'><h3 className={`${i == fecha - 1 ? activeTopicStyle : notActive}`}>{i + 1}</h3></div>
@@ -45,8 +49,8 @@ export default function Fechas({ partidos }) {
                             <th>resultado</th>
                             <th>Visitante</th>
                             <th className='hidden mini:block'>Dia</th>
-                            <th>Hora</th>
-                            <th className='rounded-br-md'>Predio</th>
+                            <th className='text-lg  text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-2'><AiOutlineClockCircle className='text-center'></AiOutlineClockCircle></th>
+                            <th className='rounded-br-md text-2xl  text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-2'><GiSoccerField ></GiSoccerField></th>
                         </tr>
                     </thead>
                     <tbody>
