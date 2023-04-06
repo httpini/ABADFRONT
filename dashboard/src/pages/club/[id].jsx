@@ -44,7 +44,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
         {
           torneos &&
           <div>
-            <h2 className='text-2xl text-center mt-5'>Torneos</h2>
+            <h2 className='text-2xl text-center mt-5'>Historial de torneos</h2>
             <div className='flex flex-wrap w-full justify-around'>
               {
                 torneos.map(t => (

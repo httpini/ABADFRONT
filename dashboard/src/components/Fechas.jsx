@@ -28,7 +28,7 @@ export default function Fechas({ partidos }) {
 
     return (
         <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
-            <div className={`flex flex-wrap justify-between items-center gap-1 border-b-2`}>
+            <div className={`flex flex-wrap justify-between items-center gap-1`}>
                 <h1 className='text-center font-bold text-xl'>Fechas y Partidos</h1>
                 <div className='flex gap-3 flex-wrap bg-oscuro1 px-5 text-claro1 rounded-lg mb-2 sm:gap-1'>
                     {Array(cantPartidos).fill(0).map((x, i) =>
@@ -38,7 +38,7 @@ export default function Fechas({ partidos }) {
             </div>
             {partidosFecha.length > 0 ?
                 (<table className='w-full'>
-                    <thead className='font-thin bg-claro1 bg-opacity-30 text-sm'>
+                    <thead className='font-thin text-sm border-b-2 border-oscuro1 bg-opacity-30'>
                         <tr>
                             <th className='rounded-bl-md hidden mini:block'>Estado</th>
                             <th>Local</th>
@@ -52,7 +52,7 @@ export default function Fechas({ partidos }) {
                     <tbody>
                         {
                             partidosFecha.map((e, i) => (
-                                <tr className='font-thin' key={i}>
+                                <tr className={`${i % 2 == 0 ? 'par' : ''} font-thin`} key={i}>
                                     <th className='font-thin hidden mini:block'>{e.estado}</th>
                                     <th className='font-thin'>{e.local_name}</th>
                                     <th className='font-thin'>{e.g_local} - {e.g_visitante}</th>

@@ -6,7 +6,7 @@ export default function Fechas({ partidos }) {
     return (
         <div className='tarjeta bg-oscuro3 shadow-oscuro3 shadow-md w-full'>
             <h2 className='font-bold underline'>Fechas</h2>
-            <table className='w-full h-full'>
+            <table className='w-full'>
                 <thead className='bg-white ba bg-claro1 bg-opacity-50'>
                     <tr>
                         <th>#</th>
