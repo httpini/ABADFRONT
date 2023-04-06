@@ -18,6 +18,8 @@ module.exports = {
       'amarillo' : '#fdf0d5',
       'logoClaro' : '#60C2E5',
       'logoOscuro' : '#0F639F',
+      'amarillo-tarjeta': '#ffc300',
+      'rojo-tarjeta': '#d90429'
     },
     fontFamily: {
       display: ["Open Sans", "sans-serif"],

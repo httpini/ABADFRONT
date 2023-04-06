@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import {GiSoccerField} from "react-icons/gi" //PARA IMPORTAR ICONOS DESTRUCTURAR EL NOMBRE DEL ICONO, FROM react-icons/ las dos primeras iniciales
 import{AiOutlineClockCircle} from "react-icons/ai"
+import {MdOutlineCalendarToday} from "react-icons/md"
 
 const activeTopicStyle = 'font-bold underline hover:underline text-center'
 const notActive = 'hover:underline'
@@ -44,13 +45,13 @@ export default function Fechas({ partidos }) {
                 (<table className='w-full'>
                     <thead className='font-thin text-sm border-b-2 border-oscuro1 bg-opacity-30'>
                         <tr>
-                            <th className='rounded-bl-md hidden mini:block'>Estado</th>
+                            <th className='hidden mini:block'>Estado</th>
                             <th>Local</th>
                             <th>resultado</th>
                             <th>Visitante</th>
-                            <th className='hidden mini:block'>Dia</th>
-                            <th className='text-lg  text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-2'><AiOutlineClockCircle className='text-center'></AiOutlineClockCircle></th>
-                            <th className='rounded-br-md text-2xl  text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-2'><GiSoccerField ></GiSoccerField></th>
+                            <th className='hidden mini:block '><MdOutlineCalendarToday className='text-lg text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'></MdOutlineCalendarToday></th>
+                            <th className='text-lg  text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'><AiOutlineClockCircle className='text-center'></AiOutlineClockCircle></th>
+                            <th className='rounded-br-md text-3xl  text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'><GiSoccerField ></GiSoccerField></th>
                         </tr>
                     </thead>
                     <tbody>
