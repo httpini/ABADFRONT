@@ -8,7 +8,7 @@ export default function TablaPuntajes({ tabla }) {
         <div className='tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
             <h1 className='font-bold text-xl text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-2'>Tabla de Posiciones</h1>
             <table className='w-full'>
-                <thead className='font-thin bg-logoOscuro  border-b-2 border-oscuro1 bg-opacity-30'>
+                <thead className='font-thin border-b-2 border-oscuro1 bg-opacity-30'>
                     <tr>
                         <th className='rounded-bl-md text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>#</th>
                         <th className='text-left text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>Equipo</th>

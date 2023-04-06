@@ -21,9 +21,12 @@ export default function Header({ allTorneos }) {
         fetch()
     }, [])
 
+    function onClick() {
+        window.location.href = "/"
+    }
 
     return (
-        <div className='flex w-full flex-row justify-center h-[75px] items-center bg-oscuro1 shadow-md shadow-oscuro1 text-[#fdf0d5]  fixed z-50'>
+        <div className='flex w-full flex-row justify-around h-[75px] items-center bg-oscuro1 shadow-md shadow-oscuro1 text-[#fdf0d5]  fixed z-50'>
             <Link href='/'>
                 <h1 className='mx-[5em]'><Image rel="preload" priority={true} alt='logo' className='w-[45px]' src={ABADlogo}></Image></h1>
             </Link>
@@ -36,16 +39,24 @@ export default function Header({ allTorneos }) {
                     <AiOutlineClose fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(false)} />
                     : <HiMenuAlt4 fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(true)} />}
                 {toggleMenu && (
-                    <ul className='z-10 fixed top-0 -right-2 p-3 w-[30vw] h-screen shadow-2xl md:hidden list-none 
-                    flex flex-col justify-start items-end rounded-md bg-black text-white animate-slide-in'>
-                        <li className='text-xl w-full my-2'>
-                            <AiOutlineClose onClick={() => setToggleMenu(false)} />
-                        </li>
-                        <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
-                        {/* <LinkHeader texto='Copas' lista={copas} pagina='copa' /> */}
-                        <LinkHeader texto='Clubs' lista={[]} pagina='club' />
-                        <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
-                    </ul>
+                    <div className='relative'>
+
+                        <ul className={`z-10 fixed top-0 -right-0 p-3 w-[50%] h-screen shadow-2xl shadow-oscuro1 md:hidden list-none 
+                    flex flex-col justify-start items-end bg-oscuro1 text-white ${toggleMenu ? 'animate-slide-in' : 'animate-slide-out'}`}>
+                            <li className='text-4xl w-full my-2'>
+                                <AiOutlineClose onClick={() => setToggleMenu(false)} />
+                            </li>
+                            <div className='flex flex-col gap-10 align-bottom text-right'>
+                                <Link href='/' className='hover:text-claro1 cursor-pointer pr-3'>Inicio</Link>
+
+                                <LinkHeader texto='Torneos' lista={torn} pagina='torneo' hide={true} />
+                                {/* <LinkHeader texto='Copas' lista={copas} pagina='copa' /> */}
+                                <LinkHeader texto='Clubs' lista={[]} pagina='club' />
+                                <LinkHeader texto='Nosotros' lista={[]} pagina='nosotros' />
+                            </div>
+                        </ul>
+                        {/* <Image rel="preload" priority={true} alt='logo' className='w-[45px] z-20 sticky bottom-10' src={ABADlogo}></Image> */}
+                    </div>
                 )}
             </div>
 
