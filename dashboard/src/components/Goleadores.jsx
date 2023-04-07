@@ -12,7 +12,7 @@ export default function Goleadores({ goleadores }) {
                         <th className=" text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">#</th>
                         <th className=" text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Equipo</th>
                         <th className=" text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Jugador/a</th>
-                        <th className="text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50"><div className='flex flex-row gap-2 items-center justify-center '><p>Goles</p><BiFootball></BiFootball></div></th>
+                        <th className="text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50"><div className='flex flex-row gap-2 items-center justify-center '><p>Goles</p><BiFootball className='text-xl'></BiFootball></div></th>
 
                     </tr>
                 </thead>

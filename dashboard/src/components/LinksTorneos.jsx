@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-const activeTopicStyle = 'underline font-bold'
-const topicStyle = 'hover:underline'
+const activeTopicStyle = 'rounded-xl p-1.5 text-base text-claro1 font-bold bg-oscuro1'
+const topicStyle = 'rounded-xl p-1.5 text-base hover:underline bg-oscuro1 text-amarillo'
 import { FiMoreHorizontal } from 'react-icons/fi'
 
 export default function LinksTorneos({ torneos, id, hide }) {

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import {GiSoccerField} from "react-icons/gi" //PARA IMPORTAR ICONOS DESTRUCTURAR EL NOMBRE DEL ICONO, FROM react-icons/ las dos primeras iniciales
 import{AiOutlineClockCircle, AiOutlineCalendar} from "react-icons/ai"
-
+import {BiFootball} from "react-icons/bi"
 
 const activeTopicStyle = 'font-bold text-xl text-center text-claro1'
 const notActive = 'hover:text-claro1 hover:underline'
@@ -47,7 +47,7 @@ export default function Fechas({ partidos }) {
                         <tr>
                             <th className='hidden mini:table-cell text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>Estado</th>
                             <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>Local</th>
-                            <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>Res.</th>
+                            <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-row gap-2 items-center justify-center '><BiFootball className='text-xl'></BiFootball></div></th>
                             <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>Visitante</th>
                             <th className='hidden mini:table-cell text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-row items-center justify-center '><AiOutlineCalendar className='text-xl'></AiOutlineCalendar></div></th>
                             <th className=' text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-row items-center justify-center '><AiOutlineClockCircle className='text-xl'></AiOutlineClockCircle></div></th>
@@ -60,11 +60,11 @@ export default function Fechas({ partidos }) {
                                 <tr className={`${i % 2 == 0 ? 'par' : ''} font-thin`} key={i}>
                                     <th className='font-thin hidden mini:block'>{e.estado}</th>
                                     <th className='font-thin text-center'>{e.local_name}</th>
-                                    <th className='font-thin text-center'>{e.g_local}-{e.g_visitante}</th>
+                                    <th className='font-thin text-center min-w-goles'>{e.g_local}-{e.g_visitante}</th>
                                     <th className='font-thin text-center'>{e.visitante_name}</th>
                                     <th className='font-thin hidden mini:block text-center'>{e.dia ? e.dia : 'a confirmar'}</th>
                                     <th className='font-thin text-center'>{e.hora ? e.hora : 'a confirmar'}</th>
-                                    <th className='font-thin text-center'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name.toLowerCase() : 'a confirmar'}</Link></th>
+                                    <th className='font-thin text-center'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name : 'a confirmar'}</Link></th>
                                 </tr>
                             ))
                         }

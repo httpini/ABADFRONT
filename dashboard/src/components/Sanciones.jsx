@@ -26,7 +26,7 @@ export default function Sanciones({ sanciones }) {
                   <th className='text-center'>{sanc.nombre}</th>
                   <th className='text-center'>{sanc.f_sancion}</th>
                   <th className='hidden mini:block text-center'>{sanc.sancion}</th>
-                  <th>Provisorio</th>
+                  <th className='text-center'>{sanc.vuelta}</th>
                 </tr>
               ))
             }
