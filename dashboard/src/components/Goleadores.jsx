@@ -6,8 +6,8 @@ export default function Goleadores({ goleadores }) {
     return (
         <div className='tarjeta shadow-md shadow-oscuro3  bg-oscuro3'>
             <h1 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>Goleadores/as</h1>
-            {goleadores.length > 0 ? <table className='w-full'>
-                <thead className='font-thin '>
+            {goleadores.length > 0 ? <table className='w-full '>
+                <thead className='font-thin border-b-2 border-oscuro1 bg-opacity-30'>
                     <tr>
                         <th className=" text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">#</th>
                         <th className=" text-center text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Equipo</th>

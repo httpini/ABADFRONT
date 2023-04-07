@@ -8,7 +8,7 @@ export default function Sanciones({ sanciones }) {
       <div className='bg-yellow-300 w-full '>
         <h1 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>Sanciones Vigentes</h1>
         {sanciones.length > 0 ? <table className='w-full'>
-          <thead className='font-thin '>
+          <thead className='font-thin border-b-2 border-oscuro1 bg-opacity-30 '>
             <tr>
               <th  className="text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Equipo</th>
               <th className="text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center">Jugador/a</th>

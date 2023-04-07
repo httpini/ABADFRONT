@@ -16,7 +16,7 @@ export default function FairPlay({ fair_play }) {
                         <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>PTS</th>
                         <th className=' text-amarillo-tarjeta drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-rowitems-center justify-center '><TbRectangleVerticalFilled></TbRectangleVerticalFilled></div></th>
                         <th className=' text-rojo-tarjeta drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'><div className='flex flex-rowitems-center justify-center '><TbRectangleVerticalFilled></TbRectangleVerticalFilled></div></th>
-                        <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>Amon.</th>
+                        <th className='text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center'>Amonestaciones</th>
                     </tr>
                 </thead>
                 <tbody>
