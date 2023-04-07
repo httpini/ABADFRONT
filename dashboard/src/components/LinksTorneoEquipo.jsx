@@ -2,8 +2,8 @@ import Link from 'next/link';
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const activeTopicStyle = 'underline font-bold text-center'
-const topicStyle = 'text-center'
+const activeTopicStyle = 'rounded-xl font-bold text-center flex gap-1 bg-oscuro1 text-claro1 p-1.5'
+const topicStyle = 'rounded-xl hover:underline text-center flex gap-1 bg-oscuro3 text-amarillo p-1.5'
 
 export default function LinksTorneoEquipo({ query, torneo }) {
     let router = useRouter();
