@@ -33,8 +33,8 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
       {/* <ColoresEquipo colores={equipo.equipo.colores} width={100} height={100}/> */}
       <section className='w-full'>
         {/* <LinksTorneos torneos={torneos} id={id} /> */}
-        <h2 className='text-2xl text-center mt-5'>Equipos</h2>
-        <div className='flex flex-wrap w-full justify-around px-20'>
+        <h2 className='text-2xl text-center mt-5 text-oscuro0 my-3'>Equipo/s de {club.name}</h2>
+        <div className='flex flex-wrap w-full justify-center px-20 gap-1.5'>
           {
             equipos && equipos.map(e => (
               <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo}/>
@@ -44,7 +44,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
         {
           torneos &&
           <div>
-            <h2 className='text-2xl text-center mt-5'>Historial de torneos</h2>
+            <h2 className='text-2xl text-center mt-5 text-oscuro0'>Torneos en disputa</h2>
             <div className='flex flex-wrap w-full justify-around'>
               {
                 torneos.map(t => (

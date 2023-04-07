@@ -62,7 +62,7 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
       <Header allTorneos={allTorneos} />
       <section className='flex flex-col items-center'>
         <LinksTorneos torneos={allTorneos} id={id} hide={isBreakpoint}/>
-        <h1 className='text-center font-bold text-2xl mt-4  text-oscuro0'><div className='flex justify-center items-center'><BiFootball></BiFootball>Torneo {title}<BiFootball></BiFootball> </div></h1>
+        <h1 className='text-center font-bold text-2xl mt-4  text-oscuro0'><div className='flex justify-center items-center'><BiFootball></BiFootball>Torneo {title}<BiFootball></BiFootball></div></h1>
         <Link href={reglamento} target="_blank"><div className='drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 hover:text-claro1 ease-in duration-200 flex text-xl justify-center text-amarillo items-center gap-2 bg-oscuro1 w-59 p-2 text-center mt-3 rounded-xl' ><GiInjustice className='text-2xl '></GiInjustice><p>Reglamento</p><AiOutlineCloudDownload className='text-2xl'></AiOutlineCloudDownload></div></Link>
         <div className='flex flex-col break:grid grid-cols-2 justify w-full gap-7 justify-around py-7 sm:px-10'>
           <TablaPuntajes tabla={tabla} />
