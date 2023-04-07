@@ -22,7 +22,7 @@ export default function Sanciones({ sanciones }) {
               sanciones && sanciones.map((sanc, i) => (
                 <tr key={i} className={`${i % 2 == 0 ? 'par' : ''}`}>
                   {/*LO MISMO FALTA PONERLE COLORES A LOS EQUIPOS*/}
-                  <th><Link href={`/equipo/${sanc.equipo}`}>{sanc.equipo}</Link></th>
+                  <th>{sanc.equipo}</th>
                   <th className='text-center'>{sanc.nombre}</th>
                   <th className='text-center'>{sanc.f_sancion}</th>
                   <th className='hidden mini:block text-center'>{sanc.sancion}</th>

@@ -58,7 +58,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
         {
           equipo && (
             <div className='flex flex-col break:grid grid-cols-2 w-full flex-wrap gap-10 justify-around py-10 sm:px-10'>
-              <InformacionEquipo nombreTorneo={torn.name} nombreEquipo={equ.name} equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
+              <InformacionEquipo torneo={torn} nombreEquipo={equ.name} equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
               <FechasEquipo partidos={equipo.partidos} />
               <GoleadoresSanciones nombreTorneo={torn.name} nombreEquipo={equ.name} equipo={equipo.equipo} fairPlay={equipo.fair_play} goleadores={equipo.goleadores} tabla={equipo.tabla} sancionados={equipo.sancionados} />
             </div>

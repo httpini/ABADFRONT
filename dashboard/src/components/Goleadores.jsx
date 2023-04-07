@@ -22,7 +22,7 @@ export default function Goleadores({ goleadores }) {
                             <tr key={i} className={`${i % 2 == 0 ? 'par' : ''}`}>
                                 <th>{i + 1}</th>
                                 {/*FALTA LO MISMO DE AGREGAR LOS COLORES A LOS EQUIPOS Y HAY QUE VER QUE LOGICA ARMAMOS PARA EL href=""*/}
-                                <th className='text-center' ><Link href={`/equipo/${g.equipo}`}>{g.equipo}</Link></th>
+                                <th className='text-center' >{g.equipo}</th>
                                 <th className='text-center'>{g.nombre}</th>
                                 <th className='text-center'>{g.goles}</th>
                             </tr>

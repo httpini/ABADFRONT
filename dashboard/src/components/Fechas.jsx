@@ -64,7 +64,7 @@ export default function Fechas({ partidos }) {
                                     <th className='font-thin text-center'>{e.visitante_name}</th>
                                     <th className='font-thin hidden mini:block text-center'>{e.dia ? e.dia : 'a confirmar'}</th>
                                     <th className='font-thin text-center'>{e.hora ? e.hora : 'a confirmar'}</th>
-                                    <th className='font-thin text-center'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name : 'a confirmar'}</Link></th>
+                                    <th className='font-thin text-center  hover:text-amarillo hover:font-bold'><Link href={e.predio_url ? e.predio_url : '#'} target={e.predio_url ? "_blank" : ''} style={e.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{e.predio_name ? e.predio_name : 'a confirmar'}</Link></th>
                                 </tr>
                             ))
                         }

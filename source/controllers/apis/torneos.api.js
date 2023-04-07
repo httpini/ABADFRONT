@@ -316,7 +316,7 @@ module.exports = {
                 predio_name: datosEquipo.predio ? datosEquipo.predio.name : null,
                 predio_direccion: datosEquipo.predio ? datosEquipo.predio.adress : null,
                 predio_url: datosEquipo.predio ? datosEquipo.predio.map : null,
-                horario_local: datosEquipo.horario_local ? datosEquipo.horario_local : null,
+                horario_local: datosEquipo.horario_local ? datosEquipo.horario_local.slice(0,-3) : null,
             }
             if (datosEquipo.color_1 != null && datosEquipo.color_1 != "") {
                 equipoDatos.colores.push(datosEquipo.color_1)
@@ -456,7 +456,7 @@ module.exports = {
                 let elementosDia = fechaOriginal.split("-")
                 let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                 let data = {
-                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated,
+                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated.slice(0,-5),
                     fecha: p.fecha.nro,
                     localVisitante: p.local_id == datosEquipo.id ? "L" : "V",
                     rival: p.local_id == datosEquipo.id ? p.visitante.team_name : p.local.team_name,

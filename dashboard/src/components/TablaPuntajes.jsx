@@ -29,7 +29,7 @@ export default function TablaPuntajes({ tabla }) {
                             <tr key={i} className={`${i % 2 == 0 ? 'par' : ''}`}>
                                 <th>{i + 1}</th>
                                 {/* FALTA AGREGAR LOS COLORES DE LOS EQUIPOS DELANTE DEL NOMBRE EN EL MISMO <th></th>*/}
-                                <th><Link href={`/club/${t.club_url}/?equipo=${t.equipo_url}&torneo=${t.torneo_url}`}><div className='flex justify-start gap-2 items-center'>{t.equipo} <ColoresEquipo colores={t.colores} hide={true}/></div></Link></th>
+                                <th><Link href={`/club/${t.club_url}/?equipo=${t.equipo_url}&torneo=${t.torneo_url}`}><div className='flex justify-start gap-2 items-center  hover:text-amarillo hover:font-bold'>{t.equipo} <ColoresEquipo colores={t.colores} hide={true}/></div></Link></th>
                                 <th className='text-center' >{t.pts}</th>
                                 <th className='text-center'>{t.p_jugados}</th>
                                 <th className='text-center'>{t.p_ganados}</th>

@@ -25,7 +25,7 @@ export default function FairPlay({ fair_play }) {
                             <tr key={i} className={`${i % 2 == 0 ? 'par' : ''}`}>
                                 <th>{i + 1}</th>
                                 {/*LO MISMO FALTA PONERLE COLORES A LOS EQUIPOS*/}
-                                <th><Link href={`/club/${fp.equipo}`}>{fp.equipo}</Link></th>
+                                <th>{fp.equipo}</th>
                                 <th className='text-center'>{fp.puntos}</th>
                                 <th className='text-center'>{fp.amarillas}</th>
                                 <th className='text-center'>{fp.rojas}</th>
