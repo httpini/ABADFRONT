@@ -75,14 +75,19 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
   try {
 
     let clubData = await axios.post('http://localhost:3500/api/club-url', { club: id })
-    // console.log('club', clubData);
+    // console.log('club', clubData.data.club.equipos[0]);
     if (!clubData) {
       return redirect('/');
     }
     // console.log(torneo, equipo);
+    let primerEquipo = clubData.data.club?.equipos[0]?.name_url
+    let primerTorneo = clubData.data.club?.equipos[0]?.torneo[0]
+    console.log(primer);
     let equipoData
     if (torneo && equipo) equipoData = await axios.post(`http://localhost:3500/api/equipo-torneo`, { torneo, equipo })
+    // if (!torneo && !equipo) equipoData = await axios.post(`http://localhost:3500/api/equipo-torneo`, { torneo: primerTorneo, equipo: primerEquipo})
 
+    
     if (clubData == null) redirect('/')
     // console.log(equipoData.data);
     // let dataEquipo = calls[1]
@@ -91,6 +96,10 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
     if (equipo) {
       torneos = clubData.data.club.equipos.find(e => e.name_url === equipo).torneos
     }
+    // if (!equipo) {
+    //   primerTorneo = clubData.data.club.equipos.find(e => e.name_url === equipo).torneos
+    // }
+    
 
     let props = {
       id,
@@ -107,6 +116,7 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
       props
     }
   } catch (error) {
+    console.log(error);
     return {
       redirect: {
         permanent: false,
