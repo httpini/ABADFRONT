@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { BsInstagram } from 'react-icons/bs'
 import { MdOutlineRadio } from 'react-icons/md'
 import { GoFileCode } from 'react-icons/go'
@@ -7,7 +7,6 @@ import FadeInOut from './FadeInOut'
 
 export default function Footer() {
   const [show, setShow] = useState(false);
-  console.log(show);
   const email = 'estfersomoza@gmail.com'
 
   function copyEmail() {
@@ -24,7 +23,7 @@ export default function Footer() {
       <Link href={'/nosotros'} className='text-sm grow-1 text-center'>más sobre nosotros</Link>
       <div className='flex items-center justify-evenly gap-3 mini:gap-10'>
         <Link href='https://www.instagram.com/abadfutbol/' target='_blank'><BsInstagram /></Link>
-        <Link href='https://www.instagram.com/abadfutbol/' target='_blank'><MdOutlineRadio /></Link>
+        <Link href='https://www.radiodelpueblo.com.ar/' target='_blank'><MdOutlineRadio /></Link>
       </div>
       {show && <FadeInOut show={show} duration={500} className='absolute right-8 bottom-20 w-[250px] text-center bg-oscuro1 p-3 rounded-2xl bg-opacity-75'>
         ¡email de desarrolladores copiado al portapapeles!
