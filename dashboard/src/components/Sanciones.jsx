@@ -4,29 +4,29 @@ import Link from 'next/link'
 
 export default function Sanciones({ sanciones }) {
   return (
-    <div className='break:col-span-2 justify-self-center self-center flex flex-wrap justify-center w-full break:w-[70%] tarjeta shadow-md shadow-oscuro3 bg-opacity-50 bg-oscuro3'>
+    <div className='break:col-span-2 justify-self-center self-center flex flex-wrap justify-center w-full break:w-[70%] tarjeta shadow-md shadow-oscuro3 bg-oscuro3'>
       <div className='bg-yellow-300 w-full '>
-        <h1 className='md:text-center font-bold text-xl border-b-2 border-oscuro1'>Sanciones</h1>
+        <h1 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>Sanciones Vigentes</h1>
         {sanciones.length > 0 ? <table className='w-full'>
-          <thead className='font-thin bg-claro1 bg-opacity-70'>
+          <thead className='font-thin border-b-2 border-oscuro1 bg-opacity-30 '>
             <tr>
-              <th className='rounded-bl-md'>Equipo</th>
-              <th>Jugador/a</th>
-              <th>Fecha de Sancion</th>
-              <th>Pena Aplicada</th>
-              <th className='rounded-br-md'>Vuelve a Jugar</th>
+              <th  className="text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Equipo</th>
+              <th className="text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center">Jugador/a</th>
+              <th className="text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center">Expulsión</th>
+              <th className="hidden mini:block text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center">Pena</th>
+              <th className="text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 text-center">Vuelve</th>
             </tr>
           </thead>
           <tbody>
             {
               sanciones && sanciones.map((sanc, i) => (
-                <tr key={i}>
+                <tr key={i} className={`${i % 2 == 0 ? 'par' : ''}`}>
                   {/*LO MISMO FALTA PONERLE COLORES A LOS EQUIPOS*/}
-                  <th><Link href={`/equipo/${sanc.equipo}`}>{sanc.equipo}</Link></th>
-                  <th>{sanc.nombre}</th>
-                  <th>{sanc.f_sancion}</th>
-                  <th>{sanc.sancion}</th>
-                  <th>{sanc.vuelta}</th>
+                  <th>{sanc.equipo}</th>
+                  <th className='text-center'>{sanc.nombre}</th>
+                  <th className='text-center'>{sanc.f_sancion}</th>
+                  <th className='hidden mini:block text-center'>{sanc.sancion}</th>
+                  <th className='text-center'>{sanc.vuelta}</th>
                 </tr>
               ))
             }

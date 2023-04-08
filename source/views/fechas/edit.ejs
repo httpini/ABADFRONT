@@ -9,10 +9,18 @@
             <h3>Editar Datos de la fecha "<%= fecha.name %>" del <%= fecha.torneo.name %> <%= fecha.torneo.temporada %></h3>
                        
             <label for="nro">Fecha Numero</label>
-            <input type="number" id="nro" name="nro" value="<%= fecha.nro%>">
+            <input type="number" id="nro" name="nro" 
+            value="<%= locals.oldData ? oldData.nro: fecha.nro%>">
+            <% if (locals.errors && errors.nro) { %>
+                <p class="msg-error"><%= errors.nro.msg %></p>
+            <% } %>
 
             <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" value="<%= fecha.name%>">
+            <input type="text" id="name" name="name" 
+            value="<%= locals.oldData ? oldData.name: fecha.name%>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>
 
             <label for="dia">Dia de juego</label>
             <input type="date" name="dia" id="dia" value="<%= fecha.dia%>">
