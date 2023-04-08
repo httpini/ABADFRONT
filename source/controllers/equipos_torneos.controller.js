@@ -5,6 +5,11 @@ module.exports={
         let equipos_torneos = await equipo_torneo.findAll({
             include:[
                 {
+                    model:predio,
+                    as:"predio",
+                    atributes:["name", "id"]
+                },
+                {
                     model: equipo,
                     as:"equipo",
                     atributes:["name","categoria_id"]
