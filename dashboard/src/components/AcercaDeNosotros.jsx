@@ -9,7 +9,7 @@ import { BsFillPersonCheckFill } from 'react-icons/bs'
 
 export default function AcercaDeNosotros() {
     return (
-        <div>
+        <div className='mx-4 mini:mx-[50px] md:mx-[100px] mb-10'>
             <h1 className='mt-10 text-xl font-thin'>Acerca de nosotros</h1>
             <div className='flex gap-10 items-start flex-wrap md:flex-nowrap justify-center md:justify-between'>
                 <div className='flex flex-wrap flex-col w-full'>

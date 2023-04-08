@@ -9,7 +9,7 @@ export default function nosotros() {
     return (
         <div>
             <Header />
-            <section className='mx-4 mini:mx-[50px] md:mx-[100px] mb-10'>
+            <section className=''>
                 <AcercaDeNosotros />
                 <NuestrosTorneos />
             </section>
