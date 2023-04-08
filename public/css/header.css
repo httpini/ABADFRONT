@@ -72,3 +72,14 @@ main{
     margin-top: 20px;
     margin-right:20px
 }
+
+section nav{
+    display:flex;
+    flex-direction:column;
+    gap:20px
+}
+
+p.msg-error{
+    color:red;
+    opacity: 0.6
+}

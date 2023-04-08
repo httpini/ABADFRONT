@@ -117,12 +117,14 @@ module.exports={
 
         if(req.query && req.query.temporada){
             partidos = partidos.filter( partido=>{
-                return partido.dia.getFullYear() == req.query.temporada
+                let fechaDia = new Date(partido.dia)
+                return fechaDia.getFullYear() == req.query.temporada
             })
         }
-        if(req.query && req.query.mes){
+        if(req.query && req.query.mes ){
             partidos = partidos.filter( partido=>{
-                return partido.dia.getMonth() + 1 == req.query.mes
+                let fechaDia = new Date(partido.dia)
+                return fechaDia.getMonth() + 1 == req.query.mes
             })
         }
         if(req.query && req.query.estado){

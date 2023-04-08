@@ -1,5 +1,7 @@
 const {fecha, torneo, partido, equipo_torneo, terna, predio, estado_partido}= require("../database/models/index")
 const{actualizar,restablecer}= require("../modules/actualizarTabla")
+
+const {validationResult} = require('express-validator')
 module.exports ={
     select: async (req,res)=>{
             let torneos = await torneo.findAll({
@@ -35,7 +37,6 @@ module.exports ={
     },
     create: async(req,res)=>{
         let torneos = await torneo.findByPk(req.params.torneo_id,{
-            include:{all:true}
         })
         return res.render("fechas/create",{
             title:`Crear Fecha para ${torneos.name} ${torneos.temporada}`,
@@ -44,6 +45,19 @@ module.exports ={
 
     },
     created:async (req,res)=>{
+        let torneos = await torneo.findByPk(req.params.torneo_id,{
+        })
+
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("fechas/create",{
+                title:`Crear Fecha para ${torneos.name} ${torneos.temporada}`,
+                torneo: torneos,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
 
         let fechaCreada = await fecha.create({
             nro: req.body.nro,
@@ -120,6 +134,21 @@ module.exports ={
         })
         if(!fec){
             return res.redirect(`/fechas/torneo/${req.params.torneo_id}`)
+        }
+
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("fechas/edit",{
+                title: "Editar Campos de Fair Play",
+                fecha: fec,
+                partidos:partidos,
+                predios:predios,
+                ternas:ternas,
+                estados:estados,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
         }
 
         await fec.update(req.body)
