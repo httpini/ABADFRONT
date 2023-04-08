@@ -14,8 +14,8 @@ export default function InformacionEquipo({ nombreEquipo, nombreTorneo, fairPlay
             <h2 className='par'>Hora: {equipo.horario_local? equipo.horario_local : "No especificada"}</h2>
 
 
-            <div className='grid grid-cols-2'>
-                <div className=''>
+            <div className='grid grid-cols-2 mt-5'>
+                <div className=' border-r-2 border-oscuro1 border-opacity-40'>
                     <h2 className='text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>Datos de tabla</h2>
                     <ul className=''>
                         <li className='text-center par'>Posición: <h3 className='inline font-bold'>{tabla.posicion}</h3></li>

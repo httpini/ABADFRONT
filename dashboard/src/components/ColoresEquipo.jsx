@@ -9,7 +9,7 @@ export default function ColoresEquipo({ colores, width, height, className, hide 
         setCols(colorArray)
     }, [colores])
 
-    return (
+    if (colores.length > 0) return (
         <div className={`mask ${width ? `w-[${width}px]` : 'w-[20px]'} ${height ? `h-[${height}px]` : 'h-[20px]'} flex items-center ${hide ? 'hidden mini:block' : ''}`}>
             <div className='flex w-full h-full rounded-md overflow-hidden'>
                 {cols && cols.map(c => <div style={{ backgroundColor: `#${c}` }} key={c} className={`h-full w-full`}></div>)}
