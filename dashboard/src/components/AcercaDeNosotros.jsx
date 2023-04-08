@@ -6,6 +6,7 @@ import { MdMail } from 'react-icons/md'
 import { BsFillTelephoneFill } from 'react-icons/bs'
 import { HiLocationMarker } from 'react-icons/hi'
 import { BsFillPersonCheckFill } from 'react-icons/bs'
+import Link from 'next/link'
 
 export default function AcercaDeNosotros() {
     return (
@@ -29,7 +30,7 @@ export default function AcercaDeNosotros() {
                     <br />
                     <div>
                         <p className='flex items-center gap-2'><BsFillPersonCheckFill className='inline text-xl font-black' />Personería Jurídica otorgada el 02/08/1939</p>
-                        <p className='flex items-center gap-2'><HiLocationMarker className='inline text-xl font-black' />Maipú 62 - 3º piso - Oficina 17 - C.P. 1084 - Buenos Aires</p>
+                        <Link href='https://goo.gl/maps/94EL5oh9tRtxg4EN7' target='_blank' className='flex items-center gap-2 hover:oscuro2 hover:font-bold hover:underline'><HiLocationMarker className='inline text-xl font-black' />Maipú 62 - 3º piso - Oficina 17 - C.P. 1084 - Buenos Aires</Link>
                         <p className='flex items-center gap-2'><BsFillTelephoneFill className='inline text-xl font-black' />4343-6126 / 4342-2117</p>
                         <p className='flex items-center gap-2'><MdMail className='inline text-xl font-black' /> abadargentina@gmail.com.ar</p>
                     </div>
