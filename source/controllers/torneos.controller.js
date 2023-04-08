@@ -1,6 +1,7 @@
 const {torneo, categoria, subcategoria, equipo, equipo_torneo, fair_play}=require("../database/models/index")
 const {unlinkSync} = require('fs')
-const {join} = require('path')
+const {join, extname} = require('path')
+const {validationResult} = require('express-validator')
 
 function nameURL(nombre, temporada) {
     // Convertir el nombre a minúsculas y reemplazar espacios por guiones bajos
@@ -89,7 +90,81 @@ module.exports={
         })
     },
     created: async(req,res)=>{
+        let torneos = await torneo.findAll({
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                },
+                {
+                    model:subcategoria,
+                    as:"subcategoria",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
+            order:[
+                ["temporada", "DESC"]
+            ]
+        })
+        let lastTorneos = await torneo.findAll({
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                },
+                {
+                    model:subcategoria,
+                    as:"subcategoria",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ],
+            order:[
+                ["id", "DESC"]
+            ],
+            limit:3
+        })
         
+        let categorias = await categoria.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let subcategorias = await subcategoria.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            if(req.files && req.files.length > 0){
+                if(extname(req.files[0].filename) == ".pdf"){
+                    unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",req.files[0].filename))
+                }
+            }
+            return res.render("torneos/create",{
+                title:"Torneos",
+                lastTorneos:lastTorneos,
+                torneos:torneos,
+                categorias:categorias,
+                subcategorias:subcategorias,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
 
         let nuevoTorneo = await torneo.create({
             name:req.body.name,
@@ -158,11 +233,27 @@ module.exports={
     },
     oneTorneo: async(req,res)=>{
         let oneTorneo = await torneo.findByPk(req.params.id,{
-            include:{all:true}
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                },
+                {
+                    model:subcategoria,
+                    as:"subcategoria",
+                    atributes:["name"]
+                },
+                {
+                    model:equipo,
+                    as:"equipos",
+                    atributes:["id"]
+                }
+            ]
         })
         // en equiposPosibles vamos a buscar los equipos que pertenezcan a la categoria del torneo pero que no esten en el torneo, a fin de que el usuario los pueda agregar si asi lo desease.
         let equiposPosibles = await equipo.findAll({
-            include: {all:true},
+            
             where: {
                 categoria_id: oneTorneo.categoria_id
             }
@@ -318,6 +409,31 @@ module.exports={
         if(!torneos){
             return res.redirect("/torneos")
         }//FALTA LA PARTE DEL REGLAMENTO CON MULTER.
+
+        let subcategorias = await subcategoria.findAll({
+            where:{
+                categoria_id: torneos.categoria_id
+            },
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            if(req.files && req.files.length > 0){
+                if(extname(req.files[0].filename) == ".pdf"){
+                    unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",req.files[0].filename))
+                }
+            }
+            return res.render("torneos/edit",{
+                title: `Editar Torneo ${torneos.name}`,
+                torneo:torneos,
+                subcategorias:subcategorias,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await torneos.update({
             name:req.body.name,
             temporada:req.body.temporada,

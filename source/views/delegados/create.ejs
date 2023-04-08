@@ -8,16 +8,32 @@
         <form method="post" action="/delegados/created" >
             <h3>Nuevo Delegado <i class="fa-solid fa-plus"></i></h3>
             <label for="name">Nombre</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name"
+            value="<%= locals.oldData ? oldData.name: null %>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>
 
             <label for="last_name">Apellido</label>
-            <input type="text" name="last_name" id="last_name">
+            <input type="text" name="last_name" id="last_name"
+            value="<%= locals.oldData ? oldData.last_name: null %>">
+            <% if (locals.errors && errors.last_name) { %>
+                <p class="msg-error"><%= errors.last_name.msg %></p>
+            <% } %>
 
             <label for="email">Correo Electronico</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email"
+            value="<%= locals.oldData ? oldData.email: null %>">
+            <% if (locals.errors && errors.email) { %>
+                <p class="msg-error"><%= errors.email.msg %></p>
+            <% } %>
 
             <label for="tel">Telefono</label>
-            <input type="number" id="tel" name="tel">
+            <input type="number" id="tel" name="tel"
+            value="<%= locals.oldData ? oldData.tel: null %>">
+            <% if (locals.errors && errors.tel) { %>
+                <p class="msg-error"><%= errors.tel.msg %></p>
+            <% } %>
 
             <label for="equipo_id">Equipo al que pertenece</label>
             <select name="equipo_id" id="equipo_id">
@@ -26,6 +42,9 @@
                     <option value="<%=e.id%>"><%= e.name %> - <%= e.categoria.name %>  </option> 
                 <% }) %> 
             </select>
+            <% if (locals.errors && errors.equipo_id) { %>
+                <p class="msg-error"><%= errors.equipo_id.msg %></p>
+            <% } %>
 
             <button type="submit">Agregar Delegado</button>
         </form>

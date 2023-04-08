@@ -1,4 +1,5 @@
 const {terna, partido, estado_partido}= require("../database/models/index")
+const {validationResult} = require('express-validator')
 
 module.exports={
     create: async(req,res)=>{
@@ -29,17 +30,52 @@ module.exports={
             res.redirect("/ternas/")
         }
         return res.render("ternas/edit",{
-            title:"Editar Terna",
+            title:`Editar Terna ${ternas.name}`,
             terna: ternas
         })
     },
     created:async (req,res)=>{
+        let listaTernas = await terna.findAll({
+            include:{all:true},
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let recentTernas=await terna.findAll({
+            include:{all:true},
+            order:[
+                ["name", "ASC"]
+            ],
+            limit: 3
+        })
+
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("ternas/create",{
+                title: "Ternas",
+                ternas: listaTernas,
+                recentTernas:recentTernas,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await terna.create(req.body)
         return res.redirect("/ternas/")
     },
     edited: async(req,res)=>{
 
         let ternas= await terna.findByPk(req.params.id,{include:{all:true}})
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("ternas/edit",{
+                title:`Editar Terna ${ternas.name}`,
+                terna: ternas,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await ternas.update(req.body)
         return res.redirect("/ternas/")
     },

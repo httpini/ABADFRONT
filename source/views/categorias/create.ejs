@@ -8,7 +8,11 @@
         <form method="post" action="/categorias/created">
             <h3> Nueva Categoria <i class="fa-solid fa-plus"></i></h3>
             <label for="name">Nombre de la categoria</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name"
+            value="<%= locals.oldData ? oldData.name: null %>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>  
 
             <label for="description">Descripcion (edad maxima, etc)</label>
             <textarea name="description" id="description" ></textarea>
@@ -38,7 +42,11 @@
             <h3>Nueva Subcategoria <i class="fa-solid fa-plus"></i></h3>
 
             <label for="name">Nombre de la subcategoria</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name"
+            value="<%= locals.oldDatasub ? oldDatasub.name: null %>">
+            <% if (locals.errorsSub && errorsSub.name) { %>
+                <p class="msg-error"><%= errorsSub.name.msg %></p>
+            <% } %>  
 
             <label for="categoria_id">Categoria a la que pertenece</label>
             <select name="categoria_id" id="categoria_id">
@@ -47,7 +55,7 @@
                     <option value="<%=c.id%>"><%= c.name %> </option> 
                 <% }) %> 
             </select>
-
+            
             <button type="submit">Crear Subcategoria</button>
         </form>
         <section>

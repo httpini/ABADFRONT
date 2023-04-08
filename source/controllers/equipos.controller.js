@@ -1,11 +1,17 @@
 const {categoria, equipo, equipo_torneo, club}= require("../database/models/index")
-
+const {validationResult} = require('express-validator')
 
 module.exports = {
     create: async (req,res) =>{
        
         let listaEquipos = await equipo.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
             order:[
                 ["name", "ASC"]
             ]
@@ -18,14 +24,19 @@ module.exports = {
         }
         
         let recentsEquipos = await equipo.findAll({
-            include: {all:true},
+            include: [
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
             order:[
                 ["id", "DESC"]
             ],
             limit:3
         })
         let listaCategorias = await categoria.findAll({
-            include: {all:true},
             order:[
                 ["name", "ASC"]
             ]
@@ -47,6 +58,64 @@ module.exports = {
         })
     },
     created:async(req,res)=> {
+
+        let listaEquipos = await equipo.findAll({
+            include:[
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        if(req.query && req.query.name){
+            listaEquipos = listaEquipos.filter(equipo=> equipo.name.toLowerCase().indexOf(req.query.name.toLowerCase())> -1)
+        }
+        if(req.query && req.query.cat){
+            listaEquipos= listaEquipos.filter(equipo => equipo.categoria_id == req.query.cat)
+        }
+        
+        let recentsEquipos = await equipo.findAll({
+            include: [
+                {
+                    model:categoria,
+                    as:"categoria",
+                    atributes:["name"]
+                }
+            ],
+            order:[
+                ["id", "DESC"]
+            ],
+            limit:3
+        })
+        let listaCategorias = await categoria.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let listaClubes = await club.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render ("equipos/create",{
+                title: "Equipos Asociados",
+                listaEquipos: listaEquipos,
+                recentsEquipos: recentsEquipos,
+                categorias: listaCategorias,
+                count:listaEquipos.length,
+                clubes:listaClubes,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         req.body.name_url = "-"
         await equipo.create(req.body)
         let ultimoEquipo = await equipo.findAll({
@@ -71,8 +140,8 @@ module.exports = {
 
     },
     edit:async(req,res)=> {
-        let categorias = await categoria.findAll({include: {all:true}})
-        let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
+        let categorias = await categoria.findAll()
+        let equipos = await equipo.findByPk(req.params.id)
         if (!equipos){
             res.redirect("/equipos/")
         }
@@ -82,7 +151,7 @@ module.exports = {
             ]
         })
         return res.render("equipos/edit",{
-            title: "Editar equipo",
+            title: `Editar equipo ${equipos.name}`,
             equipo: equipos,
             categorias: categorias,
             clubes:listaClubes
@@ -91,7 +160,25 @@ module.exports = {
     },
     
     edited: async (req,res)=>{
-        let equipos = await equipo.findByPk(req.params.id, {include:{all:true}})
+        let equipos = await equipo.findByPk(req.params.id)
+        let categorias = await categoria.findAll()
+        let listaClubes = await club.findAll({
+            order:[
+                ["name", "ASC"]
+            ]
+        })
+        let validaciones = validationResult(req)
+        let {errors} = validaciones
+        if(errors && errors.length > 0){
+            return res.render("equipos/edit",{
+                title:`Editar equipo ${equipos.name}`,
+                equipo: equipos,
+                categorias: categorias,
+                clubes:listaClubes,
+                oldData: req.body,
+                errors:validaciones.mapped()
+          })
+        }
         await equipos.update({
             name: req.body.name,
             club_id: req.body.club_id,

@@ -9,13 +9,24 @@
             <h3>Editar Torneo</h3>
             <p>Aqui vamos a poder actualizar el nombre, la temporada, el reglamento o la subcategoria del torneo, en caso de querer modificar la categoria, directamente vamos a eliminar este torneo y crear uno nuevo. En caso de querer editar los equipos que participan, lo vamos a hacer en agregar o quitar equipos</p>
             <label for="name">Nombre del Torneo</label>
-            <input type="text" name="name" id="name" value="<%=torneo.name%>">
+            <input type="text" name="name" id="name" 
+            value="<%=locals.oldData ? locals.oldData.name : torneo.name%>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="msg-error"><%= errors.name.msg %></p>
+            <% } %>
 
             <label for="temporada">Temporada</label>
-            <input type="number" name="temporada" id="temporada" value="<%=torneo.temporada%>">
+            <input type="number" name="temporada" id="temporada" 
+            value="<%=locals.oldData ? locals.oldData.temporada : torneo.temporada%>">
+            <% if (locals.errors && errors.temporada) { %>
+                <p class="msg-error"><%= errors.temporada.msg %></p>
+            <% } %>
 
             <label for="reglamento_path">Reglamento (formato.pdf)</label>
             <input type="file" id="reglamento_path" name="reglamento_path">
+            <% if (locals.errors && errors.reglamento_path) { %>
+                <p class="msg-error"><%= errors.reglamento_path.msg %></p>
+            <% } %>
 
             <% if (subcategorias.length > 0) { %>
                 <label for="subcategoria_id">Subcategoria</label>
