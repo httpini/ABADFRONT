@@ -152,7 +152,8 @@ module.exports = {
                 where: {
                     [Op.or]: [
                         { estado_id: 4 },
-                        { estado_id: 7 }
+                        { estado_id: 7 },
+                        { estado_id: 5 }
                     ]
                 },
                 order: [
