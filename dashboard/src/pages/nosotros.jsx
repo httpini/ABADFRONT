@@ -9,7 +9,7 @@ export default function nosotros() {
     return (
         <div>
             <Header />
-            <section className=''>
+            <section className='flex flex-col'>
                 <AcercaDeNosotros />
                 <NuestrosTorneos />
             </section>
