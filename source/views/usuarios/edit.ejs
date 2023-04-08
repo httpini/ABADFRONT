@@ -32,8 +32,8 @@
                 <p class="msg-error"><%= errors.user_name.msg %></p>
             <% } %>  
 
-
-            <label for="permiso">Nivel de Jerarquia</label>
+            <% if (user && user.permiso == "sAdmin") { %>
+                <label for="permiso">Nivel de Jerarquia</label>
             <select name="equipo_id" id="equipo_id">
                 <option value="sAdmin" <%= usuario.permiso == "sAdmin"? "selected":"" %>>Super Admin</option>
                 <option value="resultados" <%= usuario.permiso == "resultados"? "selected":"" %>>Solo Resultados</option>
@@ -41,6 +41,8 @@
                 <option value="viewOnly" <%= usuario.permiso == "viewOnly"? "selected":"" %>>Solo Vistas</option>
                 <option value="tribunal" <%= usuario.permiso == "tribunal"? "selected":"" %>>Tribunal</option>
             </select>
+                <%}%>
+            
 
             <label for="newPassword">Nueva Contraseña</label>
             <input type="text" name="newPassword" id="newPassword">

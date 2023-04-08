@@ -97,7 +97,7 @@ module.exports = {
         }
         let elUsuario = await usuario.findOne({
             where: {
-                name_url:req.body.nombreUsuario
+                user_name:req.body.nombreUsuario
             }
         })
         
@@ -105,7 +105,7 @@ module.exports = {
         req.session.user = elUsuario
         //LO DE ACA ABAJO SON LAS COOKIES, SIGUE SIN CAMBIOS
         if(req.body.recordame != undefined){
-            res.cookie("recordame", user.user_name, {maxAge:172800000})
+            res.cookie("recordame", elUsuario.user_name, {maxAge:172800000})
         }
         return res.redirect('/')
     },
