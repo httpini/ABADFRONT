@@ -80,9 +80,9 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
       return redirect('/');
     }
     // console.log(torneo, equipo);
-    let primerEquipo = clubData.data.club?.equipos[0]?.name_url
-    let primerTorneo = clubData.data.club?.equipos[0]?.torneo[0]
-    console.log(primer);
+    // let primerEquipo = clubData.data.club?.equipos[0]?.name_url
+    // let primerTorneo = clubData.data.club?.equipos[0]?.torneo[0]
+    // console.log(primer);
     let equipoData
     if (torneo && equipo) equipoData = await axios.post(`http://localhost:3500/api/equipo-torneo`, { torneo, equipo })
     // if (!torneo && !equipo) equipoData = await axios.post(`http://localhost:3500/api/equipo-torneo`, { torneo: primerTorneo, equipo: primerEquipo})
