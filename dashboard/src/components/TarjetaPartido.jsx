@@ -33,7 +33,7 @@ export default function TarjetaPartido({ data }) {
         <Puntaje equipo={data.visitante_name} goles={data.visitante_goles} colores={data.visitante_colores} local={false} />
       </div>
       <div className='text-center  flex justify-around bg-oscuro3 rounded-b-md '>
-        <Link className={`${data.predio_url ? 'hover:text-amarillo hover:font-bold' : ''}`} href={data.predio_url ? data.predio_url : '#'} target={data.predio_url ? "_blank" : ''} style={data.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{data.predio_name ? data.predio_name : 'predio a confirmar'}</Link>
+        <Link className={`${data.predio_url ? 'hover:text-amarillo hover:font-bold' : ''}`} href={data.predio_url ? data.predio_url : '#'} target={data.predio_url ? "_blank" : ''} style={data.predio_url ? { cursor: 'pointer' } : { cursor: 'default' }} >{data.predio_name ? data.predio_name : 'Predio a confirmar'}</Link>
         {/* <p className='cursor-pointer'>{data.predio_name ? data.predio_name : 'predio a confirmar'}</p> */}
         <p>-</p>
         <p>{data.torneo_name}</p>

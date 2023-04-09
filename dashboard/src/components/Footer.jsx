@@ -20,7 +20,7 @@ export default function Footer() {
 
   return (
     <div className='z-50 mb-auto sticky bottom-0 w-[100vw] bg-oscuro1 text-amarillo flex justify-around items-center p-2 h-[50px]'>
-      <Link href={'/nosotros'} className='text-sm grow-1 text-center'>más sobre nosotros</Link>
+      <Link href={'/nosotros'} className='text-sm grow-1 text-center'>Más sobre nosotros</Link>
       <div className='flex items-center justify-evenly gap-3 mini:gap-10'>
         <Link href='https://www.instagram.com/abadfutbol/' target='_blank'><BsInstagram /></Link>
         <Link href='https://www.radiodelpueblo.com.ar/' target='_blank'><MdOutlineRadio /></Link>
