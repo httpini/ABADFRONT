@@ -8,7 +8,7 @@ export default function formateo(date, time) {
 
     // console.log(timestamp);
     var dayOfWeek = dia[timestamp.getDay()]
-    console.log(dayOfWeek, date);
+    // console.log(dayOfWeek, date);
     // let myDate = date.split("-");
     // var newDate = new Date(myDate[2], myDate[1] - 1, myDate[0]);
     // console.log(newDate);

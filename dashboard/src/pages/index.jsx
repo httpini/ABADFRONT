@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProximosPartidos from "@/components/ProximosPartidos";
 import axios from "axios";
-import Head from "next/head";
 
 export default function Home({ partidosConfirmados, partidosDisputados }) {
   // console.log(partidosConfirmados, partidosDisputados);
@@ -12,22 +11,25 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
       <Header />
       <section>
         <Banner />
-        {
-          partidosConfirmados &&
-          <>
-            <h2 className="font-bold text-center p-3 text-2xl">Partidos a jugar</h2>
-            <ProximosPartidos data={partidosConfirmados} />
-          </>
+        <div>
 
-        }
-        <br />
-        {
-          partidosConfirmados &&
-          <>
-            <h2 className="font-bold text-center p-5 text-2xl">Partidos jugados</h2>
-            <ProximosPartidos data={partidosDisputados} />
-          </>
-        }
+          {
+            partidosConfirmados &&
+            <>
+              <h2 className="font-bold text-center p-3 text-2xl">Partidos a jugar</h2>
+              <ProximosPartidos data={partidosConfirmados} />
+            </>
+
+          }
+          <br />
+          {
+            partidosConfirmados &&
+            <>
+              <h2 className="font-bold text-center p-5 text-2xl">Partidos jugados</h2>
+              <ProximosPartidos data={partidosDisputados} />
+            </>
+          }
+        </div>
 
       </section>
       <Footer />

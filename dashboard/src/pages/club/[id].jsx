@@ -1,18 +1,15 @@
-import Fechas from '@/components/Fechas'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import InformacionEquipo from '@/components/InformacionEquipo'
-import LinksTorneos from '@/components/LinksTorneos'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import FechasEquipo from '@/components/FechasEquipo'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import LinksEquipos from '@/components/LinksEquipos'
 import LinksTorneoEquipo from '@/components/LinksTorneoEquipo'
-import { redirect } from 'next/navigation';
-import ColoresEquipo from '@/components/ColoresEquipo'
 import GoleadoresSanciones from '@/components/GoleadoresSanciones'
+import { useRouter } from 'next/router'
+import { redirect } from 'next/navigation';
+import { NextResponse } from 'next/server'
 
 
 export default function ClubId({ id, club, equipos, torneos, equipo }) {
@@ -37,7 +34,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
         <div className='flex flex-wrap w-full justify-center px-5 gap-3'>
           {
             equipos && equipos.map(e => (
-              <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo}/>
+              <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo} />
             ))
           }
         </div>
@@ -73,20 +70,41 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
 
 export const getServerSideProps = async ({ params: { id }, query: { torneo, equipo } }) => {
   try {
-
+    console.time('time')
     let clubData = await axios.post('http://localhost:3500/api/club-url', { club: id })
-    // console.log('club', clubData);
+
     if (!clubData) {
-      return redirect('/');
+      return redirect('/asdf');
     }
-    // console.log(torneo, equipo);
+
+    let primerEquipo = clubData.data.club?.equipos[0]?.name_url
+    let primerTorneo = clubData.data.club?.equipos[0]?.torneos[0].name_url
+
+    if (!torneo && !equipo) {
+      return {
+        redirect: {
+          destination: `/club/${id}?equipo=${primerEquipo}&torneo=${primerTorneo}`,
+          permanent: false,
+        }
+      }
+    }
+
+    let equipoSelecto = clubData.data.club.equipos.find(c => c.name_url === equipo)
+
+    if (equipo && !torneo) {
+      return {
+        redirect: {
+          destination: `/club/${id}?equipo=${equipo}&torneo=${equipoSelecto.torneos[0].name_url}`,
+          permanent: false,
+        }
+      }
+    }
+
     let equipoData
     if (torneo && equipo) equipoData = await axios.post(`http://localhost:3500/api/equipo-torneo`, { torneo, equipo })
 
     if (clubData == null) redirect('/')
-    // console.log(equipoData.data);
-    // let dataEquipo = calls[1]
-    // console.log(dataClub.data.club.equipos, equipo);
+
     let torneos
     if (equipo) {
       torneos = clubData.data.club.equipos.find(e => e.name_url === equipo).torneos
@@ -99,14 +117,15 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
     }
 
     if (torneos) props.torneos = torneos
-    // console.log(equipoData.data);
     if (equipoData) props.equipo = equipoData.data.equipos
 
+    console.timeEnd('time')
 
     return {
       props
     }
   } catch (error) {
+    console.log('error', error);
     return {
       redirect: {
         permanent: false,

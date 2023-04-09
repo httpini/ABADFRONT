@@ -2,20 +2,20 @@ import React, { useState } from 'react'
 import { equipos } from '../../utils/constants'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {BsArrowUpRightCircle } from "react-icons/bs"
+import { HiOutlineExternalLink } from "react-icons/hi"
 
-export default function InformacionEquipo({ nombreEquipo, nombreTorneo, fairPlay, goleadores, tabla, sancionados, torneo, equipo}) {
+export default function InformacionEquipo({ nombreEquipo, nombreTorneo, fairPlay, goleadores, tabla, sancionados, torneo, equipo }) {
     const [visible, setVisible] = useState(false)
     return (
         <div className='tarjeta bg-oscuro3 shadow-md shadow-oscuro3 p-5 w-[100%]'>
             <h1 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>{nombreEquipo}</h1>
-            <h2 className='par'>Torneo: <Link className=' hover:text-amarillo hover:font-bold' href={`/torneo/${torneo.name_url}`}>{torneo.name}</Link></h2>
-            <h2 className=''>Predio: {equipo.predio_name ? <Link className=' hover:text-amarillo hover:font-bold' target="_blank" href={equipo.predio_url}>{equipo.predio_name}</Link>: "No especificado"}</h2>
-            <h2 className='par'>Hora: {equipo.horario_local? equipo.horario_local : "No especificada"}</h2>
+            <h2 className='par font-bold'>Torneo: <Link className=' hover:text-amarillo hover:font-bold font-thin' href={`/torneo/${torneo.name_url}`}>{torneo.name}</Link></h2>
+            <h2 className='font-bold'>Predio: {equipo.predio_name ? <Link className=' hover:text-amarillo hover:font-bold font-thin ' target="_blank" href={equipo.predio_url}>{equipo.predio_name} <HiOutlineExternalLink className='inline'/></Link> : <p className='inline font-thin'>No especificado</p>}</h2>
+            <h2 className='par font-bold'>Hora: <p className='font-thin inline'>{equipo.horario_local ? equipo.horario_local : "No especificada"}</p></h2>
 
 
-            <div className='grid grid-cols-2'>
-                <div className=''>
+            <div className='grid grid-cols-2 mt-5'>
+                <div className=' border-r-2 border-oscuro1 border-opacity-40'>
                     <h2 className='text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50'>Datos de tabla</h2>
                     <ul className=''>
                         <li className='text-center par'>Posición: <h3 className='inline font-bold'>{tabla.posicion}</h3></li>

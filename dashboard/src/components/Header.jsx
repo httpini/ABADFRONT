@@ -4,7 +4,6 @@ import { AiOutlineClose } from 'react-icons/ai'
 import LinkHeader from './LinkHeader'
 import Link from 'next/link'
 import Image from 'next/image'
-import { torneos, copas } from '../../utils/constants'
 import axios from 'axios'
 import ABADlogo from '../../public/ABADlogo.svg'
 
@@ -34,7 +33,7 @@ export default function Header({ allTorneos }) {
                 {/* <LinkHeader texto='Copas' lista={copas} pagina='copa' /> */}
             </div>
 
-            <div>
+            <div className='text-4xl'>
                 {toggleMenu ?
                     <AiOutlineClose fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(false)} />
                     : <HiMenuAlt4 fontSize={28} className='text-white md:hidden cursor-pointer' onClick={() => setToggleMenu(true)} />}
@@ -60,7 +59,7 @@ export default function Header({ allTorneos }) {
                 )}
             </div>
 
-            <div className='md:flex hidden justify-around flex-grow'>
+            <div className='md:flex hidden justify-around flex-grow text-xl'>
                 <LinkHeader texto='Torneos' lista={torn} pagina='torneo' />
 
                 <LinkHeader texto='Clubes' lista={[]} pagina='club' />
