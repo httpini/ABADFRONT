@@ -16,7 +16,7 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
           {
             partidosConfirmados &&
             <>
-              <h2 className="font-bold text-center p-3 text-2xl">Partidos a jugar</h2>
+              <h2 className="font-bold text-center p-3 text-2xl font-bold text-center text-amarillo drop-shadow-[0_3.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Partidos a jugar</h2>
               <ProximosPartidos data={partidosConfirmados} />
             </>
 
@@ -25,7 +25,7 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
           {
             partidosConfirmados &&
             <>
-              <h2 className="font-bold text-center p-5 text-2xl">Partidos jugados</h2>
+              <h2 className="font-bold text-center p-3 text-2xl font-bold text-center text-amarillo drop-shadow-[0_3.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50">Partidos jugados</h2>
               <ProximosPartidos data={partidosDisputados} />
             </>
           }
