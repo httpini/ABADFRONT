@@ -14,7 +14,7 @@ export default function Club({ clubes }) {
 
                 <div className='w-full flex md:flex-1 flex-col md:grid md:grid-cols-2 break:grid-cols-3 2xl:grid-cols-4 grid-flow-row p-10 gap-5 break:gap-10 justify-center items-stretch'>
                     {
-                        clubes && clubes.map(c => <TarjetaClub key={c.name} club={c} />)
+                        clubes && clubes.map(c => <TarjetaClub key={c.name} club={c} name={c.name} url={c.name_url} />)
                     }
                 </div>
             </section>
@@ -25,7 +25,9 @@ export default function Club({ clubes }) {
 
 
 export const getServerSideProps = async () => {
+    console.time('api club')
     let clubes = await axios.get('http://localhost:3500/api/clubes')
+    console.timeEnd('api club')
     return {
         props: {
             clubes: clubes.data.clubes
