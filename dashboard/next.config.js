@@ -26,7 +26,7 @@ const nextConfig = {
     ]
   },
   env: {
-    PORT: localEnv.PORT
+    PORT: localEnv.PORT || 8020
   }
 }
 

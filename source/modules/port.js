@@ -1,8 +1,9 @@
 require('dotenv').config()
-console.log('port', process.env.PORT);
+let PORT = process.env.PORT
+console.log('port', PORT);
 module.exports = {
-    port: process.env.PORT || 8020,
+    port: PORT || 8020,
     callback: function(){
-        console.log("Abriendo el servidor http://localhost:8020")
+        console.log(`Abriendo el servidor http://localhost:${PORT}`)
     }
 }
