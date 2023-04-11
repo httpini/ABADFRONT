@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "nodemon source/app.js -e json,js,mjs,ejs"
+    "test": "nodemon source/app.js -e json,js,mjs,ejs",
+    "start": "node src/app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
