@@ -27,7 +27,8 @@ const nextConfig = {
   },
   env: {
     PORT: localEnv.PORT || 8020
-  }
+  },
+  distDir: "build",
 }
 
 module.exports = nextConfig

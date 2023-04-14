@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "nodemon source/app.js -e json,js,mjs,ejs",
+    "test": "nodemon src/app.js -e json,js,mjs,ejs",
     "start": "node src/app.js"
   },
   "dependencies": {
