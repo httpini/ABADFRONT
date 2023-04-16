@@ -1,4 +1,4 @@
-const {torneo, categoria, subcategoria, equipo, equipo_torneo, fair_play}=require("../database/models/index")
+const {torneo, categoria, subcategoria, equipo, equipo_torneo, fair_play, fecha, partido}=require("../database/models/index")
 const {unlinkSync} = require('fs')
 const {join, extname} = require('path')
 const {validationResult} = require('express-validator')
@@ -355,7 +355,12 @@ module.exports={
         if(torneos.reglamento_path){
             unlinkSync(join(__dirname, "../../public/assets/", "reglamentos-torneos",torneos.reglamento_path))
         }
-        
+        await partido.destroy({
+            where: {torneo_id: req.params.id}
+        })
+        await FileSystemDirectoryHandle.destroy({
+            where:{ torneo_id: req.params.id}
+        })
         
         await equipo_torneo.destroy({
             where: {torneo_id: req.params.id}
