@@ -1,11 +1,3 @@
-let {
-  db_host,
-  db_name,
-  db_password,
-  db_port,
-  db_user
-} = require("../../modules/port") 
-
 module.exports ={
   "development": {
     "username": "root",
@@ -15,17 +7,17 @@ module.exports ={
     "dialect": "mysql"
   },
   "test": {
-    "username": "root" ,
-    "password": null ,
-    "database": "abad" ,
-    "host": "127.0.0.1",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "abad",
-    "host": "127.0.0.1",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
     "dialect": "mysql"
   }
 }
