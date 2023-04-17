@@ -26,7 +26,8 @@ const nextConfig = {
     ]
   },
   env: {
-    PORT: localEnv.PORT || 8020
+    PORT: localEnv.PORT || 8020,
+    URL: localEnv.URL
   },
   distDir: "build",
 }

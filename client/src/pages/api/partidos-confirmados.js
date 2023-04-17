@@ -7,6 +7,6 @@ import axios from "axios";
 
 export default async function handler(req, res) {
     console.log(process.env.PORT);
-    let partidos = await axios.get(`http://localhost:${process.env.PORT}/api/partidosConfirmados`)
+    let partidos = await axios.get(`${process.env.URL}/api/partidosConfirmados`)
     res.status(200).json({ partidos: partidos.data.partidos })
 }
