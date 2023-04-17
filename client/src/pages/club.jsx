@@ -26,7 +26,7 @@ export default function Club({ clubes }) {
 
 export const getServerSideProps = async () => {
     console.time('api club')
-    let clubes = await axios.get('http://localhost:3500/api/clubes')
+    let clubes = await axios.get(`${process.env.URLFRONT}/api/clubes`)
     console.timeEnd('api club')
     return {
         props: {

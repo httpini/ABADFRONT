@@ -83,9 +83,9 @@ export const getServerSideProps = async ({ params: { id } }) => {
     console.time('apis torneo id')
 
     let results = await Promise.all([
-      axios.post('http://localhost:3500/api/partidos', { torneo: id }),
-      axios.get('http://localhost:3500/api/torneos'),
-      axios.post('http://localhost:3500/api/torneo-tabla', { torneo: id })
+      axios.post(`${process.env.URLFRONT}/api/partidos`, { torneo: id }),
+      axios.get(`${process.env.URLFRONT}/api/torneos`),
+      axios.post(`${process.env.URLFRONT}/api/torneo-tabla`, { torneo: id })
     ])
     
     let partidos = results[0]

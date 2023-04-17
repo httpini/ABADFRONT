@@ -42,8 +42,8 @@ export const getServerSideProps = async () => {
   try {
     console.time('apis index')
     let calls = await Promise.all([
-      axios.get('http://localhost:3500/api/partidos-disputados'),
-      axios.get('http://localhost:3500/api/partidos-confirmados')
+      axios.get(`${process.env.URLFRONT}/api/partidos-disputados`),
+      axios.get(`${process.env.URLFRONT}/api/partidos-confirmados`)
     ])
     
     console.timeEnd('apis index')

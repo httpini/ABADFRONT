@@ -12,9 +12,12 @@ export default function Header({ allTorneos }) {
     const [toggleMenu, setToggleMenu] = useState(false)
     const [torn, setTorn] = useState([])
 
+    // console.log(process.env.URLFRONT);
+
+
     useEffect(() => {
         let fetch = async () => {
-            let data = await axios.get('http://localhost:3500/api/torneos')
+            let data = await axios.get(`${process.env.URLFRONT}/api/torneos`)
             setTorn(data.data.torneos)
         }
         fetch()
