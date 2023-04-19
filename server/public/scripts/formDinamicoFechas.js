@@ -24,12 +24,12 @@ async function agregar_partido(){
     var torneo_id = document.getElementById("torneo_id").value;
 
     // Nos traemos los datos de las ternas
-    let request2 = await fetch("http://localhost:8020/ternas/all")
+    let request2 = await fetch(`${process.env.URL}/ternas/all`)
     let response2 = await request2.json()   
     todasTernas = response2
 
     //llamamos a la api de nuestra aplicacion web para que nos devuelva los equipos
-    let request = await fetch("http://localhost:8020/equipos-torneos/all")
+    let request = await fetch(`${process.env.URL}/equipos-torneos/all`)
     let response = await request.json()   
     todosEquipos = response
 

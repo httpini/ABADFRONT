@@ -8,6 +8,6 @@ let PORT = process.env.PORT || 8020
 module.exports = {
     port: PORT,
     callback: function () {
-        console.log(`Abriendo el servidor http://localhost:${PORT}`)
+        console.log(`Abriendo el servidor ${process.env.URL}`)
     }
 }

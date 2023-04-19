@@ -14,14 +14,14 @@ let todosEquipos
         var categoria_id = document.getElementById("categoria_id").value;
         //con esta categoria_id, podemos buscar los equipos y subcategorias que pertenezcan a la categoria. por eso la almacenamos
 
-        let request = await fetch("http://localhost:8020/categorias/all")
+        let request = await fetch(`${process.env.URL}/categorias/all`) 
         let response = await request.json()   
         todasCategorias = response
         //traemos la lista de todas las categorias
 
         
 
-        let request2 = await fetch("http://localhost:8020/subcategorias/all")
+        let request2 = await fetch(`${process.env.URL}/subcategorias/all`)
         let response2 = await request2.json()   
         todasSubcategorias = response2
         //TRAEMOS LA LISTA DE TODAS LAS SUBCATEGORIAS
@@ -32,7 +32,7 @@ let todosEquipos
         
 
 
-        let request3 = await fetch("http://localhost:8020/equipos/all")
+        let request3 = await fetch(`${process.env.URL}/equipos/all`)
         let response3 = await request3.json()   
         todosEquipos = response3
 
