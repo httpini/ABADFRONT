@@ -26,9 +26,8 @@
                     <tr>
                         <td>
                             <select name="fecha_id" id="fecha_id">
-                                <option disabled>Seleccione...</option>
                                 <% fechas.forEach(fecha => { %>
-                                    <option value="<%=fecha.id%>"><%= fecha.name %></option>
+                                    <option value="<%=fecha.id%>" <%= p.fecha_id == fecha.id? "selected": "" %>><%= fecha.name %></option>
                                  
                                 <% }) %>
                             </select>
@@ -67,7 +66,7 @@
 
                         <td><%= p.visitante.team_name %></td>
 
-                        <td><input type="time" name="hora" id="hora" value="p.hora"></td>
+                        <td><input type="time" name="hora" id="hora" value="<%=p.hora%>"></td>
 
                         <td>
                             <select name="predio_id" id="predio_id">

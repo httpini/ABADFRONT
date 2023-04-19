@@ -1,4 +1,4 @@
-const {terna, partido, estado_partido}= require("../database/models/index")
+const {terna, partido, estado_partido, predio, equipo_torneo}= require("../database/models/index")
 const {validationResult} = require('express-validator')
 
 module.exports={
@@ -108,10 +108,35 @@ module.exports={
             res.redirect("/ternas/")
         }
         let partidos = await partido.findAll({
-            include:{all:true},
+            include:[
+                {
+                    model:equipo_torneo,
+                    as:"local",
+                    atributes:["team_name"]
+                },
+                {
+                    model:equipo_torneo,
+                    as:"visitante",
+                    atributes:["team_name"]
+                },
+                {
+                    model:predio,
+                    as:"predio",
+                    atributes:["name"]
+                },
+                {
+                    model:estado_partido,
+                    as:"estado",
+                    atributes:["name"]
+                }
+
+            ],
             where:{
                 terna_id:req.params.id
-            }
+            },
+            order:[
+                ["dia", "DESC"]
+            ]
         })
         let estados = await estado_partido.findAll({include:{all:true}})
 
