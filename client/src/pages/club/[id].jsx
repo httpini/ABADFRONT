@@ -34,6 +34,7 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
         <div className='flex flex-wrap w-full justify-center px-5 gap-3'>
           {
             equipos && equipos.map(e => (
+              
               <LinksEquipos key={e.name_url} id={id} query={query} equipo={e} categoria={e.categoria} torneo={query.torneo} />
             ))
           }

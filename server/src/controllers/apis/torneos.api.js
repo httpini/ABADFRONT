@@ -1,5 +1,6 @@
 const { equipo, torneo, equipo_torneo, fair_play, goleador, sancionado, partido, categoria, fecha, club } = require("../../database/models/index")
 const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 
 module.exports = {
     //ESTE allTorneos es el que vas a requerir en el home en el desplegable del header "torneos", van a estar de mas nuevos a mas viejos
@@ -18,7 +19,7 @@ module.exports = {
                     id: t.id,
                     name: `${t.name} ${t.temporada}`,
                     name_url: t.name_url,
-                    reglamento:t.reglamento_path!= null?`${process.env.URL}/assets/reglamentos-torneos/${t.reglamento_path}`:null
+                    reglamento: t.reglamento_path != null ? `${process.env.URL}/assets/reglamentos-torneos/${t.reglamento_path}` : null
                 }
                 return data
             })
@@ -56,16 +57,16 @@ module.exports = {
                     where: {
                         torneo_id: elTorneo.id
                     },
-                    include:[
+                    include: [
                         {
-                            model:equipo,
-                            as:"equipo",
-                            atributes:["name_url"]
+                            model: equipo,
+                            as: "equipo",
+                            atributes: ["name_url"]
                         },
                         {
-                            model:club,
-                            as:"club",
-                            atributes:["name_url"]
+                            model: club,
+                            as: "club",
+                            atributes: ["name_url"]
                         }
                     ],
                     order: [
@@ -79,9 +80,9 @@ module.exports = {
                     let data = {
                         //YA VA CON LA POSICION DE LA TABLA PUESTA
                         pos: index + 1,
-                        torneo_url:datosElTorneo.name_url,
-                        club_url:e.club.name_url,
-                        equipo_url:e.equipo.name_url,
+                        torneo_url: datosElTorneo.name_url,
+                        club_url: e.club.name_url,
+                        equipo_url: e.equipo.name_url,
                         equipo: e.team_name,
                         pts: e.pts,
                         p_jugados: e.p_jugados,
@@ -217,7 +218,7 @@ module.exports = {
                         ["f_sancion", "ASC"]
                     ]
                 })
-                
+
                 let mappedResult = result.map(sanc => {
                     let data = {
                         equipo: sanc.equipo.team_name,
@@ -231,10 +232,10 @@ module.exports = {
                     if (sanc.equipo.color_1 != null && sanc.equipo.color_1 != "") {
                         data.colores_equipo.push(sanc.equipo.color_1)
                     }
-                    if (sanc.equipo.color_2 != null  && sanc.equipo.color_2 != "") {
+                    if (sanc.equipo.color_2 != null && sanc.equipo.color_2 != "") {
                         data.colores_equipo.push(sanc.equipo.color_2)
                     }
-                    if (sanc.equipo.color_3 != null  && sanc.equipo.color_3 != "") {
+                    if (sanc.equipo.color_3 != null && sanc.equipo.color_3 != "") {
                         data.colores_equipo.push(sanc.equipo.color_3)
                     }
                     return data
@@ -316,7 +317,7 @@ module.exports = {
                 predio_name: datosEquipo.predio ? datosEquipo.predio.name : null,
                 predio_direccion: datosEquipo.predio ? datosEquipo.predio.adress : null,
                 predio_url: datosEquipo.predio ? datosEquipo.predio.map : null,
-                horario_local: datosEquipo.horario_local ? datosEquipo.horario_local.slice(0,-3) : null,
+                horario_local: datosEquipo.horario_local ? datosEquipo.horario_local.slice(0, -3) : null,
             }
             if (datosEquipo.color_1 != null && datosEquipo.color_1 != "") {
                 equipoDatos.colores.push(datosEquipo.color_1)
@@ -413,7 +414,7 @@ module.exports = {
             posFP = posFP.find(p => {
                 return p.equipo_id == elEquipo.id
             })//filtramos el equipo que queremos para dejar como dato su posicion enla tabla
-            
+
             let laPosFP = posFP.pos
 
             let fp = await fair_play.findOne({
@@ -430,14 +431,12 @@ module.exports = {
                 tarjetasRojas: fp.rojas,
                 amonestaciones: fp.amonestaciones
             }
-
+            // console.log(sequelize);
+            // console.log(fecha);
             //AHORA VOY A TRAER LOS DATOS DE LOS PARTIDOS
             // console.log('equipoId:', datosEquipo.id);
             let partidos = await partido.findAll({
-                include: { all: true },
-                order: [
-                    ["dia", "DESC"]
-                ],
+                include: [{ all: true }],
                 where: {
                     torneo_id: elTorneo.id,
                     // estado_id: 4,
@@ -445,8 +444,12 @@ module.exports = {
                         { visitante_id: datosEquipo.id },
                         { local_id: datosEquipo.id }
                     ]
-                }
+                },
+                order: [
+                    ["fecha",'nro', "ASC"]
+                ]
             })
+            // console.log(partidos[0]);
 
             // console.log('partidos', partidos, elTorneo.id);
             let acumulador = 0
@@ -456,7 +459,7 @@ module.exports = {
                 let elementosDia = fechaOriginal.split("-")
                 let dateFormated = elementosDia[2] + "-" + elementosDia[1] + "-" + elementosDia[0]
                 let data = {
-                    dia: p.dia == "0000-00-00" || p.dia == null? "A Confirmar":dateFormated.slice(0,-5),
+                    dia: p.dia == "0000-00-00" || p.dia == null ? "A Confirmar" : dateFormated.slice(0, -5),
                     fecha: p.fecha.nro,
                     localVisitante: p.local_id == datosEquipo.id ? "L" : "V",
                     rival: p.local_id == datosEquipo.id ? p.visitante.team_name : p.local.team_name,
@@ -466,7 +469,11 @@ module.exports = {
                     }
                 }
                 if (data.goles.equipo > data.goles.rival) acumulador += 3
-                if (data.goles.equipo == data.goles.rival) acumulador += 1
+                if (data.goles.equipo == data.goles.rival) {
+                    if (data.goles.equipo != null && data.goles.rival != null) acumulador += 1
+                }
+                // if(data.goles.equipo > data.goles.rival) {data.victoria == true} else data.victoria = false
+                // console.log(acumulador);
                 data.goles.equipo !== null ? data.puntos = acumulador : null
                 return data
             })
@@ -482,6 +489,7 @@ module.exports = {
             }).status(200)
 
         } catch (error) {
+            console.log(error);
             return res.status(505).json(error)
         }
     }
