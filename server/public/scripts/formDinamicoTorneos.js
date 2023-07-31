@@ -1,6 +1,8 @@
 let todasCategorias
 let todasSubcategorias
 let todosEquipos
+
+const URL = "http://localhost:8020"
 //definimos las variables donde vamos a traer la lista completa de datos desde el modelo
        
     async function cambia_categoria(){
@@ -14,29 +16,29 @@ let todosEquipos
         var categoria_id = document.getElementById("categoria_id").value;
         //con esta categoria_id, podemos buscar los equipos y subcategorias que pertenezcan a la categoria. por eso la almacenamos
 
-        let request = await fetch(`${process.env.URL}/categorias/all`) 
+        let request = await fetch(`${URL}/categorias/all`) 
         let response = await request.json()   
         todasCategorias = response
         //traemos la lista de todas las categorias
 
         
 
-        let request2 = await fetch(`${process.env.URL}/subcategorias/all`)
+        let request2 = await fetch(`${URL}/subcategorias/all`)
         let response2 = await request2.json()   
         todasSubcategorias = response2
         //TRAEMOS LA LISTA DE TODAS LAS SUBCATEGORIAS
 
-        todasSubcategorias = todasSubcategorias.filter( sub => sub.categoria.id == categoria_id)
+        todasSubcategorias = todasSubcategorias.filter( sub => sub.categoria_id == categoria_id)
         //FILTRAMOS LAS SUBCATEGORIAS QUE PERTENEZCAN A LA CATEGORIA SELECCIONADA
         
         
 
 
-        let request3 = await fetch(`${process.env.URL}/equipos/all`)
+        let request3 = await fetch(`${URL}/equipos/all`)
         let response3 = await request3.json()   
         todosEquipos = response3
 
-        todosEquipos = todosEquipos.filter( equi => equi.categoria.id == categoria_id)
+        todosEquipos = todosEquipos.filter( equi => equi.categoria_id == categoria_id)
         // lo mismo con los equipos traemos la lista completa y filtramos los que sean de la categoria seleccionada
     
         

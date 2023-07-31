@@ -115,7 +115,6 @@ module.exports={
     },
     allCategorias: async (req,res)=>{
         let listaCategorias = await categoria.findAll({
-            include:{all:true},
             order:[
                 ["name", "ASC"]
             ]

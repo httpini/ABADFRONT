@@ -76,7 +76,6 @@ module.exports = {
     },
     allSubCategorias: async (req,res)=>{
         let listaSubCategorias = await subcategoria.findAll({
-            include:{all:true},
             order:[
                 ["categoria_id", "ASC"],
                 ["name", "ASC"]
