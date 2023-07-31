@@ -227,7 +227,7 @@ module.exports = {
     },
     allEquipos: async (req,res)=>{
         let listaEquipos = await equipo.findAll({
-            include:{all:true},
+            
             order:[
                 ["name", "ASC"]
             ]

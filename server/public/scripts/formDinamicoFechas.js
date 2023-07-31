@@ -1,6 +1,6 @@
 let todosEquipos
 let todasTernas 
-
+const URL = "http://localhost:8020"
 //FALTA AGREGAR LA FUNCION DEL SELECT DE LAS TERNAS NOMAS
 async function agregar_partido(){
     let equiposSeleccionados=[]
@@ -24,12 +24,12 @@ async function agregar_partido(){
     var torneo_id = document.getElementById("torneo_id").value;
 
     // Nos traemos los datos de las ternas
-    let request2 = await fetch(`${process.env.URL}/ternas/all`)
+    let request2 = await fetch(`${URL}/ternas/all`)
     let response2 = await request2.json()   
     todasTernas = response2
 
     //llamamos a la api de nuestra aplicacion web para que nos devuelva los equipos
-    let request = await fetch(`${process.env.URL}/equipos-torneos/all`)
+    let request = await fetch(`${URL}/equipos-torneos/all`)
     let response = await request.json()   
     todosEquipos = response
 
