@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 
 export default function Fechas({ partidos }) {
+    console.log('partidos', partidos);
     return (
         <div className='tarjeta bg-oscuro3 shadow-oscuro3 shadow-md w-full'>
             <h2 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>Fechas</h2>

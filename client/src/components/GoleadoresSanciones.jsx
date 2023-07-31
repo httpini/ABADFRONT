@@ -10,7 +10,7 @@ export default function InformacionEquipo({ nombreEquipo, nombreTorneo, fairPlay
             <div>
                 <h2 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 mb-1'>Goleadores/as</h2>
                 <ul className='text-center'>
-                    {goleadores.map((g, i) => <li className={`${i % 2 == 0 ? 'par' : ''}`}>{g.name}: {g.goles} goles</li>)}
+                    {goleadores.map((g, i) => <li key={g.name} className={`${i % 2 == 0 ? 'par' : ''}`}>{g.name}: {g.goles} goles</li>)}
                 </ul>
                 <h2 className='font-bold text-xl text-center border-b-2 border-oscuro1 text-amarillo drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)] shadow-blue-600/50 pb-1 my-2'>Sanciones Activas</h2>
                 <table className='w-full'>
