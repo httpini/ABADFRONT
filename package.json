@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3500",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start -p 3500",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export":"next export"
   },
   "homepage": "http://abad2023.suki.com.co/",
   "dependencies": {
