@@ -43,7 +43,6 @@ jobs:
           unset CI
           npm run build
 
-      # Deploy to the S3 server
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
