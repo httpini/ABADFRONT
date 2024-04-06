@@ -25,4 +25,4 @@ jobs:
           aws-region: us-east-1
       - name: Copy files to S3 with the AWS CLI
         run: |
-          aws s3 sync ./out s3://abad2024-react/
+          aws s3 sync build/ s3://abad2024-react/
