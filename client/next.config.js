@@ -34,6 +34,7 @@ const nextConfig = {
     URL: process.env.URL,
     URLFRONT: process.env.URLFRONT
   },
+  
   distDir: "build",
 }
 
