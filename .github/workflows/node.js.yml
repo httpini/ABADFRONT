@@ -1,4 +1,5 @@
-name: your-project-name
+# This workflow will do a clean installation of node dependencies, cache/restore them, build and upload /out folder to Amazon S3
+name: abad
 
 on:
   push:
@@ -25,4 +26,5 @@ jobs:
           aws-region: us-east-1
       - name: Copy files to S3 with the AWS CLI
         run: |
-          aws s3 sync ./out s3://abadreact-2024/
+          aws s3 sync ./out s3://abad2024-react/
+
