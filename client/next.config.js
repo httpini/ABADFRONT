@@ -7,9 +7,13 @@
 // });
 // console.log('port env', myEnv);
 const path = require('path')
-const { parsed: localEnv } = require('dotenv').config({
+//const { parsed: localEnv } = require('dotenv').config({
+//  path: path.resolve(__dirname, `../.env`),
+//})
+require('dotenv').config({
   path: path.resolve(__dirname, `../.env`),
 })
+
 
 const nextConfig = {
   reactStrictMode: true,
@@ -26,9 +30,9 @@ const nextConfig = {
     ]
   },
   env: {
-    PORT: localEnv.PORT || 8020,
-    URL: localEnv.URL,
-    URLFRONT: localEnv.URLFRONT
+    PORT: process.env.PORT || 8020,
+    URL: process.env.URL,
+    URLFRONT: process.env.URLFRONT
   },
   distDir: "build",
 }
