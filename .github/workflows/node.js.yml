@@ -13,8 +13,6 @@ jobs:
         with:
           node-version: "18.x"
           cache: "npm"
-      - name: Enter folder
-        run : cd client
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -27,4 +25,4 @@ jobs:
           aws-region: us-east-1
       - name: Copy files to S3 with the AWS CLI
         run: |
-          aws s3 sync build/ s3://abad2024-react/
+          aws s3 sync client/build/ s3://abad2024-react/
