@@ -11,7 +11,7 @@ const nextConfig = {
     unoptimized: true 
   },
   env: {
-    PORT: process.env.PORT || 8020,
+    PORT: process.env.PORT.toString() || '8020',
     URL: process.env.URL || 'http://localhost:8020',
     URLFRONT: process.env.URLFRONT || 'http://localhost:3500'
   },
