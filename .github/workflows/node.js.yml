@@ -1,28 +1,37 @@
-name: abad
+name: Deploy to S3
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest    
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: "18.x"
-          cache: "npm"
+
       - name: Install dependencies
         run: npm install
-      - name: Build
+        working-directory: client  # Cambiar al directorio del cliente donde está package.json
+
+      - name: Build Next.js app
         run: npm run build
-      - name: Configure AWS Credentials
+        working-directory: client  # Cambiar al directorio del cliente donde está package.json
+
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Copy files to S3 with the AWS CLI
-        run: |
-          aws s3 sync client/build/ s3://abad2024-react/
+
+      - name: Sync static files to S3
+        run: aws s3 sync client/build/ s3://abad2024-react/
