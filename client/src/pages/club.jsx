@@ -24,13 +24,14 @@ export default function Club({ clubes }) {
 }
 
 
-export const getServerSideProps = async () => {
+export async function getStaticProps() {
     console.time('api club')
     let clubes = await axios.get(`${process.env.URLFRONT}/api/clubes`)
     console.timeEnd('api club')
     return {
         props: {
             clubes: clubes.data.clubes
-        }
+        },
+        revalidate: 60 * 60, // Revalidar cada hora
     }
 }

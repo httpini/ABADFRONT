@@ -3,18 +3,16 @@ import Header from '@/components/Header'
 import axios from 'axios'
 import React from 'react'
 
-export default function equipos({ clubes = [1, 2] }) {
+export default function Equipos({ clubes = [] }) {
   return (
     <div className='relative h-[100vh]'>
       <Header />
       <section>
         <h1>Clubes participantes de torneos</h1>
         <div className='flex flex-wrap gap-5'>
-          {
-            clubes && clubes.map((c, i) => (
-              <div>h</div>
-            ))
-          }
+          {clubes.map((club, index) => (
+            <div key={index}>{club.nombre}</div>
+          ))}
         </div>
       </section>
       <Footer />
@@ -23,11 +21,20 @@ export default function equipos({ clubes = [1, 2] }) {
 }
 
 export const getServerSideProps = async () => {
-  // let torneos = await axios.post('http://localhost:3500/api/torneo-equipos')
-  return {
-    props: {
-      // id,
-      // torneos: torneos.data.torneos
+  try {
+    const response = await axios.get('http://localhost:3500/api/torneo-equipos')
+    const clubes = response.data.clubes
+    return {
+      props: {
+        clubes: clubes || [],
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching clubes:', error)
+    return {
+      props: {
+        clubes: [],
+      },
     }
   }
 }
