@@ -69,13 +69,15 @@ export default function ClubId({ id, club, equipos, torneos, equipo }) {
 }
 
 
-export const getServerSideProps = async ({ params: { id }, query: { torneo, equipo } }) => {
+export async function getStaticProps({ params: { id }, query: { torneo, equipo } }) {
   try {
     console.time('apis club id')
     let clubData = await axios.post(`${process.env.URLFRONT}/api/club-url`, { club: id })
 
     if (!clubData) {
-      return redirect('/asdf');
+      return {
+        notFound: true,
+      };
     }
 
     let primerEquipo = clubData.data.club?.equipos[0]?.name_url
@@ -104,7 +106,11 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
     let equipoData
     if (torneo && equipo) equipoData = await axios.post(`${process.env.URLFRONT}/api/equipo-torneo`, { torneo, equipo })
 
-    if (clubData == null) redirect('/')
+    if (clubData == null) {
+      return {
+        notFound: true,
+      };
+    }
 
     let torneos
     if (equipo) {
@@ -123,15 +129,13 @@ export const getServerSideProps = async ({ params: { id }, query: { torneo, equi
     console.timeEnd('apis club id')
 
     return {
-      props
-    }
+      props,
+      revalidate: 60 * 60, // Revalidar cada hora
+    };
   } catch (error) {
     console.log('error', error);
     return {
-      redirect: {
-        permanent: false,
-        destination: "/club",
-      }
+      notFound: true,
     };
   }
 }

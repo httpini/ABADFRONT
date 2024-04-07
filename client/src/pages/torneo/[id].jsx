@@ -78,7 +78,7 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
   )
 }
 
-export const getServerSideProps = async ({ params: { id } }) => {
+export async function getStaticProps({ params: { id } }) {
   try {
     console.time('apis torneo id')
 
@@ -102,14 +102,13 @@ export const getServerSideProps = async ({ params: { id } }) => {
         fair_play: torneo.data.fair_play,
         sanciones: torneo.data.sanciones,
         allTorneos: allTorneos.data.torneos
-      }
-    }
+      },
+      revalidate: 60 * 60, // Revalidar cada hora
+    };
   } catch (error) {
+    console.error('Error fetching data:', error);
     return {
-      redirect: {
-        permanent: false,
-        destination: "/",
-      }
+      notFound: true,
     };
   }
 }

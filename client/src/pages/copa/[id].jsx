@@ -14,20 +14,18 @@ export default function Copa({ id }) {
   )
 }
 
-export const getServerSideProps = async ({ params: { id } }) => {
+export async function getStaticProps({ params: { id } }) {
   try {
-
     return {
       props: {
         id
-      }
-    }
+      },
+      revalidate: 60 * 60, 
+    };
   } catch (error) {
+    console.error('Error fetching data:', error);
     return {
-      redirect: {
-        permanent: false,
-        destination: "/",
-      }
+      notFound: true,
     };
   }
 }
