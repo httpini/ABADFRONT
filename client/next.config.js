@@ -7,7 +7,8 @@ const nextConfig = {
   reactStrictMode: true,
   output:'export',
   images: {
-    domains: ["storage.googleapis.com", "lh3.googleusercontent.com"]
+    domains: ["storage.googleapis.com", "lh3.googleusercontent.com"],
+    unoptimized: true 
   },
   env: {
     PORT: process.env.PORT || 8020,
