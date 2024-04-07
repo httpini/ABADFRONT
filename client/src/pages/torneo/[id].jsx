@@ -9,9 +9,8 @@ import Goleadores from '@/components/Goleadores';
 import FairPlay from '@/components/FairPlay';
 import Sanciones from '@/components/Sanciones';
 import LinksTorneos from '@/components/LinksTorneos';
-// import useMediaQuery from '../../../utils/useMediaQuery';
 import {BiFootball} from "react-icons/bi"
- import {AiOutlineCloudDownload} from 'react-icons/ai'
+import {AiOutlineCloudDownload} from 'react-icons/ai'
 import {GiInjustice} from 'react-icons/gi'
 import { HiOutlineExternalLink } from "react-icons/hi"
 
@@ -76,6 +75,18 @@ export default function Torneo({ allTorneos, id, partidos, tabla, goleadores, fa
       <Footer />
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  // Obtener los IDs de los torneos desde alguna fuente de datos
+  const torneoIds = ['torneo1', 'torneo2', 'torneo3']; // Ejemplo de IDs de torneo
+
+  // Generar las rutas dinámicas
+  const paths = torneoIds.map((id) => ({
+    params: { id },
+  }));
+
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params: { id } }) {
