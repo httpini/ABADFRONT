@@ -5,6 +5,7 @@ require('dotenv').config({
 
 const nextConfig = {
   reactStrictMode: true,
+  output:'export',
   images: {
     domains: ["storage.googleapis.com", "lh3.googleusercontent.com"]
   },
