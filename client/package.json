@@ -6,8 +6,7 @@
     "dev": "next dev -p 3500",
     "build": "next build",
     "start": "next start -p 3500",
-    "lint": "next lint",
-    "export":"next export"
+    "lint": "next lint"
   },
   "homepage": "http://abad2023.suki.com.co/",
   "dependencies": {
@@ -16,10 +15,10 @@
     "dotenv": "^16.0.3",
     "fs": "^0.0.1-security",
     "moment": "^2.29.4",
-    "next": "^13.5.6",
+    "next": "13.2.3",
     "path": "^0.12.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-icons": "^4.8.0"
   },
   "devDependencies": {

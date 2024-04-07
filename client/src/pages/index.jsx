@@ -38,10 +38,10 @@ export default function Home({ partidosConfirmados, partidosDisputados }) {
 }
 
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     console.time('apis index')
-    const [partidosDisputadosResponse, partidosConfirmadosResponse] = await Promise.all([
+    let calls = await Promise.all([
       axios.get(`${process.env.URLFRONT}/api/partidos-disputados`),
       axios.get(`${process.env.URLFRONT}/api/partidos-confirmados`)
     ])
@@ -49,18 +49,11 @@ export const getStaticProps = async () => {
     console.timeEnd('apis index')
     return {
       props: {
-        partidosDisputados: partidosDisputadosResponse.data,
-        partidosConfirmados: partidosConfirmadosResponse.data
-      },
-      revalidate: 60 * 5 // Vuelve a generar la página cada 5 minutos
-    }
-  } catch (error) {
-    console.error(error);
-    return {
-      props: {
-        partidosDisputados: [],
-        partidosConfirmados: []
+        partidosDisputados: calls[0].data,
+        partidosConfirmados: calls[1].data
       }
     }
+  } catch (error) {
+    console.log(error);
   }
 }
