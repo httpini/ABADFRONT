@@ -20,11 +20,17 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: client  # Cambiar al directorio del cliente donde está package.json
+        working-directory: client 
 
       - name: Build Next.js app
         run: npm run build
-        working-directory: client  # Cambiar al directorio del cliente donde está package.json
+        working-directory: client
+      - run: npm run export
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: build_dir
+          path: ./out
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
