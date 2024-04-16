@@ -30,7 +30,7 @@ const nextConfig = {
     URL: localEnv.URL,
     URLFRONT: localEnv.URLFRONT
   },
-  distDir: "build",
+  //distDir: "build",
 }
 
 module.exports = nextConfig
